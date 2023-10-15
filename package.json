@@ -11,9 +11,10 @@
     "build": "rollup -c",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
-    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "storybook:build": "storybook build",
+    "build-storybook": "storybook build",
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "license": "MIT",
   "peerDependencies": {
@@ -45,6 +46,7 @@
     "@storybook/testing-library": "0.2.2",
     "@svgr/rollup": "^8.1.0",
     "@svgr/webpack": "^8.1.0",
+    "@testing-library/jest-dom": "^6.1.4",
     "@types/aria-query": "^5.0.2",
     "@types/babel__core": "^7.20.2",
     "@types/node": "^20.8.4",
@@ -94,5 +96,6 @@
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --write"
     ]
-  }
+  },
+  "packageManager": "yarn@3.6.4"
 }

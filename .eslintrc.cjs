@@ -24,15 +24,19 @@ const config = {
     project: true,
     tsconfigRootDir: __dirname
   },
-  plugins: ['react', 'react-hooks', '@typescript-eslint'],
+  plugins: ['simple-import-sort', 'react', 'react-hooks', '@typescript-eslint'],
   settings: {
     react: {
       version: 'detect'
     }
   },
   rules: {
-    'react/jsx-props-no-spreading': 'off',
-    'react/function-component-definition': 'off',
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+    'import/first': 'error',
+    'import/newline-after-import': 'error',
+    'import/no-duplicates': 'error',
+    'react/function-component-definition': false,
     '@typescript-eslint/no-unused-vars': [
       'warn',
       {
