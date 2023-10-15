@@ -1,17 +1,15 @@
 import { createGlobalStyle } from 'styled-components';
-import fonts from './fonts';
-import paddings from './paddings';
-import margins from './margins';
+import theme from '@/constants/theme';
 
 const GlobalStyle = createGlobalStyle`
 * {
-  font-family: ${fonts.fontFamily};
+  font-family: ${theme.fontFamily};
   box-sizing: border-box;
   text-decoration: none;
   list-style: none;
   outline: none;
-  padding: ${paddings.zero};
-  margin: ${margins.zero};
+  padding: ${theme.padding.zero};
+  margin: ${theme.padding.zero};
 }`;
 
 export default GlobalStyle;

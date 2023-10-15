@@ -1,9 +1,9 @@
-const colors = {
-  grey: '#dddddd',
-  lightGrey: '#F1F1F1',
-  blue: '#2F80ED',
-  white: '#FFFFFF',
-  black: '#000000'
-};
+const enum Colors {
+  GREY = '#dddddd',
+  LIGHT_GREY = '#F1F1F1',
+  BLUE = '#2F80ED',
+  WHITE = '#FFFFFF',
+  BLACK = '#000000'
+}
 
-export default colors;
+export default Colors;

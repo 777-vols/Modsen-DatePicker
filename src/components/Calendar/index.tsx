@@ -1,13 +1,15 @@
 import React, { memo } from 'react';
 
-import HeaderInput from '@/components/HeaderInput';
 import { Wrapper } from './styles';
 import InterfaceProps from './types';
+import MonthSlider from '@/components/MonthSlider';
+import DaysGrid from '../DaysGrid';
 
-const Calendar = memo(function Calendar({ value, inputHandler }: InterfaceProps) {
+const Calendar = memo(function Calendar() {
   return (
     <Wrapper>
-      <HeaderInput value={value} inputHandler={inputHandler} />
+      <MonthSlider />
+      <DaysGrid />
     </Wrapper>
   );
 });

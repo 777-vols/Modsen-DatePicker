@@ -1,17 +1,17 @@
-const paddings = {
-  largeXL: '30px',
-  largeL: '27px',
-  largeM: '25px',
-  largeS: '22px',
-  mediumXL: '20px',
-  mediumL: '18px',
-  mediumM: '15px',
-  mediumS: '12px',
-  smallXL: '10px',
-  smallL: '8px',
-  smallM: '5px',
-  smallS: '2px',
-  zero: '0px'
-};
+const enum Padding {
+  LARGE_XL = '22px',
+  LARGE_L = '20px',
+  LARGE_M = '18px',
+  LARGE_S = '17px',
+  MEDIUM_XL = '15px',
+  MEDIUM_L = '14px',
+  MEDIUM_M = '12px',
+  MEDIUM_S = '10px',
+  SMALL_XL = '9px',
+  SMALL_L = '8px',
+  SMALL_M = '7px',
+  SMALL_S = '5px',
+  ZERO = '0px'
+}
 
-export default paddings;
+export default Padding;
