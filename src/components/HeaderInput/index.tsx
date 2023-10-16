@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { FC, memo } from 'react';
 
 import calendarImg from '@/assets/calendar.svg';
 import clearImg from '@/assets/clear.svg';
@@ -8,7 +8,7 @@ import config from './config';
 
 const { title, placeholder } = config;
 
-const HeaderInput = memo(function HeaderInput({ value, inputHandler }: InterfaceProps) {
+const HeaderInput: FC<InterfaceProps> = ({ value, inputHandler }) => {
   return (
     <Wrapper>
       <Title>{title}</Title>
@@ -23,6 +23,6 @@ const HeaderInput = memo(function HeaderInput({ value, inputHandler }: Interface
       </Panel>
     </Wrapper>
   );
-});
+};
 
-export default HeaderInput;
+export default memo(HeaderInput);

@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
+import React, { FC, memo } from 'react';
 import nextImg from '@/assets/next.svg';
 import prevImg from '@/assets/prev.svg';
 import { ChangeMonthButton, MonthName, Wrapper } from './styled';
 
-const MonthSlider = memo(function MonthSlider() {
+const MonthSlider: FC = () => {
   return (
     <Wrapper>
       <ChangeMonthButton>
@@ -15,6 +15,6 @@ const MonthSlider = memo(function MonthSlider() {
       </ChangeMonthButton>
     </Wrapper>
   );
-});
+};
 
-export default MonthSlider;
+export default memo(MonthSlider);

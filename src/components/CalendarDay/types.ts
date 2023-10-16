@@ -1,5 +1,6 @@
 interface InterfaceProps {
-  dayNumberValue: number | string;
+  dayValue: number | string;
+  isBold?: boolean;
 }
 
 export default InterfaceProps;

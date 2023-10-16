@@ -1,13 +1,13 @@
-import React, { memo } from 'react';
+import React, { FC, memo } from 'react';
 import { Wrapper } from './styled';
 import Calendar from '@/components/Calendar';
 import { ThemeProvider } from 'styled-components';
-import GlobalStyle from '@/constants/styles/globalStyles';
+import GlobalStyle from '@/constants/styles/globalStyle';
 import theme from '@/constants/theme';
 import InterfaceProps from './types';
 import HeaderInput from '@/components/HeaderInput';
 
-const DayPicker = memo(function DayPicker({ value, inputHandler }: InterfaceProps) {
+const DayPicker: FC<InterfaceProps> = ({ value, inputHandler }) => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
@@ -17,6 +17,6 @@ const DayPicker = memo(function DayPicker({ value, inputHandler }: InterfaceProp
       </Wrapper>
     </ThemeProvider>
   );
-});
+};
 
-export default DayPicker;
+export default memo(DayPicker);

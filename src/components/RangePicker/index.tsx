@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { FC, memo } from 'react';
 import { Wrapper } from './styled';
 import Calendar from '@/components/Calendar';
 import { ThemeProvider } from 'styled-components';
-import { GlobalStyles } from '@/constants/styles/globalStyles';
+import GlobalStyle from '@/constants/styles/globalStyle';
 import theme from '@/constants/theme';
 
-const RangePicker = () => {
+const RangePicker: FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
+      <GlobalStyle />
       <Wrapper>
         <Calendar />
       </Wrapper>
@@ -16,4 +16,4 @@ const RangePicker = () => {
   );
 };
 
-export default RangePicker;
+export default memo(RangePicker);
