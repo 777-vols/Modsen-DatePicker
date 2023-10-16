@@ -1,4 +1,5 @@
-import { StoryObj, type Meta, type StoryFn } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
+
 import DayPicker from './index';
 
 const meta: Meta<typeof DayPicker> = {

@@ -1,17 +1,15 @@
 import React, { FC, memo } from 'react';
 
-import { Wrapper } from './styles';
-import InterfaceProps from './types';
+import DaysGrid from '@/components/DaysGrid';
 import MonthSlider from '@/components/MonthSlider';
-import DaysGrid from '../DaysGrid';
 
-const Calendar: FC = () => {
-  return (
-    <Wrapper>
-      <MonthSlider />
-      <DaysGrid />
-    </Wrapper>
-  );
-};
+import Wrapper from './styles';
+
+const Calendar: FC = () => (
+  <Wrapper>
+    <MonthSlider />
+    <DaysGrid />
+  </Wrapper>
+);
 
 export default memo(Calendar);

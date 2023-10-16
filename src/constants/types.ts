@@ -57,3 +57,4 @@ interface InterfaceTheme {
     zero: string;
   };
 }
+export default InterfaceTheme;

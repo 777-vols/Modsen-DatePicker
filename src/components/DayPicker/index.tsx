@@ -1,19 +1,39 @@
-import React, { FC, memo } from 'react';
-import { Wrapper } from './styled';
-import Calendar from '@/components/Calendar';
+import React, { FC, memo, useCallback, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
+
+import Calendar from '@/components/Calendar';
+import HeaderDateInput from '@/components/HeaderDateInput';
 import GlobalStyle from '@/constants/styles/globalStyle';
 import theme from '@/constants/theme';
-import InterfaceProps from './types';
-import HeaderInput from '@/components/HeaderInput';
 
-const DayPicker: FC<InterfaceProps> = ({ value, inputHandler }) => {
+import Wrapper from './styled';
+
+const DayPicker: FC = () => {
+  const [calenderIsOpen, setCalendarIsOpen] = useState<boolean>(true);
+  const [headerDateInputValue, setHeaderDateInputValue] = useState<string>('');
+
+  const openCalendarHandler = useCallback(
+    () => setCalendarIsOpen((prevState: boolean) => !prevState),
+    [setCalendarIsOpen]
+  );
+
+  const dateInputChangeHandler = useCallback(
+    (dateInputValue: string) => {
+      setHeaderDateInputValue(dateInputValue);
+    },
+    [setHeaderDateInputValue]
+  );
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Wrapper>
-        <HeaderInput value={value} inputHandler={inputHandler} />
-        <Calendar />
+        <HeaderDateInput
+          dateInputValue={headerDateInputValue}
+          dateInputChangeHandler={dateInputChangeHandler}
+          openCalendarHandler={openCalendarHandler}
+        />
+        {calenderIsOpen && <Calendar />}
       </Wrapper>
     </ThemeProvider>
   );

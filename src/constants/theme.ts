@@ -2,6 +2,7 @@ import Colors from './styles/colors';
 import FontSize from './styles/fontSizes';
 import Margin from './styles/margins';
 import Padding from './styles/paddings';
+import InterfaceTheme from './types';
 
 const theme: InterfaceTheme = {
   colors: {

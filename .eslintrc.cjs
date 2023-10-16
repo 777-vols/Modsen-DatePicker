@@ -31,6 +31,16 @@ const config = {
     }
   },
   rules: {
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never'
+      }
+    ],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'simple-import-sort/imports': 'error',
@@ -38,7 +48,8 @@ const config = {
     'import/first': 'error',
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
-    'react/function-component-definition': false,
+    'react/function-component-definition': 0,
+    'import/extensions': 'off',
     '@typescript-eslint/no-unused-vars': [
       'warn',
       {

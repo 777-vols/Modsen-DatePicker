@@ -32,6 +32,6 @@ export const StyledButtton = styled.button`
   border: none;
   transition: 0.2s;
   &:hover {
-    transform: rotate(360deg);
+    transform: rotate(360deg) scale(1.2);
   }
 `;

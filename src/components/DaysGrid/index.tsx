@@ -1,19 +1,19 @@
 import React, { FC, memo, useMemo } from 'react';
-import { MonthDaysNumbers, DayName, WeekDaysNames, Wrapper } from './styled';
+
 import { daysNamesStartsWithSu } from '@/constants/calendarData';
+
 import MonthDay from '../CalendarDay';
+import { MonthDaysNumbers, WeekDaysNames, Wrapper } from './styled';
 
 const DaysGrid: FC = () => {
   const daysNamesArray = useMemo(
     () =>
-      daysNamesStartsWithSu.map((dayName) => (
-        <MonthDay key={dayName} isBold={true} dayValue={dayName} />
-      )),
-    [daysNamesStartsWithSu]
+      daysNamesStartsWithSu.map((dayName) => <MonthDay key={dayName} isBold dayValue={dayName} />),
+    []
   );
   const daysNumbersArray = useMemo(() => {
-    let result = [];
-    for (let i = 1; i < 36; i++) {
+    const result = [];
+    for (let i = 1; i < 36; i += 1) {
       result.push(<MonthDay dayValue={i} />);
     }
     return result;
