@@ -5,7 +5,7 @@ import InterfaceProps from './types';
 
 const MonthDay: FC<InterfaceProps> = ({ dayValue, isBold }) => (
   <Wrapper>
-    <DayNumber bold={isBold}>{dayValue}</DayNumber>
+    <DayNumber $bold={isBold}>{dayValue}</DayNumber>
   </Wrapper>
 );
 

@@ -10,7 +10,8 @@ const theme: InterfaceTheme = {
     lightGray: Colors.LIGHT_GREY,
     blue: Colors.BLUE,
     white: Colors.WHITE,
-    black: Colors.BLACK
+    black: Colors.BLACK,
+    red: Colors.RED
   },
   fontFamily: "'Poppins', sans-serif",
   fontWeight: {

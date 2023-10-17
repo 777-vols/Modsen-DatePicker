@@ -3,7 +3,8 @@ const enum Colors {
   LIGHT_GREY = '#F1F1F1',
   BLUE = '#2F80ED',
   WHITE = '#FFFFFF',
-  BLACK = '#000000'
+  BLACK = '#000000',
+  RED = '#FF0000'
 }
 
 export default Colors;

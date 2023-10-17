@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface InterfaceDayNumber {
-  bold?: boolean;
+  $bold?: boolean;
 }
 
 export const Wrapper = styled.div`
@@ -13,8 +13,8 @@ export const Wrapper = styled.div`
 `;
 export const DayNumber = styled.span`
   font-size: ${({ theme }) => theme.fontSize.mediumM};
-  ${({ bold }: InterfaceDayNumber) =>
-    bold &&
+  ${({ $bold }: InterfaceDayNumber) =>
+    $bold &&
     css`
       font-weight: 700;
     `}

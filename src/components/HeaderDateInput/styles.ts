@@ -3,10 +3,19 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   width: 250px;
 `;
+export const TitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 export const Title = styled.h1`
   font-size: ${({ theme }) => theme.fontSize.mediumXL};
   height: 20px;
   margin-bottom: ${({ theme }) => theme.padding.smallL};
+`;
+export const ErrorMessage = styled.span`
+  font-size: ${({ theme }) => theme.fontSize.mediumM};
+  color: ${({ theme }) => theme.colors.red};
 `;
 export const Panel = styled.div`
   padding: ${({ theme }) => theme.padding.zero} ${({ theme }) => theme.padding.mediumM};

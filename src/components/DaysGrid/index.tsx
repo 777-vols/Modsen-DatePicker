@@ -14,7 +14,7 @@ const DaysGrid: FC = () => {
   const daysNumbersArray = useMemo(() => {
     const result = [];
     for (let i = 1; i < 36; i += 1) {
-      result.push(<MonthDay dayValue={i} />);
+      result.push(<MonthDay key={i} dayValue={i} />);
     }
     return result;
   }, []);

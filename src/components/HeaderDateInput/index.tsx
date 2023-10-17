@@ -1,29 +1,44 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useState } from 'react';
 
 import calendarImg from '@/assets/calendar.svg';
 import clearImg from '@/assets/clear.svg';
+import dateInputCheckHelper from '@/helpers/dateInputCheckHelpers';
 
 import config from './config';
-import { Input, Panel, StyledButtton, Title, Wrapper } from './styles';
+import { ErrorMessage, Input, Panel, StyledButtton, Title, TitleWrapper, Wrapper } from './styles';
 import InterfaceProps from './types';
 
-const { title, placeholder } = config;
+const { title, placeholder, errorMessage } = config;
 
 const HeaderDateInput: FC<InterfaceProps> = ({
   dateInputValue,
   dateInputChangeHandler,
   openCalendarHandler
 }) => {
+  const [isErrorMessage, setIsErrorMessage] = useState<boolean>(false);
+
   const dateInputHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     dateInputChangeHandler(event.target.value);
+    setIsErrorMessage(false);
+
+    if (!dateInputCheckHelper(event.target.value)) {
+      setIsErrorMessage(true);
+    }
+    if (event.target.value === '') {
+      setIsErrorMessage(false);
+    }
   };
+
   const clearButtonHandler = (): void => {
     dateInputChangeHandler('');
   };
 
   return (
     <Wrapper>
-      <Title>{title}</Title>
+      <TitleWrapper>
+        <Title>{title}</Title>
+        {isErrorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      </TitleWrapper>
       <Panel>
         <StyledButtton onClick={openCalendarHandler}>
           <img src={calendarImg} alt="calendarImg" />

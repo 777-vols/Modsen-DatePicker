@@ -5,6 +5,7 @@ interface InterfaceTheme {
     blue: string;
     white: string;
     black: string;
+    red: string;
   };
   fontFamily: string;
   fontWeight: {
