@@ -13,7 +13,7 @@ const theme: InterfaceTheme = {
     black: Colors.BLACK,
     red: Colors.RED
   },
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Open Sans', sans-serif",
   fontWeight: {
     l: 700,
     m: 500,

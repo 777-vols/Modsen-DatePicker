@@ -1,4 +1,4 @@
-import getNumberOfDaysInMonthNumber from './calendarHelpers';
+import { getNumberOfDaysInMonth } from './calendarHelpers';
 
 const dateInputCheckHelper = (dateValue: string): boolean => {
   const oneMonth = 1;
@@ -14,7 +14,7 @@ const dateInputCheckHelper = (dateValue: string): boolean => {
     monthNumber < oneMonth ||
     monthNumber > decemberIndex ||
     dayNumber < firstDayIndex ||
-    dayNumber > getNumberOfDaysInMonthNumber(yearNumber, monthNumber)
+    dayNumber > getNumberOfDaysInMonth(yearNumber, monthNumber)
   ) {
     return false;
   }

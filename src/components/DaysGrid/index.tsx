@@ -1,27 +1,49 @@
 import React, { FC, memo, useMemo } from 'react';
 
-import { daysNamesStartsWithSu } from '@/constants/calendarData';
+import { daysNamesStartsWithMon, daysNamesStartsWithSu } from '@/constants/calendarData';
+import { getArrayOfDaysForCalendar, getNumberOfDaysInMonth } from '@/helpers/calendarHelpers';
 
-import MonthDay from '../CalendarDay';
+import CalendarDay from '../CalendarDay';
 import { MonthDaysNumbers, WeekDaysNames, Wrapper } from './styled';
+import InterfaceProps from './types';
 
-const DaysGrid: FC = () => {
-  const daysNamesArray = useMemo(
-    () =>
-      daysNamesStartsWithSu.map((dayName) => <MonthDay key={dayName} isBold dayValue={dayName} />),
-    []
-  );
-  const daysNumbersArray = useMemo(() => {
-    const result = [];
-    for (let i = 1; i < 36; i += 1) {
-      result.push(<MonthDay key={i} dayValue={i} />);
+const oneDay = 1;
+
+const DaysGrid: FC<InterfaceProps> = (props) => {
+  const { currentSelectedMonth, currentSelectedYear, weekFormat, changeWeekFormat } = props;
+  const daysNamesArray = useMemo(() => {
+    if (weekFormat === daysNamesStartsWithMon[0]) {
+      return daysNamesStartsWithMon.map((dayName) => (
+        <CalendarDay key={dayName} dayValue={dayName} isBold />
+      ));
     }
-    return result;
-  }, []);
+    return daysNamesStartsWithSu.map((dayName) => (
+      <CalendarDay key={dayName} dayValue={dayName} isBold />
+    ));
+  }, [weekFormat]);
+
+  // console.log(getNumberOfDaysInMonth(yearNumber, monthNumber));
+  const daysNumbersArray = useMemo(
+    () =>
+      getArrayOfDaysForCalendar(
+        oneDay,
+        getNumberOfDaysInMonth(currentSelectedYear, currentSelectedMonth) + oneDay,
+        currentSelectedMonth,
+        currentSelectedYear,
+        weekFormat
+      ).map(({ id, day }) =>
+        typeof day === 'string' ? (
+          <CalendarDay key={id} dayValue={day} />
+        ) : (
+          <CalendarDay key={id} dayValue={day} isBold />
+        )
+      ),
+    [weekFormat, currentSelectedMonth, currentSelectedYear]
+  );
 
   return (
     <Wrapper>
-      <WeekDaysNames>{daysNamesArray}</WeekDaysNames>
+      <WeekDaysNames onClick={changeWeekFormat}>{daysNamesArray}</WeekDaysNames>
       <MonthDaysNumbers>{daysNumbersArray}</MonthDaysNumbers>
     </Wrapper>
   );
