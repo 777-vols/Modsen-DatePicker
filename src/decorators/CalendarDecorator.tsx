@@ -2,14 +2,14 @@
 import React, { useMemo } from 'react';
 
 import CalendarDay from '@/components/CalendarDay';
-import InterfaceProps from '@/components/DaysGrid/types';
+import IProps from '@/components/DaysGrid/types';
 import { daysNamesStartsWithMon, daysNamesStartsWithSu } from '@/constants/calendarData';
 import { getArrayOfDaysForCalendar, getNumberOfDaysInMonth } from '@/helpers/calendarHelpers';
 
 const oneDay = 1;
 
 const CalendarDecorator = (WrappedComponent: React.ElementType) => {
-  const DecoratedComponent = (props: InterfaceProps) => {
+  const DecoratedComponent = (props: IProps) => {
     const { currentSelectedMonth, currentSelectedYear, weekFormat, ...otherProps } = props;
 
     const daysNamesArray = useMemo(() => {
@@ -31,13 +31,14 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
           currentSelectedMonth,
           currentSelectedYear,
           weekFormat
-        ).map(({ id, day }) =>
-          typeof day === 'string' ? (
-            <CalendarDay key={id} dayValue={day} />
+        ).map(({ id, day }) => {
+          const { dayNumber, isHoliday } = day;
+          return typeof dayNumber === 'string' ? (
+            <CalendarDay key={id} dayValue={day.dayNumber} isHoliday={isHoliday} />
           ) : (
-            <CalendarDay key={id} dayValue={day} isBold />
-          )
-        ),
+            <CalendarDay key={id} dayValue={day.dayNumber} isHoliday={isHoliday} isBold />
+          );
+        }),
       [weekFormat, currentSelectedMonth, currentSelectedYear]
     );
     return (

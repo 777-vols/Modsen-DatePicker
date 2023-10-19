@@ -1,22 +1,20 @@
-import React, { FC, memo, useState } from 'react';
+import React, { FC, memo } from 'react';
 
 import nextImg from '@/assets/next.svg';
 import prevImg from '@/assets/prev.svg';
 import { allMonthsNames } from '@/constants/calendarData';
 
 import { ChangeMonthButton, MonthName, Wrapper } from './styled';
-import InterfaceProps from './types';
+import IProps from './types';
 
-const MonthSlider: FC<InterfaceProps> = (props) => {
-  const {
-    changeCurrentSelectedMonth,
-    changeCurrentSelectedYear,
-    currentSelectedMonth,
-    currentSelectedYear
-  } = props;
+const oneMonth = 1;
 
-  const oneMonth = 1;
-
+const MonthSlider: FC<IProps> = ({
+  changeCurrentSelectedMonth,
+  changeCurrentSelectedYear,
+  currentSelectedMonth,
+  currentSelectedYear
+}) => {
   const prevMonthHandler = (): void => {
     changeCurrentSelectedMonth(currentSelectedMonth - oneMonth);
   };

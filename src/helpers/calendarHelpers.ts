@@ -1,12 +1,13 @@
-import { daysNamesStartsWithMon } from '@/constants/calendarData';
+import { daysNamesStartsWithMon, holidaysArray } from '@/constants/calendarData';
 
 const firstDayIndex = 0;
 
 const firstDayIndexOfTheWeek = 0;
 const lastDayIndexOfTheWeek = 6;
 const oneDay = 1;
-const oneMonth = 1;
 const twoDays = 2;
+const oneMonth = 1;
+const twoMonth = 2;
 
 const numOfWeeksInCalendar = 6;
 const numOfDaysInOneWeek = 7;
@@ -37,13 +38,14 @@ export const getArrayOfDaysInMonth = (
 
   return daysArray;
 };
+
 export const getArrayOfDaysForCalendar = (
   beginningOfTheMonth: number,
   endOfTheMonth: number,
   selectedMonth: number,
   selectedYear: number,
   beginningOfTheWeek: string
-): Array<{ id: number; day: string | number }> => {
+): Array<{ id: number; day: { dayNumber: string | number; isHoliday: boolean } }> => {
   const arrayOfDaysInMonth = getArrayOfDaysInMonth(beginningOfTheMonth, endOfTheMonth);
 
   const monthFirstDay = getMonthFirstDayIndex(selectedMonth, selectedYear);
@@ -55,6 +57,17 @@ export const getArrayOfDaysForCalendar = (
   const nextMonthDaysNumber =
     getNumberOfDaysInMonth(selectedYear, selectedMonth + oneMonth) - oneDay;
   const nextMonthDaysArray = getArrayOfDaysInMonth(oneDay, nextMonthDaysNumber);
+
+  const markHolidaysInMonth = (
+    monthArray: Array<number | string>,
+    monthIndex: number
+  ): Array<{ dayNumber: number | string; isHoliday: boolean }> =>
+    monthArray.map((dayIndex) => {
+      if (holidaysArray[monthIndex].day.includes(Number(dayIndex))) {
+        return { dayNumber: dayIndex, isHoliday: true };
+      }
+      return { dayNumber: dayIndex, isHoliday: false };
+    });
 
   let numberOfDaysFromPrevMonth: number;
   if (beginningOfTheWeek === daysNamesStartsWithMon[firstDayIndex]) {
@@ -82,7 +95,11 @@ export const getArrayOfDaysForCalendar = (
     .slice(firstDayIndexOfTheWeek, numberOfDaysFromNextMonth)
     .map((item) => String(item));
 
-  const rangedResult = [...prevMonthVisibleDays, ...arrayOfDaysInMonth, ...nextMonthVisibleDays];
+  const calendarDaysArray = [
+    ...markHolidaysInMonth(prevMonthVisibleDays, selectedMonth - twoMonth),
+    ...markHolidaysInMonth(arrayOfDaysInMonth, selectedMonth - oneMonth),
+    ...markHolidaysInMonth(nextMonthVisibleDays, selectedMonth)
+  ];
 
-  return rangedResult.map((dayIndex, index) => ({ id: index, day: dayIndex }));
+  return calendarDaysArray.map((dayObject, index) => ({ id: index, day: dayObject }));
 };

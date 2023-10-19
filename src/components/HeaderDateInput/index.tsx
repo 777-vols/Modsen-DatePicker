@@ -6,26 +6,34 @@ import dateInputCheckHelper from '@/helpers/dateInputCheckHelpers';
 
 import config from './config';
 import { ErrorMessage, Input, Panel, StyledButtton, Title, TitleWrapper, Wrapper } from './styles';
-import InterfaceProps from './types';
+import IProps from './types';
 
 const { title, placeholder, errorMessage } = config;
 
-const HeaderDateInput: FC<InterfaceProps> = ({
+const HeaderDateInput: FC<IProps> = ({
   dateInputValue,
   dateInputChangeHandler,
-  openCalendarHandler
+  openCalendarHandler,
+  changeCurrentSelectedMonth,
+  changeCurrentSelectedYear
 }) => {
   const [isErrorMessage, setIsErrorMessage] = useState<boolean>(false);
 
   const dateInputHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    dateInputChangeHandler(event.target.value);
+    const { target } = event;
+    dateInputChangeHandler(target.value);
     setIsErrorMessage(false);
 
-    if (!dateInputCheckHelper(event.target.value)) {
+    if (!dateInputCheckHelper(target.value)) {
       setIsErrorMessage(true);
-    }
-    if (event.target.value === '') {
+    } else if (target.value === '') {
       setIsErrorMessage(false);
+    } else {
+      const inputDataValue = target.value.split('/');
+      const month = Number(inputDataValue[1]);
+      const year = Number(inputDataValue[2]);
+      changeCurrentSelectedMonth(month);
+      changeCurrentSelectedYear(year);
     }
   };
 

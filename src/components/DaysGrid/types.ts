@@ -1,4 +1,4 @@
-interface InterfaceProps {
+interface IProps {
   daysNumbersArray?: Array<number | string>;
   daysNamesArray?: Array<string>;
   currentSelectedMonth: number;
@@ -7,4 +7,4 @@ interface InterfaceProps {
   changeWeekFormat: () => void;
 }
 
-export default InterfaceProps;
+export default IProps;

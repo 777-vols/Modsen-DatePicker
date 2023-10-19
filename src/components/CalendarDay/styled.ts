@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 interface InterfaceDayNumber {
   $bold?: boolean;
+  $isHoliday?: boolean;
 }
 
 export const Wrapper = styled.div`
@@ -17,5 +18,10 @@ export const DayNumber = styled.span`
     $bold &&
     css`
       font-weight: 700;
+    `};
+  ${({ $isHoliday }: InterfaceDayNumber) =>
+    $isHoliday &&
+    css`
+      color: ${({ theme }) => theme.colors.red};
     `}
 `;

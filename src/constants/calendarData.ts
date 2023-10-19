@@ -16,7 +16,17 @@ export const allMonthsNames: string[] = [
   'December'
 ];
 
-export const allYears: number[] = [
-  2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027,
-  2028, 2029, 2030
+export const holidaysArray: Array<{ month: number; day: number[] }> = [
+  { month: 1, day: [6, 16] },
+  { month: 2, day: [4, 25] },
+  { month: 3, day: [2, 28] },
+  { month: 4, day: [10] },
+  { month: 5, day: [12, 20] },
+  { month: 6, day: [5, 15] },
+  { month: 7, day: [9] },
+  { month: 8, day: [10, 21] },
+  { month: 9, day: [3, 29] },
+  { month: 10, day: [1, 25] },
+  { month: 11, day: [5, 20] },
+  { month: 12, day: [14, 29] }
 ];

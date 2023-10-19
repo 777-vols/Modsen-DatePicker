@@ -1,6 +1,7 @@
-interface InterfaceProps {
+interface IProps {
   dayValue: number | string;
   isBold?: boolean;
+  isHoliday?: boolean;
 }
 
-export default InterfaceProps;
+export default IProps;

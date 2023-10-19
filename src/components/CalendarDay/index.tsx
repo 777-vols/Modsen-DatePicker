@@ -1,11 +1,13 @@
 import React, { FC, memo } from 'react';
 
 import { DayNumber, Wrapper } from './styled';
-import InterfaceProps from './types';
+import IProps from './types';
 
-const CalendarDay: FC<InterfaceProps> = ({ dayValue, isBold }) => (
+const CalendarDay: FC<IProps> = ({ dayValue, isBold, isHoliday }) => (
   <Wrapper>
-    <DayNumber $bold={isBold}>{dayValue}</DayNumber>
+    <DayNumber $isHoliday={isHoliday} $bold={isBold}>
+      {dayValue}
+    </DayNumber>
   </Wrapper>
 );
 
