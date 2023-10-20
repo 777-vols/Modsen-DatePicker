@@ -3,22 +3,29 @@ import React, { useMemo } from 'react';
 
 import CalendarDay from '@/components/CalendarDay';
 import IProps from '@/components/DaysGrid/types';
-import { daysNamesStartsWithMon, daysNamesStartsWithSu } from '@/constants/calendarData';
+import { daysNamesStartsWithMonday, daysNamesStartsWithSunday } from '@/constants/calendarData';
 import { getArrayOfDaysForCalendar, getNumberOfDaysInMonth } from '@/helpers/calendarHelpers';
 
 const oneDay = 1;
 
 const CalendarDecorator = (WrappedComponent: React.ElementType) => {
   const DecoratedComponent = (props: IProps) => {
-    const { currentSelectedMonth, currentSelectedYear, weekFormat, ...otherProps } = props;
+    const {
+      currentSelectedMonth,
+      currentSelectedYear,
+      weekFormat,
+      activeDay,
+      changeCurrentActiveDay,
+      ...otherProps
+    } = props;
 
     const daysNamesArray = useMemo(() => {
-      if (weekFormat === daysNamesStartsWithMon[0]) {
-        return daysNamesStartsWithMon.map((dayName) => (
+      if (weekFormat === daysNamesStartsWithMonday[0]) {
+        return daysNamesStartsWithMonday.map((dayName) => (
           <CalendarDay key={dayName} dayValue={dayName} isBold />
         ));
       }
-      return daysNamesStartsWithSu.map((dayName) => (
+      return daysNamesStartsWithSunday.map((dayName) => (
         <CalendarDay key={dayName} dayValue={dayName} isBold />
       ));
     }, [weekFormat]);
@@ -32,14 +39,27 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
           currentSelectedYear,
           weekFormat
         ).map(({ id, day }) => {
-          const { dayNumber, isHoliday } = day;
+          const { dayNumber, isHoliday, isCurrentDay } = day;
           return typeof dayNumber === 'string' ? (
-            <CalendarDay key={id} dayValue={day.dayNumber} isHoliday={isHoliday} />
+            <CalendarDay
+              key={id}
+              dayValue={day.dayNumber}
+              isHoliday={isHoliday}
+              isCurrentDay={isCurrentDay}
+            />
           ) : (
-            <CalendarDay key={id} dayValue={day.dayNumber} isHoliday={isHoliday} isBold />
+            <CalendarDay
+              key={id}
+              dayValue={day.dayNumber}
+              isHoliday={isHoliday}
+              isCurrentDay={isCurrentDay}
+              activeDay={activeDay}
+              changeCurrentActiveDay={changeCurrentActiveDay}
+              isBold
+            />
           );
         }),
-      [weekFormat, currentSelectedMonth, currentSelectedYear]
+      [weekFormat, currentSelectedMonth, currentSelectedYear, activeDay, changeCurrentActiveDay]
     );
     return (
       <WrappedComponent

@@ -1,5 +1,5 @@
-export const daysNamesStartsWithSu: string[] = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-export const daysNamesStartsWithMon: string[] = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+export const daysNamesStartsWithSunday: string[] = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+export const daysNamesStartsWithMonday: string[] = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
 export const allMonthsNames: string[] = [
   'January',

@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components';
 interface InterfaceDayNumber {
   $bold?: boolean;
   $isHoliday?: boolean;
+  $isCurrentDay?: boolean;
+  $isActive?: boolean;
 }
 
 export const Wrapper = styled.div`
@@ -12,16 +14,35 @@ export const Wrapper = styled.div`
   height: 32px;
   width: 32px;
 `;
-export const DayNumber = styled.span`
+export const DayNumber = styled.button<InterfaceDayNumber>`
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  height: 100%;
   font-size: ${({ theme }) => theme.fontSize.mediumM};
-  ${({ $bold }: InterfaceDayNumber) =>
+  border-radius: 5px;
+  ${({ $bold }) =>
     $bold &&
     css`
       font-weight: 700;
+      font-size: ${({ theme }) => theme.fontSize.mediumL};
     `};
-  ${({ $isHoliday }: InterfaceDayNumber) =>
+  ${({ $isHoliday }) =>
     $isHoliday &&
     css`
       color: ${({ theme }) => theme.colors.red};
+      background: ${({ theme }) => theme.colors.lightRed};
+    `}
+  ${({ $isCurrentDay }) =>
+    $isCurrentDay &&
+    css`
+      border: 2px solid ${({ theme }) => theme.colors.black};
+    `}
+  ${({ $isActive }) =>
+    $isActive &&
+    css`
+      background: ${({ theme }) => theme.colors.blue};
+      color: ${({ theme }) => theme.colors.white};
     `}
 `;

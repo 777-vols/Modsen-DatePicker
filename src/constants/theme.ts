@@ -2,16 +2,17 @@ import Colors from './styles/colors';
 import FontSize from './styles/fontSizes';
 import Margin from './styles/margins';
 import Padding from './styles/paddings';
-import InterfaceTheme from './types';
+import ITheme from './types';
 
-const theme: InterfaceTheme = {
+const theme: ITheme = {
   colors: {
     grey: Colors.GREY,
     lightGray: Colors.LIGHT_GREY,
     blue: Colors.BLUE,
     white: Colors.WHITE,
     black: Colors.BLACK,
-    red: Colors.RED
+    red: Colors.RED,
+    lightRed: Colors.LIGHT_RED
   },
   fontFamily: "'Open Sans', sans-serif",
   fontWeight: {

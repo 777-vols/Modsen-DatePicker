@@ -1,4 +1,4 @@
-interface InterfaceTheme {
+interface ITheme {
   colors: {
     grey: string;
     lightGray: string;
@@ -6,6 +6,7 @@ interface InterfaceTheme {
     white: string;
     black: string;
     red: string;
+    lightRed: string;
   };
   fontFamily: string;
   fontWeight: {
@@ -58,4 +59,4 @@ interface InterfaceTheme {
     zero: string;
   };
 }
-export default InterfaceTheme;
+export default ITheme;

@@ -2,7 +2,7 @@ import React, { FC, memo, useState } from 'react';
 
 import DaysGrid from '@/components/DaysGrid';
 import MonthSlider from '@/components/MonthSlider';
-import { daysNamesStartsWithMon, daysNamesStartsWithSu } from '@/constants/calendarData';
+import { daysNamesStartsWithMonday, daysNamesStartsWithSunday } from '@/constants/calendarData';
 
 import Wrapper from './styles';
 import IProps from './types';
@@ -11,13 +11,17 @@ const Calendar: FC<IProps> = ({
   currentSelectedMonth,
   currentSelectedYear,
   changeCurrentSelectedMonth,
-  changeCurrentSelectedYear
+  changeCurrentSelectedYear,
+  activeDay,
+  changeCurrentActiveDay
 }) => {
-  const [weekFormat, setWeekFormat] = useState(daysNamesStartsWithMon[0]);
+  const [weekFormat, setWeekFormat] = useState(daysNamesStartsWithMonday[0]);
 
   const changeWeekFormat = () => {
     setWeekFormat((prevState) =>
-      prevState === daysNamesStartsWithMon[0] ? daysNamesStartsWithSu[0] : daysNamesStartsWithMon[0]
+      prevState === daysNamesStartsWithMonday[0]
+        ? daysNamesStartsWithSunday[0]
+        : daysNamesStartsWithMonday[0]
     );
   };
 
@@ -34,6 +38,8 @@ const Calendar: FC<IProps> = ({
         currentSelectedYear={currentSelectedYear}
         weekFormat={weekFormat}
         changeWeekFormat={changeWeekFormat}
+        activeDay={activeDay}
+        changeCurrentActiveDay={changeCurrentActiveDay}
       />
     </Wrapper>
   );

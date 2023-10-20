@@ -18,20 +18,18 @@ const DayPicker: FC = () => {
   const [headerDateInputValue, setHeaderDateInputValue] = useState<string>('');
   const [currentSelectedMonth, setCurrentSelectedMonth] = useState(new Date().getMonth() + oneDay);
   const [currentSelectedYear, setCurrentSelectedYear] = useState(new Date().getFullYear());
+  const [activeDay, setActiveDay] = useState<number>(0);
 
   const openCalendarHandler = useCallback(
     () => setCalendarIsOpen((prevState: boolean) => !prevState),
-    [setCalendarIsOpen]
+    []
   );
 
-  const dateInputChangeHandler = useCallback(
-    (dateInputValue: string) => {
-      setHeaderDateInputValue(dateInputValue);
-    },
-    [setHeaderDateInputValue]
-  );
+  const dateInputChangeHandler = useCallback((dateInputValue: string) => {
+    setHeaderDateInputValue(dateInputValue);
+  }, []);
 
-  const changeCurrentSelectedMonth = (newMonth: number) => {
+  const changeCurrentSelectedMonth = useCallback((newMonth: number) => {
     if (newMonth < januaryIndex) {
       setCurrentSelectedMonth(decemberIndex);
       setCurrentSelectedYear((prevState) => prevState - oneYear);
@@ -41,11 +39,16 @@ const DayPicker: FC = () => {
     } else {
       setCurrentSelectedMonth(newMonth);
     }
-  };
+    setActiveDay(0);
+  }, []);
 
-  const changeCurrentSelectedYear = (newYear: number) => {
+  const changeCurrentSelectedYear = useCallback((newYear: number) => {
     setCurrentSelectedYear(newYear);
-  };
+  }, []);
+
+  const changeCurrentActiveDay = useCallback((newActiveDay: number) => {
+    setActiveDay(newActiveDay);
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -64,6 +67,8 @@ const DayPicker: FC = () => {
             currentSelectedYear={currentSelectedYear}
             changeCurrentSelectedMonth={changeCurrentSelectedMonth}
             changeCurrentSelectedYear={changeCurrentSelectedYear}
+            activeDay={activeDay}
+            changeCurrentActiveDay={changeCurrentActiveDay}
           />
         )}
       </Wrapper>

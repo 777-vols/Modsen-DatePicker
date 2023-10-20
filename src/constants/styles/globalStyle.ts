@@ -1,8 +1,8 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, DefaultTheme } from 'styled-components';
 
 import theme from '@/constants/theme';
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme }>`
 * {
   font-family: ${theme.fontFamily};
   box-sizing: border-box;
