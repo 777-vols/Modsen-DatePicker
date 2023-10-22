@@ -25,7 +25,7 @@ export const DayNumber = styled.button<InterfaceDayNumber>`
   ${({ $bold }) =>
     $bold &&
     css`
-      font-weight: 700;
+      font-weight: ${({ theme }) => theme.fontWeight.l};
       font-size: ${({ theme }) => theme.fontSize.mediumL};
     `};
   ${({ $isHoliday }) =>

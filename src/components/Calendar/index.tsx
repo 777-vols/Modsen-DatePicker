@@ -13,7 +13,8 @@ const Calendar: FC<IProps> = ({
   changeCurrentSelectedMonth,
   changeCurrentSelectedYear,
   activeDay,
-  changeCurrentActiveDay
+  changeCurrentActiveDay,
+  closeOpenToDoHandler
 }) => {
   const [weekFormat, setWeekFormat] = useState(daysNamesStartsWithMonday[0]);
 
@@ -40,6 +41,7 @@ const Calendar: FC<IProps> = ({
         changeWeekFormat={changeWeekFormat}
         activeDay={activeDay}
         changeCurrentActiveDay={changeCurrentActiveDay}
+        closeOpenToDoHandler={closeOpenToDoHandler}
       />
     </Wrapper>
   );

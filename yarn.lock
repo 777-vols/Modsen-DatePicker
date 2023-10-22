@@ -4957,6 +4957,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-dom@npm:^18.2.14":
+  version: 18.2.14
+  resolution: "@types/react-dom@npm:18.2.14"
+  dependencies:
+    "@types/react": "*"
+  checksum: 890289c70d1966c168037637c09cacefe6205bdd27a33252144a6b432595a2943775ac1a1accac0beddaeb67f8fdf721e076acb1adc990b08e51c3d9fd4e780c
+  languageName: node
+  linkType: hard
+
+"@types/react-portal@npm:^4.0.5":
+  version: 4.0.5
+  resolution: "@types/react-portal@npm:4.0.5"
+  dependencies:
+    "@types/react": "*"
+  checksum: 073ef7494e863a04644f2aa54ee370f2636b35082a6a1113b235b423405dec9692fe477d0fef4428df6b3bfc16b6aa0621b1268b5489eefeafa0e6302691f3c0
+  languageName: node
+  linkType: hard
+
 "@types/react@npm:*, @types/react@npm:>=16, @types/react@npm:^18.2.27":
   version: 18.2.28
   resolution: "@types/react@npm:18.2.28"
@@ -11075,6 +11093,8 @@ __metadata:
     "@types/babel__core": ^7.20.2
     "@types/node": ^20.8.4
     "@types/react": ^18.2.27
+    "@types/react-dom": ^18.2.14
+    "@types/react-portal": ^4.0.5
     "@types/styled-components": ^5.1.28
     "@typescript-eslint/eslint-plugin": ^6.7.5
     "@typescript-eslint/parser": ^6.7.5
@@ -11099,6 +11119,7 @@ __metadata:
     prettier: ^3.0.3
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-portal: ^4.2.2
     rollup: ^4.0.2
     rollup-plugin-dts: ^6.1.0
     rollup-plugin-module-replacement: ^1.2.1
@@ -12412,7 +12433,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.5.8, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -12666,6 +12687,18 @@ __metadata:
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 9d6d111d8990dc98bc5402c1266a808b0459b5d54830bbea24c12d908b536df7883f268a7868cfaedde3dd9d4e0d574db456f84d2e6df9c4526f99bb4b5344d8
+  languageName: node
+  linkType: hard
+
+"react-portal@npm:^4.2.2":
+  version: 4.2.2
+  resolution: "react-portal@npm:4.2.2"
+  dependencies:
+    prop-types: ^15.5.8
+  peerDependencies:
+    react: ^16.0.0-0 || ^17.0.0-0 || ^18.0.0-0
+    react-dom: ^16.0.0-0 || ^17.0.0-0 || ^18.0.0-0
+  checksum: dc7cd0c6907d1859c0eca4571108934ac791eb9eaf020529a26d4732b7bb556a53bf7e87e868f9918bd60c58f512cc36a49aef5671c964d0a49494168fb2abe0
   languageName: node
   linkType: hard
 

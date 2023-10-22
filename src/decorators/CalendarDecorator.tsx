@@ -16,6 +16,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
       weekFormat,
       activeDay,
       changeCurrentActiveDay,
+      closeOpenToDoHandler,
       ...otherProps
     } = props;
 
@@ -55,11 +56,19 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
               isCurrentDay={isCurrentDay}
               activeDay={activeDay}
               changeCurrentActiveDay={changeCurrentActiveDay}
+              closeOpenToDoHandler={closeOpenToDoHandler}
               isBold
             />
           );
         }),
-      [weekFormat, currentSelectedMonth, currentSelectedYear, activeDay, changeCurrentActiveDay]
+      [
+        weekFormat,
+        currentSelectedMonth,
+        currentSelectedYear,
+        activeDay,
+        changeCurrentActiveDay,
+        closeOpenToDoHandler
+      ]
     );
     return (
       <WrappedComponent

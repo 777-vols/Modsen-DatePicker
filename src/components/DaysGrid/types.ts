@@ -8,6 +8,7 @@ interface IProps {
   changeWeekFormat: () => void;
   activeDay: number;
   changeCurrentActiveDay: (newActiveDay: number) => void;
+  closeOpenToDoHandler: () => void;
 }
 
 export default IProps;

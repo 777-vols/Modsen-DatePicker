@@ -3,17 +3,24 @@ import React, { FC, memo } from 'react';
 import { DayNumber, Wrapper } from './styled';
 import IProps from './types';
 
+const doubleClick = 2;
+
 const CalendarDay: FC<IProps> = ({
   dayValue,
   isBold,
   isHoliday,
   isCurrentDay,
   activeDay,
-  changeCurrentActiveDay
+  changeCurrentActiveDay,
+  closeOpenToDoHandler
 }) => {
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent) => {
     if (typeof dayValue === 'number' && changeCurrentActiveDay) {
       changeCurrentActiveDay(dayValue);
+    }
+
+    if (event.detail === doubleClick && closeOpenToDoHandler) {
+      closeOpenToDoHandler();
     }
   };
   const isActive = activeDay === dayValue;

@@ -4,6 +4,7 @@ interface IProps {
   isHoliday?: boolean;
   isCurrentDay?: boolean;
   activeDay?: number;
+  closeOpenToDoHandler?: () => void;
   changeCurrentActiveDay?: (newActiveDay: number) => void;
 }
 
