@@ -1,6 +1,6 @@
 const config = {
   placeholder: 'Type new toDo',
-  addTodoButtonSpan: '+'
+  addTodoButtonText: '+'
 };
 
 export default config;

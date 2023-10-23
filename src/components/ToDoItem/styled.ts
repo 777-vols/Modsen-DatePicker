@@ -19,5 +19,6 @@ export const Text = styled.span<InterfaceTextSpan>`
     $isDone &&
     css`
       text-decoration: line-through;
+      color: ${({ theme }) => theme.colors.red};
     `};
 `;

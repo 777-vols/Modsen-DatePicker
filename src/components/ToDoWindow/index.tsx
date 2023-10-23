@@ -1,9 +1,9 @@
-import React, { FC, memo, useState } from 'react';
+import React, { FC, memo, useCallback, useMemo, useState } from 'react';
 
 import clearImg from '@/assets/clear.svg';
 import ToDoItem from '@/components/ToDoItem';
 import { allMonthsNames } from '@/constants/calendarData';
-import { getLocaleStorageItem, setLocaleStorageItem } from '@/helpers/localeStorageHelpers';
+import { getLocaleStorageItem, setStateAndLocaleStorage } from '@/helpers/localeStorageHelpers';
 
 import config from './config';
 import {
@@ -21,7 +21,7 @@ import {
 } from './styled';
 import { IProps, IToDo } from './types';
 
-const { placeholder, addTodoButtonSpan } = config;
+const { placeholder, addTodoButtonText } = config;
 
 const ToDoWindow: FC<IProps> = ({
   closeOpenToDoHandler,
@@ -29,68 +29,95 @@ const ToDoWindow: FC<IProps> = ({
   currentSelectedMonth,
   currentSelectedYear
 }) => {
-  const [inputValue, setInputValue] = useState('');
-  const [toDoObject, setToDoObject] = useState<object>(
-    getLocaleStorageItem('toDoObject') as object
+  const [inputNewToDo, setInputNewToDo] = useState('');
+  const [allDaysToDoStateObject, setAllDaysToDoStateObject] = useState<object>(
+    getLocaleStorageItem('allDaysToDoObject') as object
   );
-  const selectedDayDate = `${activeDay} ${currentSelectedMonth} ${currentSelectedYear}`;
-  const toDoArray: IToDo[] = toDoObject[selectedDayDate as keyof typeof toDoObject];
 
-  const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const selectedDayDate = `${activeDay} ${currentSelectedMonth} ${currentSelectedYear}`;
+  const toDoArray: IToDo[] =
+    allDaysToDoStateObject[selectedDayDate as keyof typeof allDaysToDoStateObject];
+
+  const addToDoHandler = useCallback(() => {
+    if (inputNewToDo.length !== 0) {
+      const toDoItem = {
+        id: selectedDayDate + Math.random(),
+        toDoText: inputNewToDo,
+        isDone: false
+      };
+
+      setInputNewToDo('');
+      setStateAndLocaleStorage(
+        'allDaysToDoObject',
+        {
+          ...allDaysToDoStateObject,
+          [selectedDayDate]: [...toDoArray, toDoItem]
+        },
+        setAllDaysToDoStateObject
+      );
+    }
+  }, [inputNewToDo, selectedDayDate, allDaysToDoStateObject, toDoArray]);
+
+  const deleteToDoHandler = useCallback(
+    (toDoItemId: number) => {
+      const toDoObjectLocaleStorage = getLocaleStorageItem('allDaysToDoObject') as object;
+      const filtredToDo = [...toDoArray.filter(({ id }) => id !== toDoItemId)];
+
+      setStateAndLocaleStorage(
+        'allDaysToDoObject',
+        {
+          ...toDoObjectLocaleStorage,
+          [selectedDayDate]: [...filtredToDo]
+        },
+        setAllDaysToDoStateObject
+      );
+    },
+    [selectedDayDate, toDoArray]
+  );
+
+  const completeToDoHandler = useCallback(
+    (toDoItemId: number) => {
+      const toDoObjectLocaleStorage = getLocaleStorageItem('allDaysToDoObject') as object;
+      const withCompletedToDo = [
+        ...toDoArray.map((item) => {
+          const { id, isDone } = item;
+          return id === toDoItemId ? { ...item, isDone: !isDone } : item;
+        })
+      ];
+      setStateAndLocaleStorage(
+        'allDaysToDoObject',
+        {
+          ...toDoObjectLocaleStorage,
+          [selectedDayDate]: [...withCompletedToDo]
+        },
+        setAllDaysToDoStateObject
+      );
+    },
+    [selectedDayDate, toDoArray]
+  );
+
+  const toDoItemsComponentsArray = useMemo(
+    () =>
+      toDoArray.map(({ id, toDoText, isDone }) => (
+        <ToDoItem
+          key={id}
+          id={id}
+          toDoText={toDoText}
+          isDone={isDone}
+          deleteToDoHandler={deleteToDoHandler}
+          completeToDoHandler={completeToDoHandler}
+        />
+      )),
+    [completeToDoHandler, deleteToDoHandler, toDoArray]
+  );
+
+  const inputNewToDoHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
-    setInputValue(target.value);
+    setInputNewToDo(target.value);
   };
 
   const clearInputHandler = () => {
-    setInputValue('');
-  };
-
-  const addToDoHandler = () => {
-    if (inputValue.length !== 0) {
-      const toDoItem = {
-        id: selectedDayDate + Math.random(),
-        toDoText: inputValue,
-        isDone: false
-      };
-      const toDoObjectLocaleStorage = getLocaleStorageItem('toDoObject') as object;
-      const toDoArrayLocaleStorage: IToDo[] =
-        toDoObjectLocaleStorage[selectedDayDate as keyof typeof toDoObjectLocaleStorage] ?? [];
-      setInputValue('');
-      setLocaleStorageItem('toDoObject', {
-        ...toDoObjectLocaleStorage,
-        [selectedDayDate]: [...toDoArrayLocaleStorage, toDoItem]
-      });
-      setToDoObject({ ...toDoObject, [selectedDayDate]: [...toDoArrayLocaleStorage, toDoItem] });
-    }
-  };
-
-  const deleteToDoHandler = (id: number) => {
-    const toDoObjectLocaleStorage = getLocaleStorageItem('toDoObject') as object;
-    const filtredToDo = [...toDoArray.filter((item) => item.id !== id)];
-
-    setToDoObject({ ...toDoObject, [selectedDayDate]: [...filtredToDo] });
-    setLocaleStorageItem('toDoObject', {
-      ...toDoObjectLocaleStorage,
-      [selectedDayDate]: [...filtredToDo]
-    });
-  };
-
-  const completeToDoHandler = (id: number) => {
-    const toDoObjectLocaleStorage = getLocaleStorageItem('toDoObject') as object;
-    const withCompletedToDo = [
-      ...toDoArray.map((item) => {
-        if (item.id === id) {
-          return { ...item, isDone: !item.isDone };
-        }
-        return item;
-      })
-    ];
-
-    setToDoObject({ ...toDoObject, [selectedDayDate]: [...withCompletedToDo] });
-    setLocaleStorageItem('toDoObject', {
-      ...toDoObjectLocaleStorage,
-      [selectedDayDate]: [...withCompletedToDo]
-    });
+    setInputNewToDo('');
   };
 
   return (
@@ -102,30 +129,22 @@ const ToDoWindow: FC<IProps> = ({
         <SelectedDateHeader>{`${activeDay} ${
           allMonthsNames[currentSelectedMonth - 1]
         } ${currentSelectedYear}`}</SelectedDateHeader>
+
         <AddToDoWrapper>
           <InputWrapper>
-            <AddToDoInput placeholder={placeholder} onChange={inputHandler} value={inputValue} />
+            <AddToDoInput
+              placeholder={placeholder}
+              onChange={inputNewToDoHandler}
+              value={inputNewToDo}
+            />
             <ClearButton onClick={clearInputHandler}>
               <CloseImg src={clearImg} alt="clearImg" />
             </ClearButton>
           </InputWrapper>
-          <AddToDoButton onClick={addToDoHandler}>{addTodoButtonSpan}</AddToDoButton>
+          <AddToDoButton onClick={addToDoHandler}>{addTodoButtonText}</AddToDoButton>
         </AddToDoWrapper>
 
-        {toDoArray && (
-          <ToDoListWrapper>
-            {toDoArray.map(({ id, toDoText, isDone }) => (
-              <ToDoItem
-                key={id}
-                id={id}
-                toDoText={toDoText}
-                isDone={isDone}
-                deleteToDoHandler={deleteToDoHandler}
-                completeToDoHandler={completeToDoHandler}
-              />
-            ))}
-          </ToDoListWrapper>
-        )}
+        {toDoArray && <ToDoListWrapper>{toDoItemsComponentsArray}</ToDoListWrapper>}
       </WrapperInner>
     </Wrapper>
   );

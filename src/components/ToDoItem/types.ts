@@ -2,8 +2,8 @@ interface IProps {
   id: number;
   toDoText: string;
   isDone: boolean;
-  deleteToDoHandler: (id: number) => void;
-  completeToDoHandler: (id: number) => void;
+  deleteToDoHandler: (toDoItemId: number) => void;
+  completeToDoHandler: (toDoItemId: number) => void;
 }
 
 export default IProps;

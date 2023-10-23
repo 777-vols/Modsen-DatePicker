@@ -41,7 +41,6 @@ const DayPicker: FC = () => {
     } else {
       setCurrentSelectedMonth(newMonth);
     }
-    setActiveDay(0);
   }, []);
 
   const changeCurrentSelectedYear = useCallback((newYear: number) => {
@@ -66,6 +65,7 @@ const DayPicker: FC = () => {
             dateInputValue={headerDateInputValue}
             dateInputChangeHandler={dateInputChangeHandler}
             openCalendarHandler={openCalendarHandler}
+            changeCurrentActiveDay={changeCurrentActiveDay}
             changeCurrentSelectedMonth={changeCurrentSelectedMonth}
             changeCurrentSelectedYear={changeCurrentSelectedYear}
           />

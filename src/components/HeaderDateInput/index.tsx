@@ -14,6 +14,7 @@ const HeaderDateInput: FC<IProps> = ({
   dateInputValue,
   dateInputChangeHandler,
   openCalendarHandler,
+  changeCurrentActiveDay,
   changeCurrentSelectedMonth,
   changeCurrentSelectedYear
 }) => {
@@ -30,10 +31,11 @@ const HeaderDateInput: FC<IProps> = ({
       setIsErrorMessage(false);
     } else {
       const inputDataValue = target.value.split('/');
-      const month = Number(inputDataValue[1]);
-      const year = Number(inputDataValue[2]);
-      changeCurrentSelectedMonth(month);
-      changeCurrentSelectedYear(year);
+      const [day, month, year] = inputDataValue;
+
+      changeCurrentActiveDay(Number(day));
+      changeCurrentSelectedMonth(Number(month));
+      changeCurrentSelectedYear(Number(year));
     }
   };
 
