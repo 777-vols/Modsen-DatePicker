@@ -2,6 +2,7 @@ import React, { FC, memo, useState } from 'react';
 
 import clearImg from '@/assets/clear.svg';
 import ToDoItem from '@/components/ToDoItem';
+import { allMonthsNames } from '@/constants/calendarData';
 import { getLocaleStorageItem, setLocaleStorageItem } from '@/helpers/localeStorageHelpers';
 
 import config from './config';
@@ -39,6 +40,7 @@ const ToDoWindow: FC<IProps> = ({
     const { target } = event;
     setInputValue(target.value);
   };
+
   const clearInputHandler = () => {
     setInputValue('');
   };
@@ -73,13 +75,33 @@ const ToDoWindow: FC<IProps> = ({
     });
   };
 
+  const completeToDoHandler = (id: number) => {
+    const toDoObjectLocaleStorage = getLocaleStorageItem('toDoObject') as object;
+    const withCompletedToDo = [
+      ...toDoArray.map((item) => {
+        if (item.id === id) {
+          return { ...item, isDone: !item.isDone };
+        }
+        return item;
+      })
+    ];
+
+    setToDoObject({ ...toDoObject, [selectedDayDate]: [...withCompletedToDo] });
+    setLocaleStorageItem('toDoObject', {
+      ...toDoObjectLocaleStorage,
+      [selectedDayDate]: [...withCompletedToDo]
+    });
+  };
+
   return (
     <Wrapper>
       <WrapperInner>
         <CloseButton onClick={closeOpenToDoHandler}>
           <CloseImg src={clearImg} alt="clearImg" />
         </CloseButton>
-        <SelectedDateHeader>{`${activeDay} ${currentSelectedMonth} ${currentSelectedYear}`}</SelectedDateHeader>
+        <SelectedDateHeader>{`${activeDay} ${
+          allMonthsNames[currentSelectedMonth - 1]
+        } ${currentSelectedYear}`}</SelectedDateHeader>
         <AddToDoWrapper>
           <InputWrapper>
             <AddToDoInput placeholder={placeholder} onChange={inputHandler} value={inputValue} />
@@ -99,6 +121,7 @@ const ToDoWindow: FC<IProps> = ({
                 toDoText={toDoText}
                 isDone={isDone}
                 deleteToDoHandler={deleteToDoHandler}
+                completeToDoHandler={completeToDoHandler}
               />
             ))}
           </ToDoListWrapper>

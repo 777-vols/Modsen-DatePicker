@@ -3,6 +3,7 @@ interface IProps {
   toDoText: string;
   isDone: boolean;
   deleteToDoHandler: (id: number) => void;
+  completeToDoHandler: (id: number) => void;
 }
 
 export default IProps;
