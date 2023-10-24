@@ -11,7 +11,8 @@ const meta: Meta<typeof DayPicker> = {
     isWeekStartsOnMonday: {
       options: [true, false],
       control: { type: 'radio' }
-    }
+    },
+    holidaysColor: { control: 'color' }
   }
 };
 

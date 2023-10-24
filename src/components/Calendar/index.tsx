@@ -14,7 +14,8 @@ const Calendar: FC<IProps> = ({
   activeDay,
   changeCurrentActiveDay,
   closeOpenToDoHandler,
-  isWeekStartsOnMonday
+  isWeekStartsOnMonday,
+  holidaysColor
 }) => (
   <Wrapper>
     <MonthSlider
@@ -27,6 +28,7 @@ const Calendar: FC<IProps> = ({
       currentSelectedMonth={currentSelectedMonth}
       currentSelectedYear={currentSelectedYear}
       isWeekStartsOnMonday={isWeekStartsOnMonday}
+      holidaysColor={holidaysColor}
       activeDay={activeDay}
       changeCurrentActiveDay={changeCurrentActiveDay}
       closeOpenToDoHandler={closeOpenToDoHandler}

@@ -2,6 +2,7 @@
 import React, { useMemo } from 'react';
 
 import CalendarDay from '@/components/CalendarDay';
+import { DayName } from '@/components/DaysGrid/styled';
 import IProps from '@/components/DaysGrid/types';
 import { daysNamesStartsWithMonday, daysNamesStartsWithSunday } from '@/constants/calendarData';
 import { getArrayOfDaysForCalendar, getNumberOfDaysInMonth } from '@/helpers/calendarHelpers';
@@ -14,6 +15,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
       currentSelectedMonth,
       currentSelectedYear,
       isWeekStartsOnMonday,
+      holidaysColor,
       activeDay,
       changeCurrentActiveDay,
       closeOpenToDoHandler,
@@ -23,12 +25,10 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
     const daysNamesArray = useMemo(() => {
       if (isWeekStartsOnMonday) {
         return daysNamesStartsWithMonday.map((dayName) => (
-          <CalendarDay key={dayName} dayValue={dayName} isBold />
+          <DayName key={dayName}>{dayName}</DayName>
         ));
       }
-      return daysNamesStartsWithSunday.map((dayName) => (
-        <CalendarDay key={dayName} dayValue={dayName} isBold />
-      ));
+      return daysNamesStartsWithSunday.map((dayName) => <DayName key={dayName}>{dayName}</DayName>);
     }, [isWeekStartsOnMonday]);
 
     const daysNumbersArray = useMemo(
@@ -46,6 +46,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
               key={id}
               dayValue={day.dayNumber}
               isHoliday={isHoliday}
+              holidaysColor={holidaysColor}
               isCurrentDay={isCurrentDay}
             />
           ) : (
@@ -53,6 +54,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
               key={id}
               dayValue={day.dayNumber}
               isHoliday={isHoliday}
+              holidaysColor={holidaysColor}
               isCurrentDay={isCurrentDay}
               activeDay={activeDay}
               changeCurrentActiveDay={changeCurrentActiveDay}
@@ -66,6 +68,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
         currentSelectedMonth,
         currentSelectedYear,
         activeDay,
+        holidaysColor,
         changeCurrentActiveDay,
         closeOpenToDoHandler
       ]

@@ -1,5 +1,6 @@
 interface IProps {
   dayValue: number | string;
+  holidaysColor?: string;
   isBold?: boolean;
   isHoliday?: boolean;
   isCurrentDay?: boolean;

@@ -16,7 +16,7 @@ const oneYear = 1;
 const januaryIndex = 1;
 const decemberIndex = 12;
 
-const DayPicker: FC<IProps> = ({ title, isWeekStartsOnMonday }) => {
+const DayPicker: FC<IProps> = ({ title, isWeekStartsOnMonday, holidaysColor }) => {
   const [calenderIsOpen, setCalendarIsOpen] = useState<boolean>(true);
   const [headerDateInputValue, setHeaderDateInputValue] = useState<string>('');
   const [currentSelectedMonth, setCurrentSelectedMonth] = useState(new Date().getMonth() + oneDay);
@@ -76,6 +76,7 @@ const DayPicker: FC<IProps> = ({ title, isWeekStartsOnMonday }) => {
             {calenderIsOpen && (
               <Calendar
                 isWeekStartsOnMonday={isWeekStartsOnMonday}
+                holidaysColor={holidaysColor}
                 currentSelectedMonth={currentSelectedMonth}
                 currentSelectedYear={currentSelectedYear}
                 changeCurrentSelectedMonth={changeCurrentSelectedMonth}

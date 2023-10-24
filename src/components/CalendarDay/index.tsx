@@ -9,6 +9,7 @@ const CalendarDay: FC<IProps> = ({
   dayValue,
   isBold,
   isHoliday,
+  holidaysColor,
   isCurrentDay,
   activeDay,
   changeCurrentActiveDay,
@@ -29,6 +30,7 @@ const CalendarDay: FC<IProps> = ({
       <DayNumber
         onClick={handleClick}
         $isHoliday={isHoliday}
+        $holidaysColor={holidaysColor}
         $bold={isBold}
         $isActive={isActive}
         $isCurrentDay={isCurrentDay}>

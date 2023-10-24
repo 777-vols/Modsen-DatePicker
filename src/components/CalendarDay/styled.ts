@@ -4,6 +4,7 @@ interface InterfaceDayNumber {
   $bold?: boolean;
   $isHoliday?: boolean;
   $isCurrentDay?: boolean;
+  $holidaysColor?: string;
   $isActive?: boolean;
 }
 
@@ -15,7 +16,6 @@ export const Wrapper = styled.div`
   width: 32px;
 `;
 export const DayNumber = styled.button<InterfaceDayNumber>`
-  cursor: pointer;
   border: none;
   background: transparent;
   width: 100%;
@@ -25,14 +25,25 @@ export const DayNumber = styled.button<InterfaceDayNumber>`
   ${({ $bold }) =>
     $bold &&
     css`
+      cursor: pointer;
       font-weight: ${({ theme }) => theme.fontWeight.l};
       font-size: ${({ theme }) => theme.fontSize.mediumL};
     `};
+  ${({ $isHoliday, $holidaysColor }) =>
+    $isHoliday &&
+    $holidaysColor &&
+    css`
+      background: ${$holidaysColor};
+    `}
   ${({ $isHoliday }) =>
     $isHoliday &&
     css`
-      color: ${({ theme }) => theme.colors.red};
       background: ${({ theme }) => theme.colors.lightRed};
+    `}
+  ${({ $isHoliday, $holidaysColor }) =>
+    $isHoliday &&
+    css`
+      background: ${$holidaysColor};
     `}
   ${({ $isCurrentDay }) =>
     $isCurrentDay &&
