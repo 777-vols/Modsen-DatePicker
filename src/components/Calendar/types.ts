@@ -6,6 +6,7 @@ interface IProps {
   changeCurrentSelectedYear: (newYear: number) => void;
   changeCurrentActiveDay: (newActiveDay: number) => void;
   closeOpenToDoHandler: () => void;
+  isWeekStartsOnMonday: boolean;
 }
 
 export default IProps;

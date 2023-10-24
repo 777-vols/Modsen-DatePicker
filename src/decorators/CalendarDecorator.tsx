@@ -13,7 +13,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
     const {
       currentSelectedMonth,
       currentSelectedYear,
-      weekFormat,
+      isWeekStartsOnMonday,
       activeDay,
       changeCurrentActiveDay,
       closeOpenToDoHandler,
@@ -21,7 +21,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
     } = props;
 
     const daysNamesArray = useMemo(() => {
-      if (weekFormat === daysNamesStartsWithMonday[0]) {
+      if (isWeekStartsOnMonday) {
         return daysNamesStartsWithMonday.map((dayName) => (
           <CalendarDay key={dayName} dayValue={dayName} isBold />
         ));
@@ -29,7 +29,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
       return daysNamesStartsWithSunday.map((dayName) => (
         <CalendarDay key={dayName} dayValue={dayName} isBold />
       ));
-    }, [weekFormat]);
+    }, [isWeekStartsOnMonday]);
 
     const daysNumbersArray = useMemo(
       () =>
@@ -38,7 +38,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
           getNumberOfDaysInMonth(currentSelectedYear, currentSelectedMonth) + oneDay,
           currentSelectedMonth,
           currentSelectedYear,
-          weekFormat
+          isWeekStartsOnMonday
         ).map(({ id, day }) => {
           const { dayNumber, isHoliday, isCurrentDay } = day;
           return typeof dayNumber === 'string' ? (
@@ -62,7 +62,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
           );
         }),
       [
-        weekFormat,
+        isWeekStartsOnMonday,
         currentSelectedMonth,
         currentSelectedYear,
         activeDay,

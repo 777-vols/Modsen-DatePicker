@@ -58,5 +58,16 @@ interface ITheme {
     smallS: string;
     zero: string;
   };
+  breakPoints: {
+    largeL: string;
+    largeM: string;
+    largeS: string;
+    mediumL: string;
+    mediumM: string;
+    mediumS: string;
+    smallL: string;
+    smallM: string;
+    smallS: string;
+  };
 }
 export default ITheme;

@@ -2,19 +2,21 @@ import React, { FC, memo, useCallback, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import Calendar from '@/components/Calendar';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import HeaderDateInput from '@/components/HeaderDateInput';
 import ToDoWindow from '@/components/ToDoWindow';
 import GlobalStyle from '@/constants/styles/globalStyle';
 import theme from '@/constants/theme';
 
 import { Wrapper, WrapperInner } from './styled';
+import IProps from './types';
 
 const oneDay = 1;
 const oneYear = 1;
 const januaryIndex = 1;
 const decemberIndex = 12;
 
-const DayPicker: FC = () => {
+const DayPicker: FC<IProps> = ({ title, isWeekStartsOnMonday }) => {
   const [calenderIsOpen, setCalendarIsOpen] = useState<boolean>(true);
   const [headerDateInputValue, setHeaderDateInputValue] = useState<string>('');
   const [currentSelectedMonth, setCurrentSelectedMonth] = useState(new Date().getMonth() + oneDay);
@@ -59,37 +61,41 @@ const DayPicker: FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Wrapper>
-        <WrapperInner>
-          <HeaderDateInput
-            dateInputValue={headerDateInputValue}
-            dateInputChangeHandler={dateInputChangeHandler}
-            openCalendarHandler={openCalendarHandler}
-            changeCurrentActiveDay={changeCurrentActiveDay}
-            changeCurrentSelectedMonth={changeCurrentSelectedMonth}
-            changeCurrentSelectedYear={changeCurrentSelectedYear}
-          />
-          {calenderIsOpen && (
-            <Calendar
-              currentSelectedMonth={currentSelectedMonth}
-              currentSelectedYear={currentSelectedYear}
+      <ErrorBoundary>
+        <Wrapper>
+          <WrapperInner>
+            <HeaderDateInput
+              title={title}
+              dateInputValue={headerDateInputValue}
+              dateInputChangeHandler={dateInputChangeHandler}
+              openCalendarHandler={openCalendarHandler}
+              changeCurrentActiveDay={changeCurrentActiveDay}
               changeCurrentSelectedMonth={changeCurrentSelectedMonth}
               changeCurrentSelectedYear={changeCurrentSelectedYear}
-              activeDay={activeDay}
-              changeCurrentActiveDay={changeCurrentActiveDay}
-              closeOpenToDoHandler={closeOpenToDoHandler}
             />
-          )}
-          {toDoWindowIsOpen && (
-            <ToDoWindow
-              closeOpenToDoHandler={closeOpenToDoHandler}
-              currentSelectedMonth={currentSelectedMonth}
-              currentSelectedYear={currentSelectedYear}
-              activeDay={activeDay}
-            />
-          )}
-        </WrapperInner>
-      </Wrapper>
+            {calenderIsOpen && (
+              <Calendar
+                isWeekStartsOnMonday={isWeekStartsOnMonday}
+                currentSelectedMonth={currentSelectedMonth}
+                currentSelectedYear={currentSelectedYear}
+                changeCurrentSelectedMonth={changeCurrentSelectedMonth}
+                changeCurrentSelectedYear={changeCurrentSelectedYear}
+                activeDay={activeDay}
+                changeCurrentActiveDay={changeCurrentActiveDay}
+                closeOpenToDoHandler={closeOpenToDoHandler}
+              />
+            )}
+            {toDoWindowIsOpen && (
+              <ToDoWindow
+                closeOpenToDoHandler={closeOpenToDoHandler}
+                currentSelectedMonth={currentSelectedMonth}
+                currentSelectedYear={currentSelectedYear}
+                activeDay={activeDay}
+              />
+            )}
+          </WrapperInner>
+        </Wrapper>
+      </ErrorBoundary>
     </ThemeProvider>
   );
 };

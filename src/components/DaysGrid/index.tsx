@@ -5,9 +5,9 @@ import CalendarDecorator from '@/decorators/CalendarDecorator';
 import { MonthDaysNumbers, WeekDaysNames, Wrapper } from './styled';
 import IProps from './types';
 
-const DaysGrid: FC<IProps> = ({ daysNamesArray, daysNumbersArray, changeWeekFormat }) => (
+const DaysGrid: FC<IProps> = ({ daysNamesArray, daysNumbersArray }) => (
   <Wrapper>
-    <WeekDaysNames onClick={changeWeekFormat}>{daysNamesArray}</WeekDaysNames>
+    <WeekDaysNames>{daysNamesArray}</WeekDaysNames>
     <MonthDaysNumbers>{daysNumbersArray}</MonthDaysNumbers>
   </Wrapper>
 );

@@ -29,6 +29,7 @@ const ToDoWindow: FC<IProps> = ({
   currentSelectedMonth,
   currentSelectedYear
 }) => {
+  const [leeresArray] = useState<IToDo[]>([]);
   const [inputNewToDo, setInputNewToDo] = useState('');
   const [allDaysToDoStateObject, setAllDaysToDoStateObject] = useState<object>(
     getLocaleStorageItem('allDaysToDoObject') as object
@@ -36,7 +37,7 @@ const ToDoWindow: FC<IProps> = ({
 
   const selectedDayDate = `${activeDay} ${currentSelectedMonth} ${currentSelectedYear}`;
   const toDoArray: IToDo[] =
-    allDaysToDoStateObject[selectedDayDate as keyof typeof allDaysToDoStateObject];
+    allDaysToDoStateObject[selectedDayDate as keyof typeof allDaysToDoStateObject] ?? leeresArray;
 
   const addToDoHandler = useCallback(() => {
     if (inputNewToDo.length !== 0) {

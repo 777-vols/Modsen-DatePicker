@@ -1,4 +1,5 @@
 interface IProps {
+  title: string;
   dateInputValue: string;
   dateInputChangeHandler: (value: string) => void;
   openCalendarHandler: () => void;

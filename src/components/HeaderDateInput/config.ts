@@ -1,5 +1,5 @@
 const config = {
-  title: 'Date',
+  defaultTitle: 'Date',
   placeholder: 'Day/Month/Year',
   errorMessage: 'The entered date is incorrect'
 };

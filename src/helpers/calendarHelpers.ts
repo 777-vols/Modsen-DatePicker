@@ -1,4 +1,4 @@
-import { daysNamesStartsWithMonday, holidaysArray } from '@/constants/calendarData';
+import { holidaysArray } from '@/constants/calendarData';
 
 const firstDayIndex = 0;
 
@@ -46,7 +46,7 @@ export const getArrayOfDaysForCalendar = (
   endOfTheMonth: number,
   selectedMonth: number,
   selectedYear: number,
-  beginningOfTheWeek: string
+  isWeekStartsOnMonday: boolean
 ): Array<{
   id: number;
   day: { dayNumber: string | number; isHoliday: boolean; isCurrentDay: boolean };
@@ -90,7 +90,7 @@ export const getArrayOfDaysForCalendar = (
       return dayObject;
     });
 
-  if (beginningOfTheWeek === daysNamesStartsWithMonday[firstDayIndex]) {
+  if (isWeekStartsOnMonday) {
     numberOfDaysFromPrevMonth = monthFirstDay - twoDays;
     if (numberOfDaysFromPrevMonth === -oneDay) {
       if (monthFirstDay === oneDay) {

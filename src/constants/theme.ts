@@ -1,3 +1,4 @@
+import BreakPoints from './styles/breakPoints';
 import Colors from './styles/colors';
 import FontSize from './styles/fontSizes';
 import Margin from './styles/margins';
@@ -63,6 +64,17 @@ const theme: ITheme = {
     smallM: Margin.SMALL_M,
     smallS: Margin.SMALL_S,
     zero: Margin.ZERO
+  },
+  breakPoints: {
+    largeL: BreakPoints.LARGE_L,
+    largeM: BreakPoints.LARGE_M,
+    largeS: BreakPoints.LARGE_S,
+    mediumL: BreakPoints.MEDIUM_L,
+    mediumM: BreakPoints.MEDIUM_M,
+    mediumS: BreakPoints.MEDIUM_S,
+    smallL: BreakPoints.SMALL_L,
+    smallM: BreakPoints.SMALL_M,
+    smallS: BreakPoints.SMALL_S
   }
 };
 

@@ -8,9 +8,10 @@ import config from './config';
 import { ErrorMessage, Input, Panel, StyledButtton, Title, TitleWrapper, Wrapper } from './styles';
 import IProps from './types';
 
-const { title, placeholder, errorMessage } = config;
+const { defaultTitle, placeholder, errorMessage } = config;
 
 const HeaderDateInput: FC<IProps> = ({
+  title,
   dateInputValue,
   dateInputChangeHandler,
   openCalendarHandler,
@@ -20,36 +21,38 @@ const HeaderDateInput: FC<IProps> = ({
 }) => {
   const [isErrorMessage, setIsErrorMessage] = useState<boolean>(false);
 
-  const dateInputHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const dateInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
     dateInputChangeHandler(target.value);
     setIsErrorMessage(false);
 
     if (!dateInputCheckHelper(target.value)) {
       setIsErrorMessage(true);
-    } else if (target.value === '') {
-      setIsErrorMessage(false);
-    } else {
-      const inputDataValue = target.value.split('/');
-      const [day, month, year] = inputDataValue;
+    }
+    if (dateInputCheckHelper(target.value)) {
+      const [day, month, year] = target.value.split('/');
 
       changeCurrentActiveDay(Number(day));
       changeCurrentSelectedMonth(Number(month));
       changeCurrentSelectedYear(Number(year));
     }
+    if (target.value === '') {
+      setIsErrorMessage(false);
+    }
   };
 
-  const clearButtonHandler = (): void => {
+  const clearButtonHandler = () => {
     dateInputChangeHandler('');
+    setIsErrorMessage(false);
   };
 
   return (
     <Wrapper>
       <TitleWrapper>
-        <Title>{title}</Title>
-        {isErrorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+        <Title>{title || defaultTitle}</Title>
       </TitleWrapper>
       <Panel>
+        {isErrorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         <StyledButtton onClick={openCalendarHandler}>
           <img src={calendarImg} alt="calendarImg" />
         </StyledButtton>

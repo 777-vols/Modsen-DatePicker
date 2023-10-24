@@ -4,8 +4,7 @@ interface IProps {
   isCurrentDay?: boolean;
   currentSelectedMonth: number;
   currentSelectedYear: number;
-  weekFormat: string;
-  changeWeekFormat: () => void;
+  isWeekStartsOnMonday: boolean;
   activeDay: number;
   changeCurrentActiveDay: (newActiveDay: number) => void;
   closeOpenToDoHandler: () => void;

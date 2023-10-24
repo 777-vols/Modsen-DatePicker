@@ -9,15 +9,21 @@ export const TitleWrapper = styled.div`
   align-items: center;
 `;
 export const Title = styled.h1`
+  margin: ${({ theme }) => theme.margin.zero} ${({ theme }) => theme.margin.mediumS};
   font-size: ${({ theme }) => theme.fontSize.mediumXL};
-  height: 20px;
-  margin-bottom: ${({ theme }) => theme.padding.smallL};
+  min-height: 20px;
+  margin-bottom: ${({ theme }) => theme.padding.mediumS};
+  word-wrap: break-word;
 `;
 export const ErrorMessage = styled.span`
-  font-size: ${({ theme }) => theme.fontSize.mediumM};
+  position: absolute;
+  top: -15px;
+  right: 15px;
+  font-size: ${({ theme }) => theme.fontSize.mediumS};
   color: ${({ theme }) => theme.colors.red};
 `;
 export const Panel = styled.div`
+  position: relative;
   padding: ${({ theme }) => theme.padding.zero} ${({ theme }) => theme.padding.mediumM};
   display: flex;
   align-items: center;
