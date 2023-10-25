@@ -29,6 +29,11 @@ export const DayNumber = styled.button<InterfaceDayNumber>`
       cursor: pointer;
       font-weight: ${({ theme }) => theme.fontWeight.l};
       font-size: ${({ theme }) => theme.fontSize.mediumL};
+      transition: 0.2s;
+      &:hover {
+        background: ${({ theme }) => theme.colors.blue};
+        font-size: ${({ theme }) => theme.fontSize.mediumXL};
+      }
     `};
   ${({ $isHoliday, $holidaysColor }) =>
     $isHoliday &&
@@ -49,11 +54,12 @@ export const DayNumber = styled.button<InterfaceDayNumber>`
   ${({ $isCurrentDay }) =>
     $isCurrentDay &&
     css`
-      border: 2px solid ${({ theme }) => theme.colors.black};
+      border: 2px solid ${({ theme }) => theme.colors.blue};
     `}
   ${({ $isActive }) =>
     $isActive &&
     css`
+      font-size: ${({ theme }) => theme.fontSize.mediumXL};
       background: ${({ theme }) => theme.colors.blue};
       color: ${({ theme }) => theme.colors.white};
     `}

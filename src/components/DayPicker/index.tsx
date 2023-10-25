@@ -11,15 +11,21 @@ import theme from '@/constants/theme';
 import { Wrapper, WrapperInner } from './styled';
 import IProps from './types';
 
-const oneDay = 1;
 const oneYear = 1;
-const januaryIndex = 1;
-const decemberIndex = 12;
+const januaryIndex = 0;
+const decemberIndex = 11;
 
-const DayPicker: FC<IProps> = ({ title, isWeekendsOn, isWeekStartsOnMonday, holidaysColor }) => {
+const DayPicker: FC<IProps> = ({
+  title,
+  isWeekendsOn,
+  isWeekStartsOnMonday,
+  holidaysColor,
+  minDate,
+  maxDate
+}) => {
   const [calenderIsOpen, setCalendarIsOpen] = useState<boolean>(true);
   const [headerDateInputValue, setHeaderDateInputValue] = useState<string>('');
-  const [currentSelectedMonth, setCurrentSelectedMonth] = useState(new Date().getMonth() + oneDay);
+  const [currentSelectedMonth, setCurrentSelectedMonth] = useState(new Date().getMonth());
   const [currentSelectedYear, setCurrentSelectedYear] = useState(new Date().getFullYear());
   const [toDoWindowIsOpen, setToDoWindowIsOpen] = useState(false);
   const [activeDay, setActiveDay] = useState<number>(0);
@@ -33,17 +39,25 @@ const DayPicker: FC<IProps> = ({ title, isWeekendsOn, isWeekStartsOnMonday, holi
     setHeaderDateInputValue(dateInputValue);
   }, []);
 
-  const changeCurrentSelectedMonth = useCallback((newMonth: number) => {
-    if (newMonth < januaryIndex) {
-      setCurrentSelectedMonth(decemberIndex);
-      setCurrentSelectedYear((prevState) => prevState - oneYear);
-    } else if (newMonth > decemberIndex) {
-      setCurrentSelectedMonth(januaryIndex);
-      setCurrentSelectedYear((prevState) => prevState + oneYear);
-    } else {
-      setCurrentSelectedMonth(newMonth);
-    }
-  }, []);
+  const changeCurrentSelectedMonth = useCallback(
+    (newMonth: number) => {
+      if (
+        new Date(currentSelectedYear, newMonth, 1) >= minDate &&
+        new Date(currentSelectedYear, newMonth, 1) < maxDate
+      ) {
+        if (newMonth < januaryIndex) {
+          setCurrentSelectedMonth(decemberIndex);
+          setCurrentSelectedYear((prevState) => prevState - oneYear);
+        } else if (newMonth > decemberIndex) {
+          setCurrentSelectedMonth(januaryIndex);
+          setCurrentSelectedYear((prevState) => prevState + oneYear);
+        } else {
+          setCurrentSelectedMonth(newMonth);
+        }
+      }
+    },
+    [currentSelectedYear, maxDate, minDate]
+  );
 
   const changeCurrentSelectedYear = useCallback((newYear: number) => {
     setCurrentSelectedYear(newYear);

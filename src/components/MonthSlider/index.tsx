@@ -28,9 +28,7 @@ const MonthSlider: FC<IProps> = ({
       <ChangeMonthButton onClick={prevMonthHandler}>
         <img src={prevImg} alt="prevMonth" />
       </ChangeMonthButton>
-      <MonthName>{`${
-        allMonthsNames[currentSelectedMonth - oneMonth]
-      } ${currentSelectedYear}`}</MonthName>
+      <MonthName>{`${allMonthsNames[currentSelectedMonth]} ${currentSelectedYear}`}</MonthName>
       <ChangeMonthButton onClick={nextMonthHandler}>
         <img src={nextImg} alt="nextMonth" />
       </ChangeMonthButton>

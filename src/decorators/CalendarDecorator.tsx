@@ -40,8 +40,8 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
       () =>
         getArrayOfDaysForCalendar(
           oneDay,
-          getNumberOfDaysInMonth(currentSelectedYear, currentSelectedMonth) + oneDay,
-          currentSelectedMonth,
+          getNumberOfDaysInMonth(currentSelectedYear, currentSelectedMonth + 1) + oneDay,
+          currentSelectedMonth + 1,
           currentSelectedYear,
           isWeekStartsOnMonday,
           isWeekendsOn
@@ -59,7 +59,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
               />
             );
           }
-          getWeekend(dayNumber, currentSelectedMonth - 1, currentSelectedYear);
+          getWeekend(dayNumber, currentSelectedMonth, currentSelectedYear);
           return (
             <CalendarDay
               key={id}

@@ -27,7 +27,9 @@ type Story = StoryObj<typeof DayPicker>;
 export const Default: Story = {
   args: {
     isWeekendsOn: true,
-    isWeekStartsOnMonday: true
+    isWeekStartsOnMonday: true,
+    minDate: new Date(2023, 5, 1),
+    maxDate: new Date(2023, 8, 31)
   },
 
   render: (args) => <DayPicker {...args} />
