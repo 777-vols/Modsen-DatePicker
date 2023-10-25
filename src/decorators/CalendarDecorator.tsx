@@ -46,7 +46,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
           isWeekStartsOnMonday,
           isWeekendsOn
         ).map(({ id, day }) => {
-          const { dayNumber, isHoliday, isCurrentDay, isWeekend } = day;
+          const { dayNumber, isHoliday, isCurrentDay, isWeekend, isHaveTodos } = day;
           if (typeof dayNumber === 'string') {
             return (
               <CalendarDay
@@ -66,6 +66,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
               dayNumber={dayNumber}
               isHoliday={isHoliday}
               isWeekend={isWeekend}
+              isHaveTodos={isHaveTodos}
               holidaysColor={holidaysColor}
               isCurrentDay={isCurrentDay}
               activeDay={activeDay}

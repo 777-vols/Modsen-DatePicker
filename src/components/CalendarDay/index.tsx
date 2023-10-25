@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 
-import { DayNumber, Wrapper } from './styled';
+import { DayNumber, TodosIdentifier, Wrapper } from './styled';
 import IProps from './types';
 
 const doubleClick = 2;
@@ -13,6 +13,7 @@ const CalendarDay: FC<IProps> = ({
   isCurrentDay,
   activeDay,
   isWeekend,
+  isHaveTodos,
   changeCurrentActiveDay,
   closeOpenToDoHandler
 }) => {
@@ -37,6 +38,7 @@ const CalendarDay: FC<IProps> = ({
         $isActive={isActive}
         $isCurrentDay={isCurrentDay}>
         {dayNumber}
+        <TodosIdentifier $isHaveTodos={isHaveTodos}>!</TodosIdentifier>
       </DayNumber>
     </Wrapper>
   );

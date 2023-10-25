@@ -28,8 +28,8 @@ export const Default: Story = {
   args: {
     isWeekendsOn: true,
     isWeekStartsOnMonday: true,
-    minDate: new Date(2023, 5, 1),
-    maxDate: new Date(2023, 8, 31)
+    minDate: new Date(2023, 0, 1),
+    maxDate: new Date(2023, 11, 31)
   },
 
   render: (args) => <DayPicker {...args} />

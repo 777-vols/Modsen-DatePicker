@@ -33,7 +33,7 @@ const HeaderDateInput: FC<IProps> = ({
       const [day, month, year] = target.value.split('/');
 
       changeCurrentActiveDay(Number(day));
-      changeCurrentSelectedMonth(Number(month));
+      changeCurrentSelectedMonth(Number(month) - 1);
       changeCurrentSelectedYear(Number(year));
     }
     if (target.value === '') {

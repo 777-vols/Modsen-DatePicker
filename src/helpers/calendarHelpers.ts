@@ -1,5 +1,7 @@
 import { holidaysArray } from '@/constants/calendarData';
 
+import { getLocaleStorageItem } from './localeStorageHelpers';
+
 const firstDayIndex = 0;
 
 const firstDayIndexOfTheWeek = 0;
@@ -48,7 +50,7 @@ export const getWeekend = (day: number, month: number, year: number) => {
   return false;
 };
 
-const markHolidaysAndWeekendsAndCurrentDay = (
+const getPropppertiesForDaysArray = (
   daysArray: Array<number | string>,
   month: number,
   year: number,
@@ -58,8 +60,12 @@ const markHolidaysAndWeekendsAndCurrentDay = (
   isHoliday: boolean;
   isCurrentDay: boolean;
   isWeekend: boolean;
+  isHaveTodos: boolean;
 }> =>
   daysArray.map((dayIndex) => {
+    const localeStorageObject = getLocaleStorageItem('allDaysToDoObject') as object;
+    const localeStorageProperty = `${dayIndex} ${month - 1} ${year}`;
+
     const monthIndex = month - oneMonth;
     let dayObject;
     let dataMonthIndex = monthIndex > lastMonthIndex ? firstMonthIndex : monthIndex;
@@ -87,6 +93,12 @@ const markHolidaysAndWeekendsAndCurrentDay = (
       dayObject = { ...dayObject, isWeekend: false };
     }
 
+    if (localeStorageObject[localeStorageProperty as keyof typeof localeStorageObject]) {
+      dayObject = { ...dayObject, isHaveTodos: true };
+    } else {
+      dayObject = { ...dayObject, isHaveTodos: false };
+    }
+
     return dayObject;
   });
 
@@ -104,6 +116,7 @@ export const getArrayOfDaysForCalendar = (
     isHoliday: boolean;
     isCurrentDay: boolean;
     isWeekend: boolean;
+    isHaveTodos: boolean;
   };
 }> => {
   let numberOfDaysFromPrevMonth: number;
@@ -145,19 +158,19 @@ export const getArrayOfDaysForCalendar = (
     .map((item) => String(item));
 
   const calendarDaysArray = [
-    ...markHolidaysAndWeekendsAndCurrentDay(
+    ...getPropppertiesForDaysArray(
       prevMonthVisibleDays,
       selectedMonth - oneMonth,
       selectedYear,
       isWeekendsOn
     ),
-    ...markHolidaysAndWeekendsAndCurrentDay(
+    ...getPropppertiesForDaysArray(
       currentMonthDaysArray,
       selectedMonth,
       selectedYear,
       isWeekendsOn
     ),
-    ...markHolidaysAndWeekendsAndCurrentDay(
+    ...getPropppertiesForDaysArray(
       nextMonthVisibleDays,
       selectedMonth + oneMonth,
       selectedYear,

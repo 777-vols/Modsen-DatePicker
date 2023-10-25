@@ -1,12 +1,15 @@
 import styled, { css } from 'styled-components';
 
-interface InterfaceDayNumber {
+interface IDayNumber {
   $isWeekend: boolean;
   $bold?: boolean;
   $isHoliday?: boolean;
   $isCurrentDay?: boolean;
   $holidaysColor?: string;
   $isActive?: boolean;
+}
+interface ITodosIdentifier {
+  $isHaveTodos?: boolean;
 }
 
 export const Wrapper = styled.div`
@@ -16,7 +19,8 @@ export const Wrapper = styled.div`
   height: 32px;
   width: 32px;
 `;
-export const DayNumber = styled.button<InterfaceDayNumber>`
+export const DayNumber = styled.button<IDayNumber>`
+  position: relative;
   border: none;
   background: transparent;
   width: 100%;
@@ -67,5 +71,18 @@ export const DayNumber = styled.button<InterfaceDayNumber>`
     $isWeekend &&
     css`
       color: ${({ theme }) => theme.colors.red};
+    `}
+`;
+
+export const TodosIdentifier = styled.span<ITodosIdentifier>`
+  position: absolute;
+  display: none;
+  top: 0px;
+  right: 2px;
+  font-size: ${({ theme }) => theme.fontSize.mediumXL};
+  ${({ $isHaveTodos }) =>
+    $isHaveTodos &&
+    css`
+      display: block;
     `}
 `;
