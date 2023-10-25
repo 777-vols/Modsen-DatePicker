@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface InterfaceDayNumber {
+  $isWeekend: boolean;
   $bold?: boolean;
   $isHoliday?: boolean;
   $isCurrentDay?: boolean;
@@ -55,5 +56,10 @@ export const DayNumber = styled.button<InterfaceDayNumber>`
     css`
       background: ${({ theme }) => theme.colors.blue};
       color: ${({ theme }) => theme.colors.white};
+    `}
+  ${({ $isWeekend }) =>
+    $isWeekend &&
+    css`
+      color: ${({ theme }) => theme.colors.red};
     `}
 `;

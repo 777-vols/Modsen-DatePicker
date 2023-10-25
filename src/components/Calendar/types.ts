@@ -8,6 +8,7 @@ interface IProps {
   changeCurrentActiveDay: (newActiveDay: number) => void;
   closeOpenToDoHandler: () => void;
   isWeekStartsOnMonday: boolean;
+  isWeekendsOn: boolean;
 }
 
 export default IProps;

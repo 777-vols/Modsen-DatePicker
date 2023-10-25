@@ -1,9 +1,10 @@
 interface IProps {
-  dayValue: number | string;
+  dayNumber: number | string;
+  isCurrentDay: boolean;
+  isWeekend: boolean;
   holidaysColor?: string;
   isBold?: boolean;
   isHoliday?: boolean;
-  isCurrentDay?: boolean;
   activeDay?: number;
   closeOpenToDoHandler?: () => void;
   changeCurrentActiveDay?: (newActiveDay: number) => void;

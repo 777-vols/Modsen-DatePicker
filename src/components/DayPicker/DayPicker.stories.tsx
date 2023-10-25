@@ -8,6 +8,10 @@ const meta: Meta<typeof DayPicker> = {
   title: 'components/DayPicker',
   component: DayPicker,
   argTypes: {
+    isWeekendsOn: {
+      options: [true, false],
+      control: { type: 'radio' }
+    },
     isWeekStartsOnMonday: {
       options: [true, false],
       control: { type: 'radio' }
@@ -22,6 +26,7 @@ type Story = StoryObj<typeof DayPicker>;
 
 export const Default: Story = {
   args: {
+    isWeekendsOn: true,
     isWeekStartsOnMonday: true
   },
 

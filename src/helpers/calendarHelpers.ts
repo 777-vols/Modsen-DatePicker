@@ -9,7 +9,6 @@ const lastMonthIndex = 11;
 const oneDay = 1;
 const twoDays = 2;
 const oneMonth = 1;
-const twoMonth = 2;
 
 const numOfWeeksInCalendar = 6;
 const numOfDaysInOneWeek = 7;
@@ -21,7 +20,7 @@ export const padWithZeros = (value: number, length: number = 2): string =>
   `${value}`.padStart(length, '0');
 
 export const getMonthFirstDayIndex = (month: number, year: number): number =>
-  new Date(`${year}-${padWithZeros(month, 2)}-01`).getDay() + oneDay;
+  new Date(`${year}-${padWithZeros(month)}-01`).getDay() + oneDay;
 
 export const getArrayOfDaysInMonth = (
   beginningOfTheMonth: number,
@@ -41,15 +40,71 @@ export const getArrayOfDaysInMonth = (
   return daysArray;
 };
 
+export const getWeekend = (day: number, month: number, year: number) => {
+  const dayInex = new Date(year, month, day).getDay();
+  if (dayInex === 0 || dayInex === 6) {
+    return true;
+  }
+  return false;
+};
+
+const markHolidaysAndWeekendsAndCurrentDay = (
+  daysArray: Array<number | string>,
+  month: number,
+  year: number,
+  isWeekendsOn: boolean
+): Array<{
+  dayNumber: number | string;
+  isHoliday: boolean;
+  isCurrentDay: boolean;
+  isWeekend: boolean;
+}> =>
+  daysArray.map((dayIndex) => {
+    const monthIndex = month - oneMonth;
+    let dayObject;
+    let dataMonthIndex = monthIndex > lastMonthIndex ? firstMonthIndex : monthIndex;
+    dataMonthIndex = monthIndex < firstMonthIndex ? lastMonthIndex : monthIndex;
+
+    if (holidaysArray[dataMonthIndex]?.day.includes(Number(dayIndex))) {
+      dayObject = { dayNumber: dayIndex, isHoliday: true };
+    } else {
+      dayObject = { dayNumber: dayIndex, isHoliday: false };
+    }
+
+    if (
+      new Date().getMonth() === monthIndex &&
+      new Date().getDate() === dayObject.dayNumber &&
+      new Date().getFullYear() === year
+    ) {
+      dayObject = { ...dayObject, isCurrentDay: true };
+    } else {
+      dayObject = { ...dayObject, isCurrentDay: false };
+    }
+
+    if (isWeekendsOn && getWeekend(Number(dayIndex), monthIndex, year)) {
+      dayObject = { ...dayObject, isWeekend: true };
+    } else {
+      dayObject = { ...dayObject, isWeekend: false };
+    }
+
+    return dayObject;
+  });
+
 export const getArrayOfDaysForCalendar = (
   beginningOfTheMonth: number,
   endOfTheMonth: number,
   selectedMonth: number,
   selectedYear: number,
-  isWeekStartsOnMonday: boolean
+  isWeekStartsOnMonday: boolean,
+  isWeekendsOn: boolean
 ): Array<{
   id: number;
-  day: { dayNumber: string | number; isHoliday: boolean; isCurrentDay: boolean };
+  day: {
+    dayNumber: string | number;
+    isHoliday: boolean;
+    isCurrentDay: boolean;
+    isWeekend: boolean;
+  };
 }> => {
   let numberOfDaysFromPrevMonth: number;
   const currentMonthDaysArray = getArrayOfDaysInMonth(beginningOfTheMonth, endOfTheMonth);
@@ -63,32 +118,6 @@ export const getArrayOfDaysForCalendar = (
   const nextMonthDaysNumber =
     getNumberOfDaysInMonth(selectedYear, selectedMonth + oneMonth) - oneDay;
   const nextMonthDaysArray = getArrayOfDaysInMonth(oneDay, nextMonthDaysNumber);
-
-  const markHolidaysAndCurrentDay = (
-    daysArray: Array<number | string>,
-    monthIndex: number
-  ): Array<{ dayNumber: number | string; isHoliday: boolean; isCurrentDay: boolean }> =>
-    daysArray.map((dayIndex) => {
-      let dayObject;
-      let dataMonthIndex = monthIndex > lastMonthIndex ? firstMonthIndex : monthIndex;
-      dataMonthIndex = monthIndex < firstMonthIndex ? lastMonthIndex : monthIndex;
-
-      if (holidaysArray[dataMonthIndex]?.day.includes(Number(dayIndex))) {
-        dayObject = { dayNumber: dayIndex, isHoliday: true };
-      } else {
-        dayObject = { dayNumber: dayIndex, isHoliday: false };
-      }
-
-      if (
-        new Date().getMonth() === monthIndex &&
-        new Date().getDate() === dayObject.dayNumber &&
-        new Date().getFullYear() === selectedYear
-      )
-        dayObject = { ...dayObject, isCurrentDay: true };
-      else dayObject = { ...dayObject, isCurrentDay: false };
-
-      return dayObject;
-    });
 
   if (isWeekStartsOnMonday) {
     numberOfDaysFromPrevMonth = monthFirstDay - twoDays;
@@ -116,9 +145,24 @@ export const getArrayOfDaysForCalendar = (
     .map((item) => String(item));
 
   const calendarDaysArray = [
-    ...markHolidaysAndCurrentDay(prevMonthVisibleDays, selectedMonth - twoMonth),
-    ...markHolidaysAndCurrentDay(currentMonthDaysArray, selectedMonth - oneMonth),
-    ...markHolidaysAndCurrentDay(nextMonthVisibleDays, selectedMonth)
+    ...markHolidaysAndWeekendsAndCurrentDay(
+      prevMonthVisibleDays,
+      selectedMonth - oneMonth,
+      selectedYear,
+      isWeekendsOn
+    ),
+    ...markHolidaysAndWeekendsAndCurrentDay(
+      currentMonthDaysArray,
+      selectedMonth,
+      selectedYear,
+      isWeekendsOn
+    ),
+    ...markHolidaysAndWeekendsAndCurrentDay(
+      nextMonthVisibleDays,
+      selectedMonth + oneMonth,
+      selectedYear,
+      isWeekendsOn
+    )
   ];
 
   return calendarDaysArray.map((dayObject, index) => ({ id: index, day: dayObject }));

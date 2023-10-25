@@ -5,6 +5,7 @@ interface IProps {
   currentSelectedMonth: number;
   currentSelectedYear: number;
   isWeekStartsOnMonday: boolean;
+  isWeekendsOn: boolean;
   holidaysColor: string;
   activeDay: number;
   changeCurrentActiveDay: (newActiveDay: number) => void;
