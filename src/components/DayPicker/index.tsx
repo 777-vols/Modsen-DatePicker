@@ -21,14 +21,17 @@ const DayPicker: FC<IProps> = ({
   isWeekStartsOnMonday,
   holidaysColor,
   minDate,
-  maxDate
+  maxDate,
+  form
 }) => {
-  const [calenderIsOpen, setCalendarIsOpen] = useState<boolean>(true);
+  const [calenderIsOpen, setCalendarIsOpen] = useState(true);
   const [headerDateInputValue, setHeaderDateInputValue] = useState<string>('');
   const [currentSelectedMonth, setCurrentSelectedMonth] = useState(new Date().getMonth());
   const [currentSelectedYear, setCurrentSelectedYear] = useState(new Date().getFullYear());
   const [toDoWindowIsOpen, setToDoWindowIsOpen] = useState(false);
-  const [activeDay, setActiveDay] = useState<number>(0);
+  const [activeDay, setActiveDay] = useState(0);
+  const [weeksCount, setWeeksCount] = useState(0);
+  const [activeWeekNumber, setActiveWeekNumber] = useState(0);
 
   const openCalendarHandler = useCallback(
     () => setCalendarIsOpen((prevState: boolean) => !prevState),
@@ -53,8 +56,10 @@ const DayPicker: FC<IProps> = ({
           setCurrentSelectedYear((prevState) => prevState + oneYear);
         } else {
           setCurrentSelectedMonth(newMonth);
+          return true;
         }
       }
+      return false;
     },
     [currentSelectedYear, maxDate, minDate]
   );
@@ -71,6 +76,12 @@ const DayPicker: FC<IProps> = ({
     () => setToDoWindowIsOpen((prevState) => !prevState),
     []
   );
+
+  const changeWeeksCount = useCallback((newWeeksCount: number) => setWeeksCount(newWeeksCount), []);
+
+  const changeActiveWeekNumber = useCallback((newActiveWeek: number) => {
+    setActiveWeekNumber(newActiveWeek);
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -89,13 +100,18 @@ const DayPicker: FC<IProps> = ({
             />
             {calenderIsOpen && (
               <Calendar
+                form={form}
+                weeksCount={weeksCount}
                 isWeekendsOn={isWeekendsOn}
                 isWeekStartsOnMonday={isWeekStartsOnMonday}
                 holidaysColor={holidaysColor}
+                activeWeekNumber={activeWeekNumber}
                 currentSelectedMonth={currentSelectedMonth}
                 currentSelectedYear={currentSelectedYear}
                 changeCurrentSelectedMonth={changeCurrentSelectedMonth}
                 changeCurrentSelectedYear={changeCurrentSelectedYear}
+                changeWeeksCount={changeWeeksCount}
+                changeActiveWeekNumber={changeActiveWeekNumber}
                 activeDay={activeDay}
                 changeCurrentActiveDay={changeCurrentActiveDay}
                 closeOpenToDoHandler={closeOpenToDoHandler}

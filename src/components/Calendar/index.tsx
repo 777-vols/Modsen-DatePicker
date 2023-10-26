@@ -7,12 +7,17 @@ import Wrapper from './styles';
 import IProps from './types';
 
 const Calendar: FC<IProps> = ({
+  form,
   currentSelectedMonth,
   currentSelectedYear,
   changeCurrentSelectedMonth,
   changeCurrentSelectedYear,
   activeDay,
+  weeksCount,
+  activeWeekNumber,
+  changeActiveWeekNumber,
   changeCurrentActiveDay,
+  changeWeeksCount,
   closeOpenToDoHandler,
   isWeekStartsOnMonday,
   isWeekendsOn,
@@ -20,19 +25,27 @@ const Calendar: FC<IProps> = ({
 }) => (
   <Wrapper>
     <MonthSlider
+      form={form}
+      weeksCount={weeksCount}
+      activeWeekNumber={activeWeekNumber}
+      changeActiveWeekNumber={changeActiveWeekNumber}
       currentSelectedMonth={currentSelectedMonth}
       currentSelectedYear={currentSelectedYear}
       changeCurrentSelectedMonth={changeCurrentSelectedMonth}
       changeCurrentSelectedYear={changeCurrentSelectedYear}
     />
     <DaysGrid
+      form={form}
+      activeWeekNumber={activeWeekNumber}
       currentSelectedMonth={currentSelectedMonth}
       currentSelectedYear={currentSelectedYear}
       isWeekStartsOnMonday={isWeekStartsOnMonday}
       isWeekendsOn={isWeekendsOn}
       holidaysColor={holidaysColor}
       activeDay={activeDay}
+      changeActiveWeekNumber={changeActiveWeekNumber}
       changeCurrentActiveDay={changeCurrentActiveDay}
+      changeWeeksCount={changeWeeksCount}
       closeOpenToDoHandler={closeOpenToDoHandler}
     />
   </Wrapper>

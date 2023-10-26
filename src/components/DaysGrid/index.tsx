@@ -2,14 +2,15 @@ import React, { FC, memo } from 'react';
 
 import CalendarDecorator from '@/decorators/CalendarDecorator';
 
-import { MonthDaysNumbers, WeekDaysNames, Wrapper } from './styled';
+import { MonthDaysNumbers, WeekDaysNames, WeekDaysNumbers, Wrapper } from './styled';
 import IProps from './types';
 
-const DaysGrid: FC<IProps> = ({ daysNamesArray, daysNumbersArray }) => (
+const DaysGrid: FC<IProps> = ({ form, daysNamesArray, daysNumbersArray }) => (
   <Wrapper>
     <WeekDaysNames>{daysNamesArray}</WeekDaysNames>
-    <MonthDaysNumbers>{daysNumbersArray}</MonthDaysNumbers>
+    {form === 'month' && <MonthDaysNumbers>{daysNumbersArray}</MonthDaysNumbers>}
+    {form === 'week' && <WeekDaysNumbers>{daysNumbersArray}</WeekDaysNumbers>}
+    {/* <WeekDaysNumbers>{daysNumbersArray}</WeekDaysNumbers> */}
   </Wrapper>
 );
-
 export default memo(CalendarDecorator(DaysGrid));

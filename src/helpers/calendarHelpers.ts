@@ -15,6 +15,17 @@ const oneMonth = 1;
 const numOfWeeksInCalendar = 6;
 const numOfDaysInOneWeek = 7;
 
+interface IdayObject {
+  id: number;
+  day: {
+    dayNumber: string | number;
+    isHoliday: boolean;
+    isCurrentDay: boolean;
+    isWeekend: boolean;
+    isHaveTodos: boolean;
+  };
+}
+
 export const getNumberOfDaysInMonth = (year: number, month: number): number =>
   new Date(year, month, firstDayIndex).getDate();
 
@@ -102,23 +113,14 @@ const getPropppertiesForDaysArray = (
     return dayObject;
   });
 
-export const getArrayOfDaysForCalendar = (
+export const getArrayOfDaysForMonthCalendar = (
   beginningOfTheMonth: number,
   endOfTheMonth: number,
   selectedMonth: number,
   selectedYear: number,
   isWeekStartsOnMonday: boolean,
   isWeekendsOn: boolean
-): Array<{
-  id: number;
-  day: {
-    dayNumber: string | number;
-    isHoliday: boolean;
-    isCurrentDay: boolean;
-    isWeekend: boolean;
-    isHaveTodos: boolean;
-  };
-}> => {
+): Array<IdayObject> => {
   let numberOfDaysFromPrevMonth: number;
   const currentMonthDaysArray = getArrayOfDaysInMonth(beginningOfTheMonth, endOfTheMonth);
 
@@ -179,4 +181,37 @@ export const getArrayOfDaysForCalendar = (
   ];
 
   return calendarDaysArray.map((dayObject, index) => ({ id: index, day: dayObject }));
+};
+
+export const convertToWeekFormat = (
+  monthFormatArray: Array<IdayObject>,
+  changeWeeksCount: (newWeeksCount: number) => void,
+  changeActiveWeekNumber: (newActiveWeek: number) => void,
+  activeWeekNumber: number
+): Array<IdayObject> => {
+  const convertedArray = [];
+  let oneWeekArray = [];
+
+  for (let dayIndex = 0; dayIndex <= monthFormatArray.length; dayIndex += 1) {
+    if (oneWeekArray.length === numOfDaysInOneWeek) {
+      const filledDaysInWeek = oneWeekArray.filter((dayObj) => {
+        if (dayObj.day.isCurrentDay) {
+          changeActiveWeekNumber(convertedArray.length);
+        }
+        if (typeof dayObj.day.dayNumber === 'number') {
+          return dayObj;
+        }
+        return null;
+      });
+
+      if (filledDaysInWeek.length > 0) {
+        convertedArray.push(oneWeekArray);
+        oneWeekArray = [];
+      }
+    }
+    oneWeekArray.push(monthFormatArray[dayIndex]);
+  }
+
+  changeWeeksCount(convertedArray.length - 1);
+  return convertedArray[activeWeekNumber];
 };

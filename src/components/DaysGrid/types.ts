@@ -1,4 +1,5 @@
 interface IProps {
+  form: 'year' | 'month' | 'week';
   daysNumbersArray?: Array<number | string>;
   daysNamesArray?: Array<string>;
   isCurrentDay?: boolean;
@@ -8,7 +9,10 @@ interface IProps {
   isWeekendsOn: boolean;
   holidaysColor: string;
   activeDay: number;
+  activeWeekNumber: number;
+  changeWeeksCount: (newWeeksCount: number) => void;
   changeCurrentActiveDay: (newActiveDay: number) => void;
+  changeActiveWeekNumber: (newActiveWeek: number) => void;
   closeOpenToDoHandler: () => void;
 }
 

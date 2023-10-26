@@ -25,3 +25,8 @@ export const MonthDaysNumbers = styled.div`
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 5;
 `;
+export const WeekDaysNumbers = styled.div`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 1;
+`;

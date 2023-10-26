@@ -19,6 +19,7 @@ export const WrapperInner = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: auto;
 `;
 export const SelectedDateHeader = styled.h1`
   display: flex;
@@ -88,6 +89,4 @@ export const AddToDoButton = styled.button`
 export const ToDoListWrapper = styled.div`
   margin-top: ${({ theme }) => theme.margin.mediumL};
   height: 100%;
-  max-height: 250px;
-  overflow-x: auto;
 `;

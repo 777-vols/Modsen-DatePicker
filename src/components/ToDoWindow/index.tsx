@@ -72,6 +72,15 @@ const ToDoWindow: FC<IProps> = ({
         },
         setAllDaysToDoStateObject
       );
+
+      if (filtredToDo.length === 0) {
+        delete toDoObjectLocaleStorage[selectedDayDate as keyof typeof toDoObjectLocaleStorage];
+        setStateAndLocaleStorage(
+          'allDaysToDoObject',
+          toDoObjectLocaleStorage,
+          setAllDaysToDoStateObject
+        );
+      }
     },
     [selectedDayDate, toDoArray]
   );

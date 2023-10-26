@@ -16,7 +16,11 @@ const meta: Meta<typeof DayPicker> = {
       options: [true, false],
       control: { type: 'radio' }
     },
-    holidaysColor: { control: 'color' }
+    holidaysColor: { control: 'color' },
+    form: {
+      options: ['year', 'month', 'week'],
+      control: { type: 'radio' }
+    }
   }
 };
 
@@ -26,6 +30,7 @@ type Story = StoryObj<typeof DayPicker>;
 
 export const Default: Story = {
   args: {
+    form: 'month',
     isWeekendsOn: true,
     isWeekStartsOnMonday: true,
     minDate: new Date(2023, 0, 1),
