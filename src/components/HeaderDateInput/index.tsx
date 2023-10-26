@@ -2,6 +2,7 @@ import React, { FC, memo, useState } from 'react';
 
 import calendarImg from '@/assets/calendar.svg';
 import clearImg from '@/assets/clear.svg';
+import { getWeekNumberForDay } from '@/helpers/calendarHelpers';
 import dateInputCheckHelper from '@/helpers/dateInputCheckHelpers';
 
 import config from './config';
@@ -12,12 +13,15 @@ const { defaultTitle, placeholder, errorMessage } = config;
 
 const HeaderDateInput: FC<IProps> = ({
   title,
+  form,
   dateInputValue,
+  isWeekStartsOnMonday,
   dateInputChangeHandler,
   openCalendarHandler,
   changeCurrentActiveDay,
   changeCurrentSelectedMonth,
-  changeCurrentSelectedYear
+  changeCurrentSelectedYear,
+  changeActiveWeekNumber
 }) => {
   const [isErrorMessage, setIsErrorMessage] = useState<boolean>(false);
 
@@ -35,6 +39,11 @@ const HeaderDateInput: FC<IProps> = ({
       changeCurrentActiveDay(Number(day));
       changeCurrentSelectedMonth(Number(month) - 1);
       changeCurrentSelectedYear(Number(year));
+      if (form === 'week') {
+        changeActiveWeekNumber(
+          getWeekNumberForDay(Number(day), Number(month), Number(year), isWeekStartsOnMonday)
+        );
+      }
     }
     if (target.value === '') {
       setIsErrorMessage(false);

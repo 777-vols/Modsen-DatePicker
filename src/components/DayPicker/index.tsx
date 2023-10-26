@@ -91,12 +91,15 @@ const DayPicker: FC<IProps> = ({
           <WrapperInner>
             <HeaderDateInput
               title={title}
+              form={form}
+              isWeekStartsOnMonday={isWeekStartsOnMonday}
               dateInputValue={headerDateInputValue}
               dateInputChangeHandler={dateInputChangeHandler}
               openCalendarHandler={openCalendarHandler}
               changeCurrentActiveDay={changeCurrentActiveDay}
               changeCurrentSelectedMonth={changeCurrentSelectedMonth}
               changeCurrentSelectedYear={changeCurrentSelectedYear}
+              changeActiveWeekNumber={changeActiveWeekNumber}
             />
             {calenderIsOpen && (
               <Calendar

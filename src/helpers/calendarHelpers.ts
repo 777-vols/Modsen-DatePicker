@@ -179,7 +179,6 @@ export const getArrayOfDaysForMonthCalendar = (
       isWeekendsOn
     )
   ];
-
   return calendarDaysArray.map((dayObject, index) => ({ id: index, day: dayObject }));
 };
 
@@ -192,7 +191,7 @@ export const convertToWeekFormat = (
   const convertedArray = [];
   let oneWeekArray = [];
 
-  for (let dayIndex = 0; dayIndex <= monthFormatArray.length; dayIndex += 1) {
+  for (let dayIndex = 0; dayIndex <= monthFormatArray.length; dayIndex += oneDay) {
     if (oneWeekArray.length === numOfDaysInOneWeek) {
       const filledDaysInWeek = oneWeekArray.filter((dayObj) => {
         if (dayObj.day.isCurrentDay) {
@@ -214,4 +213,74 @@ export const convertToWeekFormat = (
 
   changeWeeksCount(convertedArray.length - 1);
   return convertedArray[activeWeekNumber];
+};
+
+export const getWeekNumberForDay = (
+  day: number,
+  month: number,
+  year: number,
+  isWeekStartsOnMonday: boolean
+): number => {
+  const numberOfDaysInCurrentMonth = getNumberOfDaysInMonth(year, month) + oneDay;
+  const currentMonthDaysArray = getArrayOfDaysInMonth(oneDay, numberOfDaysInCurrentMonth);
+  let numberOfDaysFromPrevMonth: number;
+
+  const monthFirstDay = getMonthFirstDayIndex(month, year);
+
+  const prevMonthDaysNumber = getNumberOfDaysInMonth(year, month - oneMonth) + oneDay;
+  const prevMonthDaysArray = getArrayOfDaysInMonth(oneDay, prevMonthDaysNumber);
+
+  const nextMonthDaysNumber = getNumberOfDaysInMonth(year, month + oneMonth) - oneDay;
+  const nextMonthDaysArray = getArrayOfDaysInMonth(oneDay, nextMonthDaysNumber);
+
+  if (isWeekStartsOnMonday) {
+    numberOfDaysFromPrevMonth = monthFirstDay - twoDays;
+    if (numberOfDaysFromPrevMonth === -oneDay) {
+      if (monthFirstDay === oneDay) {
+        numberOfDaysFromPrevMonth = lastDayIndexOfTheWeek;
+      } else {
+        numberOfDaysFromPrevMonth = oneDay;
+      }
+    }
+  } else {
+    numberOfDaysFromPrevMonth = monthFirstDay - oneDay;
+  }
+
+  const numberOfDaysFromNextMonth =
+    numOfWeeksInCalendar * numOfDaysInOneWeek -
+    (numberOfDaysFromPrevMonth + currentMonthDaysArray.length);
+
+  const prevMonthVisibleDays = prevMonthDaysArray
+    .slice(prevMonthDaysArray.length - numberOfDaysFromPrevMonth)
+    .map((item) => String(item));
+
+  const nextMonthVisibleDays = nextMonthDaysArray
+    .slice(firstDayIndexOfTheWeek, numberOfDaysFromNextMonth)
+    .map((item) => String(item));
+
+  const monthArray = [...prevMonthVisibleDays, ...currentMonthDaysArray, ...nextMonthVisibleDays];
+
+  const convertedArray = [];
+  let oneWeekArray = [];
+
+  for (let dayIndex = 0; dayIndex <= monthArray.length; dayIndex += oneDay) {
+    if (oneWeekArray.length === numOfDaysInOneWeek) {
+      const filledDaysInWeek = oneWeekArray.filter((dayNumber) => {
+        if (typeof dayNumber === 'number') {
+          return dayNumber;
+        }
+        return null;
+      });
+
+      if (filledDaysInWeek.length > 0) {
+        convertedArray.push(oneWeekArray);
+        oneWeekArray = [];
+      }
+    }
+    if (monthArray[dayIndex] === day) {
+      return convertedArray.length;
+    }
+    oneWeekArray.push(monthArray[dayIndex]);
+  }
+  return 0;
 };
