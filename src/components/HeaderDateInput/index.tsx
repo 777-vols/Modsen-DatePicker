@@ -14,6 +14,8 @@ const { defaultTitle, placeholder, errorMessage } = config;
 const HeaderDateInput: FC<IProps> = ({
   title,
   form,
+  minDate,
+  maxDate,
   dateInputValue,
   isWeekStartsOnMonday,
   dateInputChangeHandler,
@@ -30,10 +32,10 @@ const HeaderDateInput: FC<IProps> = ({
     dateInputChangeHandler(target.value);
     setIsErrorMessage(false);
 
-    if (!dateInputCheckHelper(target.value)) {
+    if (!dateInputCheckHelper(target.value, minDate, maxDate)) {
       setIsErrorMessage(true);
     }
-    if (dateInputCheckHelper(target.value)) {
+    if (dateInputCheckHelper(target.value, minDate, maxDate)) {
       const [day, month, year] = target.value.split('/');
 
       changeCurrentActiveDay(Number(day));

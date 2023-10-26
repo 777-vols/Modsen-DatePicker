@@ -3,6 +3,8 @@ interface IProps {
   form: 'year' | 'month' | 'week';
   dateInputValue: string;
   isWeekStartsOnMonday: boolean;
+  minDate: Date;
+  maxDate: Date;
   dateInputChangeHandler: (value: string) => void;
   openCalendarHandler: () => void;
   changeCurrentActiveDay: (newMonth: number) => void;

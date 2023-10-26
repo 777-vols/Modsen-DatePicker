@@ -92,6 +92,8 @@ const DayPicker: FC<IProps> = ({
             <HeaderDateInput
               title={title}
               form={form}
+              minDate={minDate}
+              maxDate={maxDate}
               isWeekStartsOnMonday={isWeekStartsOnMonday}
               dateInputValue={headerDateInputValue}
               dateInputChangeHandler={dateInputChangeHandler}
