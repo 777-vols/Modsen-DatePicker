@@ -194,9 +194,6 @@ export const convertToWeekFormat = (
   for (let dayIndex = 0; dayIndex <= monthFormatArray.length; dayIndex += oneDay) {
     if (oneWeekArray.length === numOfDaysInOneWeek) {
       const filledDaysInWeek = oneWeekArray.filter((dayObj) => {
-        if (dayObj.day.isCurrentDay) {
-          changeActiveWeekNumber(convertedArray.length);
-        }
         if (typeof dayObj.day.dayNumber === 'number') {
           return dayObj;
         }

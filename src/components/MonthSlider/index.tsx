@@ -1,5 +1,6 @@
 import React, { FC, memo } from 'react';
 
+// import Select from 'react-select';
 import nextImg from '@/assets/next.svg';
 import prevImg from '@/assets/prev.svg';
 import { allMonthsNames } from '@/constants/calendarData';
@@ -43,6 +44,36 @@ const MonthSlider: FC<IProps> = ({
     }
   };
 
+  if (form === 'year') {
+    return (
+      <Wrapper>
+        <ChangeMonthButton onClick={prevMonthHandler}>
+          <img src={prevImg} alt="prevMonth" />
+        </ChangeMonthButton>
+        <MonthName>
+          {`${allMonthsNames[currentSelectedMonth]}`}
+          {/* <ReactSelect
+            id="year-select"
+            // onChange={selectorHandler}
+            defaultValue={{ value: 2023, label: 2023 }}
+            options={[
+              {
+                value: 2022,
+                label: 2022
+              },
+              {
+                value: 2021,
+                label: 2021
+              }
+            ]}
+          /> */}
+        </MonthName>
+        <ChangeMonthButton onClick={nextMonthHandler}>
+          <img src={nextImg} alt="nextMonth" />
+        </ChangeMonthButton>
+      </Wrapper>
+    );
+  }
   if (form === 'month') {
     return (
       <Wrapper>
@@ -56,7 +87,6 @@ const MonthSlider: FC<IProps> = ({
       </Wrapper>
     );
   }
-
   return (
     <Wrapper>
       <ChangeMonthButton onClick={prevWeekHandler}>

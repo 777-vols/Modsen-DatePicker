@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import GlobalStyle from '@/constants/styles/globalStyle';
+import theme from '@/constants/theme';
 
 import { Content, Wrapper } from './styled';
 import { IProps, IState } from './types';
@@ -21,7 +22,7 @@ class ErrorBoundary extends Component<IProps, IState> {
     if (hasError) {
       return (
         <Wrapper>
-          <GlobalStyle />
+          <GlobalStyle theme={theme} />
           <Content />
         </Wrapper>
       );

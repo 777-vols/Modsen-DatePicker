@@ -7,7 +7,7 @@ import theme from '@/constants/theme';
 
 const RangePicker: FC = () => (
   <ThemeProvider theme={theme}>
-    <GlobalStyle />
+    <GlobalStyle theme={theme} />
     {/* <Wrapper>
       <Calendar />
     </Wrapper> */}

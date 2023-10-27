@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useState } from 'react';
+import React, { FC, memo, useCallback, useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import Calendar from '@/components/Calendar';
@@ -7,6 +7,7 @@ import HeaderDateInput from '@/components/HeaderDateInput';
 import ToDoWindow from '@/components/ToDoWindow';
 import GlobalStyle from '@/constants/styles/globalStyle';
 import theme from '@/constants/theme';
+import { getWeekNumberForDay } from '@/helpers/calendarHelpers';
 
 import { Wrapper, WrapperInner } from './styled';
 import IProps from './types';
@@ -32,6 +33,17 @@ const DayPicker: FC<IProps> = ({
   const [activeDay, setActiveDay] = useState(0);
   const [weeksCount, setWeeksCount] = useState(0);
   const [activeWeekNumber, setActiveWeekNumber] = useState(0);
+
+  useEffect(() => {
+    const day = new Date().getDate();
+    const month = new Date().getMonth();
+    const year = new Date().getFullYear();
+    if (form === 'week') {
+      setActiveWeekNumber(
+        getWeekNumberForDay(Number(day), Number(month), Number(year), isWeekStartsOnMonday)
+      );
+    }
+  }, [form, isWeekStartsOnMonday]);
 
   const openCalendarHandler = useCallback(
     () => setCalendarIsOpen((prevState: boolean) => !prevState),
@@ -85,7 +97,7 @@ const DayPicker: FC<IProps> = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
+      <GlobalStyle theme={theme} />
       <ErrorBoundary>
         <Wrapper>
           <WrapperInner>
