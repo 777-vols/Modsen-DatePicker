@@ -11,9 +11,10 @@
     "build": "rollup -c",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
-    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "storybook:build": "storybook build",
+    "build-storybook": "storybook build",
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "license": "MIT",
   "peerDependencies": {
@@ -45,10 +46,14 @@
     "@storybook/testing-library": "0.2.2",
     "@svgr/rollup": "^8.1.0",
     "@svgr/webpack": "^8.1.0",
+    "@testing-library/jest-dom": "^6.1.4",
     "@types/aria-query": "^5.0.2",
     "@types/babel__core": "^7.20.2",
+    "@types/jest": "^29.5.6",
     "@types/node": "^20.8.4",
     "@types/react": "^18.2.27",
+    "@types/react-dom": "^18.2.14",
+    "@types/react-select": "^5.0.1",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
     "eslint": "^8.51.0",
@@ -63,10 +68,11 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-hooks": "next",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-storybook": "^0.6.15",
     "husky": "^8.0.3",
+    "jest": "^29.7.0",
     "lint-staged": "^14.0.1",
     "postcss": "^8.4.31",
     "prettier": "^3.0.3",
@@ -77,14 +83,16 @@
     "rollup-plugin-module-replacement": "^1.2.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "storybook": "7.4.6",
+    "storybook": "latest",
     "tslib": "^2.6.2",
+    "tslint-react-hooks": "^2.2.2",
     "typescript": "^5.2.2",
     "url-loader": "^4.1.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.1",
     "@types/styled-components": "^5.1.28",
+    "react-select": "^5.7.7",
     "styled-components": "^6.0.8"
   },
   "lint-staged": {
@@ -94,5 +102,8 @@
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --write"
     ]
+  },
+  "resolutions": {
+    "jackspeak": "2.1.1"
   }
 }

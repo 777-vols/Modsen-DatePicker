@@ -57,8 +57,7 @@ module.exports = [
       svgr({ icon: true }),
       commonjs(),
       typescript({
-        tsconfig: './tsconfig.json',
-        exclude: ['src/**/*.test.(tsx|ts)', '**/*.stories.tsx']
+        tsconfig: './tsconfig.json'
       }),
       postcss({
         extensions: ['.css'],

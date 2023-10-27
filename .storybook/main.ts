@@ -27,7 +27,9 @@ const config: StorybookConfig = {
         '@/components': path.resolve(__dirname, '../src/components/'),
         '@/constants': path.resolve(__dirname, '../src/constants/'),
         '@/hooks': path.resolve(__dirname, '../src/hooks/'),
-        '@/utils': path.resolve(__dirname, '../src/utils/')
+        '@/utils': path.resolve(__dirname, '../src/utils/'),
+        '@/helpers': path.resolve(__dirname, '../src/helpers/'),
+        '@/decorators': path.resolve(__dirname, '../src/decorators/')
       };
     }
     return config;
@@ -36,7 +38,7 @@ const config: StorybookConfig = {
     ${head}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">
   `
 };
 export default config;
