@@ -6,7 +6,6 @@ interface IProps {
   currentSelectedMonth: number;
   currentSelectedYear: number;
   activeWeekNumber: number;
-  weeksCount: number;
   minDate: Date;
   maxDate: Date;
 }

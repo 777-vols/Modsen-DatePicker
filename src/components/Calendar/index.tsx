@@ -15,11 +15,9 @@ const Calendar: FC<IProps> = ({
   changeCurrentSelectedMonth,
   changeCurrentSelectedYear,
   activeDay,
-  weeksCount,
   activeWeekNumber,
   changeActiveWeekNumber,
   changeCurrentActiveDay,
-  changeWeeksCount,
   closeOpenToDoHandler,
   isWeekStartsOnMonday,
   isWeekendsOn,
@@ -30,7 +28,6 @@ const Calendar: FC<IProps> = ({
       form={form}
       minDate={minDate}
       maxDate={maxDate}
-      weeksCount={weeksCount}
       activeWeekNumber={activeWeekNumber}
       changeActiveWeekNumber={changeActiveWeekNumber}
       currentSelectedMonth={currentSelectedMonth}
@@ -49,7 +46,6 @@ const Calendar: FC<IProps> = ({
       activeDay={activeDay}
       changeActiveWeekNumber={changeActiveWeekNumber}
       changeCurrentActiveDay={changeCurrentActiveDay}
-      changeWeeksCount={changeWeeksCount}
       closeOpenToDoHandler={closeOpenToDoHandler}
     />
   </Wrapper>

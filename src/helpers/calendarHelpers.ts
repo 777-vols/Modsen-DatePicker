@@ -182,12 +182,7 @@ export const getArrayOfDaysForMonthCalendar = (
   return calendarDaysArray.map((dayObject, index) => ({ id: index, day: dayObject }));
 };
 
-export const convertToWeekFormat = (
-  monthFormatArray: Array<IdayObject>,
-  changeWeeksCount: (newWeeksCount: number) => void,
-  changeActiveWeekNumber: (newActiveWeek: number) => void,
-  activeWeekNumber: number
-): Array<IdayObject> => {
+export const convertToWeekFormat = (monthFormatArray: Array<IdayObject>): Array<IdayObject[]> => {
   const convertedArray = [];
   let oneWeekArray = [];
 
@@ -207,9 +202,7 @@ export const convertToWeekFormat = (
     }
     oneWeekArray.push(monthFormatArray[dayIndex]);
   }
-
-  changeWeeksCount(convertedArray.length - 1);
-  return convertedArray[activeWeekNumber];
+  return convertedArray;
 };
 
 export const getWeekNumberForDay = (

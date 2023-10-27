@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 
 import CalendarDay from '@/components/CalendarDay';
 import { DayName } from '@/components/DaysGrid/styled';
@@ -25,13 +25,11 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
       holidaysColor,
       activeDay,
       activeWeekNumber,
-      changeWeeksCount,
       changeCurrentActiveDay,
-      changeActiveWeekNumber,
       closeOpenToDoHandler,
       ...otherProps
     } = props;
-
+    const weeksCountRef = useRef(0);
     const daysNamesArray = useMemo(() => {
       if (isWeekStartsOnMonday) {
         return daysNamesStartsWithMonday.map((dayName) => (
@@ -42,29 +40,24 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
     }, [isWeekStartsOnMonday]);
 
     const daysNumbersArray = useMemo(() => {
-      const arrayOfDaysForCalendar =
-        form === 'week'
-          ? convertToWeekFormat(
-              getArrayOfDaysForMonthCalendar(
-                oneDay,
-                getNumberOfDaysInMonth(currentSelectedYear, currentSelectedMonth + 1) + oneDay,
-                currentSelectedMonth + 1,
-                currentSelectedYear,
-                isWeekStartsOnMonday,
-                isWeekendsOn
-              ),
-              changeWeeksCount,
-              changeActiveWeekNumber,
-              activeWeekNumber
-            )
-          : getArrayOfDaysForMonthCalendar(
-              oneDay,
-              getNumberOfDaysInMonth(currentSelectedYear, currentSelectedMonth + 1) + oneDay,
-              currentSelectedMonth + 1,
-              currentSelectedYear,
-              isWeekStartsOnMonday,
-              isWeekendsOn
-            );
+      let arrayOfDaysForCalendar;
+      const arrayOfDays = getArrayOfDaysForMonthCalendar(
+        oneDay,
+        getNumberOfDaysInMonth(currentSelectedYear, currentSelectedMonth + 1) + oneDay,
+        currentSelectedMonth + 1,
+        currentSelectedYear,
+        isWeekStartsOnMonday,
+        isWeekendsOn
+      );
+
+      if (form === 'week') {
+        const arrayOfweeks = convertToWeekFormat(arrayOfDays);
+        weeksCountRef.current = arrayOfweeks.length - 1;
+        arrayOfDaysForCalendar = arrayOfweeks[activeWeekNumber];
+      } else {
+        arrayOfDaysForCalendar = arrayOfDays;
+      }
+
       return arrayOfDaysForCalendar.map(({ id, day }) => {
         const { dayNumber, isHoliday, isCurrentDay, isWeekend, isHaveTodos } = day;
         if (typeof dayNumber === 'string') {
@@ -105,9 +98,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
       isWeekendsOn,
       holidaysColor,
       activeWeekNumber,
-      changeWeeksCount,
       changeCurrentActiveDay,
-      changeActiveWeekNumber,
       closeOpenToDoHandler
     ]);
     return (

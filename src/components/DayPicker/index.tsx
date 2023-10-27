@@ -31,14 +31,13 @@ const DayPicker: FC<IProps> = ({
   const [currentSelectedYear, setCurrentSelectedYear] = useState(new Date().getFullYear());
   const [toDoWindowIsOpen, setToDoWindowIsOpen] = useState(false);
   const [activeDay, setActiveDay] = useState(0);
-  const [weeksCount, setWeeksCount] = useState(0);
   const [activeWeekNumber, setActiveWeekNumber] = useState(0);
 
   useEffect(() => {
-    const day = new Date().getDate();
-    const month = new Date().getMonth();
-    const year = new Date().getFullYear();
     if (form === 'week') {
+      const day = new Date().getDate();
+      const month = new Date().getMonth();
+      const year = new Date().getFullYear();
       setActiveWeekNumber(
         getWeekNumberForDay(Number(day), Number(month), Number(year), isWeekStartsOnMonday)
       );
@@ -89,8 +88,6 @@ const DayPicker: FC<IProps> = ({
     []
   );
 
-  const changeWeeksCount = useCallback((newWeeksCount: number) => setWeeksCount(newWeeksCount), []);
-
   const changeActiveWeekNumber = useCallback((newActiveWeek: number) => {
     setActiveWeekNumber(newActiveWeek);
   }, []);
@@ -120,7 +117,6 @@ const DayPicker: FC<IProps> = ({
                 form={form}
                 minDate={minDate}
                 maxDate={maxDate}
-                weeksCount={weeksCount}
                 isWeekendsOn={isWeekendsOn}
                 isWeekStartsOnMonday={isWeekStartsOnMonday}
                 holidaysColor={holidaysColor}
@@ -129,7 +125,6 @@ const DayPicker: FC<IProps> = ({
                 currentSelectedYear={currentSelectedYear}
                 changeCurrentSelectedMonth={changeCurrentSelectedMonth}
                 changeCurrentSelectedYear={changeCurrentSelectedYear}
-                changeWeeksCount={changeWeeksCount}
                 changeActiveWeekNumber={changeActiveWeekNumber}
                 activeDay={activeDay}
                 changeCurrentActiveDay={changeCurrentActiveDay}

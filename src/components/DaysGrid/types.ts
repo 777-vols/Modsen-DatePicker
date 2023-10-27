@@ -10,7 +10,6 @@ interface IProps {
   holidaysColor: string;
   activeDay: number;
   activeWeekNumber: number;
-  changeWeeksCount: (newWeeksCount: number) => void;
   changeCurrentActiveDay: (newActiveDay: number) => void;
   changeActiveWeekNumber: (newActiveWeek: number) => void;
   closeOpenToDoHandler: () => void;
