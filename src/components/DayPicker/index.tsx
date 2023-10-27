@@ -79,9 +79,16 @@ const DayPicker: FC<IProps> = ({
     setCurrentSelectedYear(newYear);
   }, []);
 
-  const changeCurrentActiveDay = useCallback((newActiveDay: number) => {
-    setActiveDay(newActiveDay);
-  }, []);
+  const changeCurrentActiveDay = useCallback(
+    (newActiveDay: number) => {
+      if (activeDay === newActiveDay) {
+        setActiveDay(0);
+      } else {
+        setActiveDay(newActiveDay);
+      }
+    },
+    [activeDay]
+  );
 
   const closeOpenToDoHandler = useCallback(
     () => setToDoWindowIsOpen((prevState) => !prevState),

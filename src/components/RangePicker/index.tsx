@@ -1,16 +1,43 @@
 import React, { FC, memo } from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import Calendar from '@/components/Calendar';
+import DayPicker from '@/components/DayPicker';
 import GlobalStyle from '@/constants/styles/globalStyle';
 import theme from '@/constants/theme';
 
-const RangePicker: FC = () => (
+import Wrapper from './styled';
+import IProps from './types';
+
+const RangePicker: FC<IProps> = ({
+  isWeekendsOn,
+  isWeekStartsOnMonday,
+  holidaysColor,
+  minDate,
+  maxDate,
+  form
+}) => (
   <ThemeProvider theme={theme}>
     <GlobalStyle theme={theme} />
-    {/* <Wrapper>
-      <Calendar />
-    </Wrapper> */}
+    <Wrapper>
+      <DayPicker
+        title="From"
+        form={form}
+        isWeekendsOn={isWeekendsOn}
+        holidaysColor={holidaysColor}
+        isWeekStartsOnMonday={isWeekStartsOnMonday}
+        minDate={minDate}
+        maxDate={maxDate}
+      />
+      <DayPicker
+        title="To"
+        form={form}
+        isWeekendsOn={isWeekendsOn}
+        holidaysColor={holidaysColor}
+        isWeekStartsOnMonday={isWeekStartsOnMonday}
+        minDate={minDate}
+        maxDate={maxDate}
+      />
+    </Wrapper>
   </ThemeProvider>
 );
 
