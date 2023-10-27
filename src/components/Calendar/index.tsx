@@ -8,6 +8,8 @@ import IProps from './types';
 
 const Calendar: FC<IProps> = ({
   form,
+  maxDate,
+  minDate,
   currentSelectedMonth,
   currentSelectedYear,
   changeCurrentSelectedMonth,
@@ -26,6 +28,8 @@ const Calendar: FC<IProps> = ({
   <Wrapper>
     <MonthSlider
       form={form}
+      minDate={minDate}
+      maxDate={maxDate}
       weeksCount={weeksCount}
       activeWeekNumber={activeWeekNumber}
       changeActiveWeekNumber={changeActiveWeekNumber}

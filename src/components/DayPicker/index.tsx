@@ -118,6 +118,8 @@ const DayPicker: FC<IProps> = ({
             {calenderIsOpen && (
               <Calendar
                 form={form}
+                minDate={minDate}
+                maxDate={maxDate}
                 weeksCount={weeksCount}
                 isWeekendsOn={isWeekendsOn}
                 isWeekStartsOnMonday={isWeekStartsOnMonday}

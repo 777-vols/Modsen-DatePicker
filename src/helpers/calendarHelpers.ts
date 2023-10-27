@@ -281,3 +281,16 @@ export const getWeekNumberForDay = (
   }
   return 0;
 };
+
+export const getYearsOptionsArray = (
+  minDate: Date,
+  maxDate: Date
+): Array<{ value: number; label: number }> => {
+  const minYear = minDate.getFullYear();
+  const maxYear = maxDate.getFullYear();
+  const yearsArray: number[] = [];
+  for (let yearNumber = minYear; yearNumber <= maxYear; yearNumber += 1) {
+    yearsArray.push(yearNumber);
+  }
+  return yearsArray.map((year) => ({ value: year, label: year }));
+};

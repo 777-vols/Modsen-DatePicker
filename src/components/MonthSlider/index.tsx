@@ -1,11 +1,12 @@
 import React, { FC, memo } from 'react';
+import ReactSelect from 'react-select';
 
-// import Select from 'react-select';
 import nextImg from '@/assets/next.svg';
 import prevImg from '@/assets/prev.svg';
 import { allMonthsNames } from '@/constants/calendarData';
+import { getYearsOptionsArray } from '@/helpers/calendarHelpers';
 
-import { ChangeMonthButton, MonthName, Wrapper } from './styled';
+import { ChangeMonthButton, MonthName, Panel, Wrapper } from './styled';
 import IProps from './types';
 
 const oneMonth = 1;
@@ -14,6 +15,8 @@ const MonthSlider: FC<IProps> = ({
   form,
   activeWeekNumber,
   weeksCount,
+  minDate,
+  maxDate,
   changeCurrentSelectedMonth,
   changeCurrentSelectedYear,
   changeActiveWeekNumber,
@@ -44,36 +47,39 @@ const MonthSlider: FC<IProps> = ({
     }
   };
 
+  type OptionType = {
+    value: number;
+    label: number;
+  };
+
+  const selectHandler = (option: OptionType | null) => {
+    if (option) changeCurrentSelectedYear(option.value);
+  };
+
   if (form === 'year') {
+    const selectOptions = getYearsOptionsArray(minDate, maxDate);
     return (
       <Wrapper>
         <ChangeMonthButton onClick={prevMonthHandler}>
           <img src={prevImg} alt="prevMonth" />
         </ChangeMonthButton>
-        <MonthName>
-          {`${allMonthsNames[currentSelectedMonth]}`}
-          {/* <ReactSelect
+        <Panel>
+          <MonthName>{`${allMonthsNames[currentSelectedMonth]}`}</MonthName>
+          <ReactSelect
             id="year-select"
-            // onChange={selectorHandler}
+            onChange={selectHandler}
+            maxMenuHeight={200}
             defaultValue={{ value: 2023, label: 2023 }}
-            options={[
-              {
-                value: 2022,
-                label: 2022
-              },
-              {
-                value: 2021,
-                label: 2021
-              }
-            ]}
-          /> */}
-        </MonthName>
+            options={selectOptions}
+          />
+        </Panel>
         <ChangeMonthButton onClick={nextMonthHandler}>
           <img src={nextImg} alt="nextMonth" />
         </ChangeMonthButton>
       </Wrapper>
     );
   }
+
   if (form === 'month') {
     return (
       <Wrapper>

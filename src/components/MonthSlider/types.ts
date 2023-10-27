@@ -7,6 +7,8 @@ interface IProps {
   currentSelectedYear: number;
   activeWeekNumber: number;
   weeksCount: number;
+  minDate: Date;
+  maxDate: Date;
 }
 
 export default IProps;

@@ -33,8 +33,8 @@ export const Default: Story = {
     form: 'month',
     isWeekendsOn: true,
     isWeekStartsOnMonday: true,
-    minDate: new Date(2022, 0, 1),
-    maxDate: new Date(2023, 11, 31)
+    minDate: new Date(2010, 0, 1),
+    maxDate: new Date(2030, 11, 31)
   },
 
   render: (args) => <DayPicker {...args} />
