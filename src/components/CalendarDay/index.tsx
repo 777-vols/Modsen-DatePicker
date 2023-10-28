@@ -6,6 +6,9 @@ import IProps from './types';
 const doubleClick = 2;
 
 const CalendarDay: FC<IProps> = ({
+  rangeStart,
+  rangeEnd,
+  isIncludeInRange,
   dayNumber,
   isBold,
   isHoliday,
@@ -36,7 +39,10 @@ const CalendarDay: FC<IProps> = ({
         $holidaysColor={holidaysColor}
         $bold={isBold}
         $isActive={isActive}
-        $isCurrentDay={isCurrentDay}>
+        $isCurrentDay={isCurrentDay}
+        $isIncludeInRange={isIncludeInRange}
+        $isStartRangeDay={rangeStart}
+        $isEndRangeDay={rangeEnd}>
         {dayNumber}
         <TodosIdentifier $isHaveTodos={isHaveTodos}>!</TodosIdentifier>
       </DayNumber>

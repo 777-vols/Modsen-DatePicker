@@ -7,6 +7,8 @@ interface IProps {
   activeWeekNumber: number;
   minDate: Date;
   maxDate: Date;
+  rangeStartDate: Date;
+  rangeEndDate: Date;
   changeCurrentSelectedMonth: (newMonth: number) => boolean;
   changeCurrentSelectedYear: (newYear: number) => void;
   changeCurrentActiveDay: (newActiveDay: number) => void;
@@ -14,6 +16,7 @@ interface IProps {
   closeOpenToDoHandler: () => void;
   isWeekStartsOnMonday: boolean;
   isWeekendsOn: boolean;
+  isClearButtonVisible: boolean;
 }
 
 export default IProps;

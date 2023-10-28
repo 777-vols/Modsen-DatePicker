@@ -136,9 +136,7 @@ const ToDoWindow: FC<IProps> = ({
         <CloseButton onClick={closeOpenToDoHandler}>
           <CloseImg src={clearImg} alt="clearImg" />
         </CloseButton>
-        <SelectedDateHeader>{`${activeDay} ${
-          allMonthsNames[currentSelectedMonth - 1]
-        } ${currentSelectedYear}`}</SelectedDateHeader>
+        <SelectedDateHeader>{`${activeDay} ${allMonthsNames[currentSelectedMonth]} ${currentSelectedYear}`}</SelectedDateHeader>
 
         <AddToDoWrapper>
           <InputWrapper>

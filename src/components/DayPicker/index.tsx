@@ -17,15 +17,20 @@ const januaryIndex = 0;
 const decemberIndex = 11;
 
 const DayPicker: FC<IProps> = ({
+  form,
   title,
   isWeekendsOn,
   isWeekStartsOnMonday,
+  isClearButtonVisible,
+  isRangeCalendarOpen,
   holidaysColor,
   minDate,
   maxDate,
-  form
+  rangeStartDate,
+  rangeEndDate,
+  onChangeRangeDate
 }) => {
-  const [calenderIsOpen, setCalendarIsOpen] = useState(true);
+  const [calenderIsOpen, setCalendarIsOpen] = useState(false);
   const [headerDateInputValue, setHeaderDateInputValue] = useState<string>('');
   const [currentSelectedMonth, setCurrentSelectedMonth] = useState(new Date().getMonth());
   const [currentSelectedYear, setCurrentSelectedYear] = useState(new Date().getFullYear());
@@ -79,16 +84,9 @@ const DayPicker: FC<IProps> = ({
     setCurrentSelectedYear(newYear);
   }, []);
 
-  const changeCurrentActiveDay = useCallback(
-    (newActiveDay: number) => {
-      if (activeDay === newActiveDay) {
-        setActiveDay(0);
-      } else {
-        setActiveDay(newActiveDay);
-      }
-    },
-    [activeDay]
-  );
+  const changeCurrentActiveDay = useCallback((newActiveDay: number) => {
+    setActiveDay(newActiveDay);
+  }, []);
 
   const closeOpenToDoHandler = useCallback(
     () => setToDoWindowIsOpen((prevState) => !prevState),
@@ -119,12 +117,15 @@ const DayPicker: FC<IProps> = ({
               changeCurrentSelectedYear={changeCurrentSelectedYear}
               changeActiveWeekNumber={changeActiveWeekNumber}
             />
-            {calenderIsOpen && (
+            {(calenderIsOpen || isRangeCalendarOpen) && (
               <Calendar
                 form={form}
                 minDate={minDate}
                 maxDate={maxDate}
+                rangeStartDate={rangeStartDate}
+                rangeEndDate={rangeEndDate}
                 isWeekendsOn={isWeekendsOn}
+                isClearButtonVisible={isClearButtonVisible}
                 isWeekStartsOnMonday={isWeekStartsOnMonday}
                 holidaysColor={holidaysColor}
                 activeWeekNumber={activeWeekNumber}

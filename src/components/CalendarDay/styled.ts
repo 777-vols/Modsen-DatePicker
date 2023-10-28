@@ -1,12 +1,15 @@
 import styled, { css } from 'styled-components';
 
 interface IDayNumber {
-  $isWeekend: boolean;
+  $isWeekend: boolean | undefined;
   $bold?: boolean;
-  $isHoliday?: boolean;
+  $isHoliday?: boolean | undefined;
   $isCurrentDay?: boolean;
   $holidaysColor?: string;
   $isActive?: boolean;
+  $isIncludeInRange?: boolean;
+  $isStartRangeDay?: boolean;
+  $isEndRangeDay?: boolean;
 }
 interface ITodosIdentifier {
   $isHaveTodos?: boolean;
@@ -71,6 +74,31 @@ export const DayNumber = styled.button<IDayNumber>`
     $isWeekend &&
     css`
       color: ${({ theme }) => theme.colors.red};
+    `}
+  ${({ $isIncludeInRange }) =>
+    $isIncludeInRange &&
+    css`
+      background: ${({ theme }) => theme.colors.grey};
+    `}
+  ${({ $isStartRangeDay }) =>
+    $isStartRangeDay &&
+    css`
+      font-size: ${({ theme }) => theme.fontSize.mediumXL};
+      background: ${({ theme }) => theme.colors.blue};
+      color: ${({ theme }) => theme.colors.white};
+      border-radius: 0px;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    `}
+  ${({ $isEndRangeDay }) =>
+    $isEndRangeDay &&
+    css`
+      font-size: ${({ theme }) => theme.fontSize.mediumXL};
+      background: ${({ theme }) => theme.colors.blue};
+      color: ${({ theme }) => theme.colors.white};
+      border-radius: 0px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
     `}
 `;
 

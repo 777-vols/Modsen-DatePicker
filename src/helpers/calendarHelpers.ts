@@ -19,10 +19,13 @@ interface IdayObject {
   id: number;
   day: {
     dayNumber: string | number;
-    isHoliday: boolean;
-    isCurrentDay: boolean;
-    isWeekend: boolean;
-    isHaveTodos: boolean;
+    isHoliday?: boolean;
+    isCurrentDay?: boolean;
+    isWeekend?: boolean;
+    isHaveTodos?: boolean;
+    rangeStart?: boolean;
+    rangeEnd?: boolean;
+    isIncludeInRange?: boolean;
   };
 }
 
@@ -34,6 +37,17 @@ export const padWithZeros = (value: number, length: number = 2): string =>
 
 export const getMonthFirstDayIndex = (month: number, year: number): number =>
   new Date(`${year}-${padWithZeros(month)}-01`).getDay() + oneDay;
+
+export const compareDates = (date1: Date, date2: Date) => {
+  if (
+    date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate()
+  ) {
+    return true;
+  }
+  return false;
+};
 
 export const getArrayOfDaysInMonth = (
   beginningOfTheMonth: number,
@@ -65,13 +79,18 @@ const getPropppertiesForDaysArray = (
   daysArray: Array<number | string>,
   month: number,
   year: number,
-  isWeekendsOn: boolean
+  isWeekendsOn: boolean,
+  rangeStartDate: Date,
+  rangeEndDate: Date
 ): Array<{
   dayNumber: number | string;
-  isHoliday: boolean;
-  isCurrentDay: boolean;
-  isWeekend: boolean;
-  isHaveTodos: boolean;
+  isHoliday?: boolean;
+  isCurrentDay?: boolean;
+  isWeekend?: boolean;
+  isHaveTodos?: boolean;
+  rangeStart?: boolean;
+  rangeEnd?: boolean;
+  isIncludeInRange?: boolean;
 }> =>
   daysArray.map((dayIndex) => {
     const localeStorageObject = getLocaleStorageItem('allDaysToDoObject') as object;
@@ -85,7 +104,7 @@ const getPropppertiesForDaysArray = (
     if (holidaysArray[dataMonthIndex]?.day.includes(Number(dayIndex))) {
       dayObject = { dayNumber: dayIndex, isHoliday: true };
     } else {
-      dayObject = { dayNumber: dayIndex, isHoliday: false };
+      dayObject = { dayNumber: dayIndex };
     }
 
     if (
@@ -94,20 +113,27 @@ const getPropppertiesForDaysArray = (
       new Date().getFullYear() === year
     ) {
       dayObject = { ...dayObject, isCurrentDay: true };
-    } else {
-      dayObject = { ...dayObject, isCurrentDay: false };
     }
 
     if (isWeekendsOn && getWeekend(Number(dayIndex), monthIndex, year)) {
       dayObject = { ...dayObject, isWeekend: true };
-    } else {
-      dayObject = { ...dayObject, isWeekend: false };
     }
 
     if (localeStorageObject[localeStorageProperty as keyof typeof localeStorageObject]) {
       dayObject = { ...dayObject, isHaveTodos: true };
-    } else {
-      dayObject = { ...dayObject, isHaveTodos: false };
+    }
+
+    if (rangeStartDate && rangeEndDate) {
+      const currentDayDate = new Date(year, monthIndex, Number(dayObject.dayNumber));
+      if (compareDates(rangeStartDate, currentDayDate)) {
+        dayObject = { ...dayObject, rangeStart: true };
+      }
+      if (compareDates(rangeEndDate, currentDayDate)) {
+        dayObject = { ...dayObject, rangeEnd: true };
+      }
+      if (currentDayDate > rangeStartDate && currentDayDate < rangeEndDate) {
+        dayObject = { ...dayObject, isIncludeInRange: true };
+      }
     }
 
     return dayObject;
@@ -119,7 +145,9 @@ export const getArrayOfDaysForMonthCalendar = (
   selectedMonth: number,
   selectedYear: number,
   isWeekStartsOnMonday: boolean,
-  isWeekendsOn: boolean
+  isWeekendsOn: boolean,
+  rangeStartDate: Date,
+  rangeEndDate: Date
 ): Array<IdayObject> => {
   let numberOfDaysFromPrevMonth: number;
   const currentMonthDaysArray = getArrayOfDaysInMonth(beginningOfTheMonth, endOfTheMonth);
@@ -164,19 +192,25 @@ export const getArrayOfDaysForMonthCalendar = (
       prevMonthVisibleDays,
       selectedMonth - oneMonth,
       selectedYear,
-      isWeekendsOn
+      isWeekendsOn,
+      rangeStartDate,
+      rangeEndDate
     ),
     ...getPropppertiesForDaysArray(
       currentMonthDaysArray,
       selectedMonth,
       selectedYear,
-      isWeekendsOn
+      isWeekendsOn,
+      rangeStartDate,
+      rangeEndDate
     ),
     ...getPropppertiesForDaysArray(
       nextMonthVisibleDays,
       selectedMonth + oneMonth,
       selectedYear,
-      isWeekendsOn
+      isWeekendsOn,
+      rangeStartDate,
+      rangeEndDate
     )
   ];
   return calendarDaysArray.map((dayObject, index) => ({ id: index, day: dayObject }));

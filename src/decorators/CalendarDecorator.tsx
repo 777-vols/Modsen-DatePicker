@@ -8,8 +8,7 @@ import { daysNamesStartsWithMonday, daysNamesStartsWithSunday } from '@/constant
 import {
   convertToWeekFormat,
   getArrayOfDaysForMonthCalendar,
-  getNumberOfDaysInMonth,
-  getWeekend
+  getNumberOfDaysInMonth
 } from '@/helpers/calendarHelpers';
 
 const oneDay = 1;
@@ -18,6 +17,8 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
   const DecoratedComponent = (props: IProps) => {
     const {
       form,
+      rangeStartDate,
+      rangeEndDate,
       currentSelectedMonth,
       currentSelectedYear,
       isWeekendsOn,
@@ -47,7 +48,9 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
         currentSelectedMonth + 1,
         currentSelectedYear,
         isWeekStartsOnMonday,
-        isWeekendsOn
+        isWeekendsOn,
+        rangeStartDate,
+        rangeEndDate
       );
 
       if (form === 'week') {
@@ -59,11 +62,23 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
       }
 
       return arrayOfDaysForCalendar.map(({ id, day }) => {
-        const { dayNumber, isHoliday, isCurrentDay, isWeekend, isHaveTodos } = day;
+        const {
+          dayNumber,
+          isHoliday,
+          isCurrentDay,
+          isWeekend,
+          isHaveTodos,
+          rangeStart,
+          rangeEnd,
+          isIncludeInRange
+        } = day;
         if (typeof dayNumber === 'string') {
           return (
             <CalendarDay
               key={id}
+              rangeStart={rangeStart}
+              rangeEnd={rangeEnd}
+              isIncludeInRange={isIncludeInRange}
               dayNumber={dayNumber}
               isHoliday={isHoliday}
               isWeekend={isWeekend}
@@ -72,10 +87,13 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
             />
           );
         }
-        getWeekend(dayNumber, currentSelectedMonth, currentSelectedYear);
+
         return (
           <CalendarDay
             key={id}
+            rangeStart={rangeStart}
+            rangeEnd={rangeEnd}
+            isIncludeInRange={isIncludeInRange}
             dayNumber={dayNumber}
             isHoliday={isHoliday}
             isWeekend={isWeekend}
@@ -90,14 +108,16 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
         );
       });
     }, [
-      form,
-      isWeekStartsOnMonday,
-      currentSelectedMonth,
       currentSelectedYear,
-      activeDay,
+      currentSelectedMonth,
+      isWeekStartsOnMonday,
       isWeekendsOn,
-      holidaysColor,
+      form,
       activeWeekNumber,
+      rangeStartDate,
+      rangeEndDate,
+      holidaysColor,
+      activeDay,
       changeCurrentActiveDay,
       closeOpenToDoHandler
     ]);

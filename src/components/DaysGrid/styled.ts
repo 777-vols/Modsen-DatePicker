@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+  padding-bottom: ${({ theme }) => theme.padding.mediumS};
+`;
 export const WeekDaysNames = styled.div`
   cursor: default;
   display: grid;
