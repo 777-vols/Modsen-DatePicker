@@ -20,12 +20,11 @@ const RangePicker: FC<IProps> = ({
   maxDate,
   form
 }) => {
-  // console.log(defaultRangeStartDate);
-  // console.log(defaultRangeEndDate);
   const [rangeStartDate, setRangeStartDate] = useState(defaultRangeStartDate);
   const [rangeEndDate, setRangeEndDate] = useState(defaultRangeEndDate);
   const onChangeRangeStartDate = useCallback((newDate: Date) => setRangeStartDate(newDate), []);
   const onChangeRangeEndDate = useCallback((newDate: Date) => setRangeEndDate(newDate), []);
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle theme={theme} />
@@ -40,6 +39,7 @@ const RangePicker: FC<IProps> = ({
           isRangeCalendarOpen={isRangeCalendarOpen}
           minDate={minDate}
           maxDate={maxDate}
+          defaultRangeDate={defaultRangeStartDate}
           rangeStartDate={rangeStartDate}
           rangeEndDate={rangeEndDate}
           onChangeRangeDate={onChangeRangeStartDate}
@@ -54,6 +54,7 @@ const RangePicker: FC<IProps> = ({
           isRangeCalendarOpen={isRangeCalendarOpen}
           minDate={minDate}
           maxDate={maxDate}
+          defaultRangeDate={defaultRangeEndDate}
           rangeStartDate={rangeStartDate}
           rangeEndDate={rangeEndDate}
           onChangeRangeDate={onChangeRangeEndDate}

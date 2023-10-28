@@ -10,6 +10,7 @@ interface IProps {
   maxDate: Date;
   rangeStartDate: Date;
   rangeEndDate: Date;
+  defaultRangeDate: Date;
   onChangeRangeDate: (newDate: Date) => void;
 }
 

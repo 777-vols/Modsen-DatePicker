@@ -46,10 +46,10 @@ export default meta;
 
 type Story = StoryObj<typeof RangePicker>;
 
-// const rangeStartDay = new Date();
-// rangeStartDay.setDate(new Date().getDate() - 20);
-// const rangeEndDay = new Date();
-// rangeEndDay.setDate(new Date().getDate() + 10);
+const rangeStartDay = new Date();
+rangeStartDay.setDate(new Date().getDate() - 5);
+const rangeEndDay = new Date();
+rangeEndDay.setDate(new Date().getDate() + 5);
 
 export const Default: Story = {
   args: {
@@ -67,15 +67,13 @@ export const Default: Story = {
   render: (args) => {
     const minDate = new Date(args.minDate);
     const maxDate = new Date(args.maxDate);
-    const defaultRangeStartDate = new Date(args.defaultRangeStartDate);
-    const defaultRangeEndDate = new Date(args.defaultRangeEndDate);
     return (
       <RangePicker
         {...args}
         minDate={minDate}
         maxDate={maxDate}
-        defaultRangeStartDate={defaultRangeStartDate}
-        defaultRangeEndDate={defaultRangeEndDate}
+        defaultRangeStartDate={rangeStartDay}
+        defaultRangeEndDate={rangeEndDay}
       />
     );
   }

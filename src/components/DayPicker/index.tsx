@@ -28,6 +28,7 @@ const DayPicker: FC<IProps> = ({
   maxDate,
   rangeStartDate,
   rangeEndDate,
+  defaultRangeDate,
   onChangeRangeDate
 }) => {
   const [calenderIsOpen, setCalendarIsOpen] = useState(false);
@@ -84,9 +85,16 @@ const DayPicker: FC<IProps> = ({
     setCurrentSelectedYear(newYear);
   }, []);
 
-  const changeCurrentActiveDay = useCallback((newActiveDay: number) => {
-    setActiveDay(newActiveDay);
-  }, []);
+  const changeCurrentActiveDay = useCallback(
+    (newActiveDay: number) => {
+      if (rangeStartDate && rangeEndDate) {
+        onChangeRangeDate(new Date(currentSelectedYear, currentSelectedMonth, newActiveDay));
+      } else {
+        setActiveDay(newActiveDay);
+      }
+    },
+    [currentSelectedMonth, currentSelectedYear, onChangeRangeDate, rangeEndDate, rangeStartDate]
+  );
 
   const closeOpenToDoHandler = useCallback(
     () => setToDoWindowIsOpen((prevState) => !prevState),
@@ -96,6 +104,10 @@ const DayPicker: FC<IProps> = ({
   const changeActiveWeekNumber = useCallback((newActiveWeek: number) => {
     setActiveWeekNumber(newActiveWeek);
   }, []);
+
+  const clearCalendarHandler = useCallback(() => {
+    onChangeRangeDate(defaultRangeDate);
+  }, [defaultRangeDate, onChangeRangeDate]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -137,6 +149,7 @@ const DayPicker: FC<IProps> = ({
                 activeDay={activeDay}
                 changeCurrentActiveDay={changeCurrentActiveDay}
                 closeOpenToDoHandler={closeOpenToDoHandler}
+                clearCalendarHandler={clearCalendarHandler}
               />
             )}
             {toDoWindowIsOpen && (

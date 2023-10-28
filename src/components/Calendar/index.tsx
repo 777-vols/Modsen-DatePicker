@@ -24,6 +24,7 @@ const Calendar: FC<IProps> = ({
   changeActiveWeekNumber,
   changeCurrentActiveDay,
   closeOpenToDoHandler,
+  clearCalendarHandler,
   isWeekStartsOnMonday,
   isClearButtonVisible,
   isWeekendsOn,
@@ -56,7 +57,7 @@ const Calendar: FC<IProps> = ({
       changeCurrentActiveDay={changeCurrentActiveDay}
       closeOpenToDoHandler={closeOpenToDoHandler}
     />
-    {isClearButtonVisible && <ClearButton>{buttonText}</ClearButton>}
+    {isClearButtonVisible && <ClearButton onClick={clearCalendarHandler}>{buttonText}</ClearButton>}
   </Wrapper>
 );
 

@@ -20,6 +20,26 @@ const meta: Meta<typeof DayPicker> = {
     form: {
       options: ['year', 'month', 'week'],
       control: { type: 'radio' }
+    },
+    onChangeRangeDate: {
+      table: {
+        disable: true
+      }
+    },
+    rangeStartDate: {
+      table: {
+        disable: true
+      }
+    },
+    rangeEndDate: {
+      table: {
+        disable: true
+      }
+    },
+    defaultRangeDate: {
+      table: {
+        disable: true
+      }
     }
   }
 };

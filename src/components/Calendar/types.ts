@@ -14,6 +14,7 @@ interface IProps {
   changeCurrentActiveDay: (newActiveDay: number) => void;
   changeActiveWeekNumber: (newActiveWeek: number) => void;
   closeOpenToDoHandler: () => void;
+  clearCalendarHandler: () => void;
   isWeekStartsOnMonday: boolean;
   isWeekendsOn: boolean;
   isClearButtonVisible: boolean;
