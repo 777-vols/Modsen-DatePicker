@@ -1,16 +1,18 @@
 import { getNumberOfDaysInMonth } from './calendarHelpers';
 
+const yearNumberLength = 4;
+const oneMonth = 1;
+const firstDayIndex = 1;
+const decemberIndex = 12;
+
 const dateInputCheckHelper = (dateValue: string, minDate: Date, maxDate: Date): boolean => {
-  const oneMonth = 1;
-  const firstDayIndex = 1;
-  const decemberIndex = 12;
   const checkDateRegExp = /^\d{2}\/\d{2}\/\d{4}$/;
   const [dayNumber, monthNumber, yearNumber] = dateValue
     .split('/')
     .map((dateItem) => Number(dateItem));
 
   let date;
-  if (dayNumber && monthNumber && String(yearNumber).length === 4) {
+  if (dayNumber && monthNumber && String(yearNumber).length === yearNumberLength) {
     date = new Date(yearNumber, monthNumber - 1, dayNumber);
   }
 

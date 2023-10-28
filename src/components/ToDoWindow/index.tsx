@@ -30,7 +30,7 @@ const ToDoWindow: FC<IProps> = ({
   currentSelectedYear
 }) => {
   const [leeresArray] = useState<IToDo[]>([]);
-  const [inputNewToDo, setInputNewToDo] = useState('');
+  const [inputNewToDo, setInputNewToDo] = useState<string>('');
   const [allDaysToDoStateObject, setAllDaysToDoStateObject] = useState<object>(
     getLocaleStorageItem('allDaysToDoObject') as object
   );

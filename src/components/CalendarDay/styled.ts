@@ -89,7 +89,13 @@ export const DayNumber = styled.button<IDayNumber>`
       border-radius: 0px;
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;
-      opacity: 0.8;
+      opacity: 0.7;
+    `}
+    ${({ $isStartRangeDay, $isActive }) =>
+    $isStartRangeDay &&
+    $isActive &&
+    css`
+      opacity: 1;
     `}
   ${({ $isEndRangeDay }) =>
     $isEndRangeDay &&
@@ -100,7 +106,13 @@ export const DayNumber = styled.button<IDayNumber>`
       border-radius: 0px;
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
-      opacity: 0.8;
+      opacity: 0.7;
+    `}
+  ${({ $isEndRangeDay, $isActive }) =>
+    $isEndRangeDay &&
+    $isActive &&
+    css`
+      opacity: 1;
     `}
 `;
 

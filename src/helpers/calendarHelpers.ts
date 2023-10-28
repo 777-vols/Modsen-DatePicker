@@ -1,6 +1,7 @@
 import { holidaysArray } from '@/constants/calendarData';
 
 import { getLocaleStorageItem } from './localeStorageHelpers';
+import { IDay, IDayObject } from './types';
 
 const firstDayIndex = 0;
 
@@ -14,20 +15,6 @@ const oneMonth = 1;
 
 const numOfWeeksInCalendar = 6;
 const numOfDaysInOneWeek = 7;
-
-interface IdayObject {
-  id: number;
-  day: {
-    dayNumber: string | number;
-    isHoliday?: boolean;
-    isCurrentDay?: boolean;
-    isWeekend?: boolean;
-    isHaveTodos?: boolean;
-    rangeStart?: boolean;
-    rangeEnd?: boolean;
-    isIncludeInRange?: boolean;
-  };
-}
 
 export const getNumberOfDaysInMonth = (year: number, month: number): number =>
   new Date(year, month, firstDayIndex).getDate();
@@ -69,29 +56,20 @@ export const getArrayOfDaysInMonth = (
 
 export const getWeekend = (day: number, month: number, year: number) => {
   const dayInex = new Date(year, month, day).getDay();
-  if (dayInex === 0 || dayInex === 6) {
+  if (dayInex === firstDayIndexOfTheWeek || dayInex === lastDayIndexOfTheWeek) {
     return true;
   }
   return false;
 };
 
-const getPropppertiesForDaysArray = (
+const getProppertiesForDaysArray = (
   daysArray: Array<number | string>,
   month: number,
   year: number,
   isWeekendsOn: boolean,
   rangeStartDate: Date,
   rangeEndDate: Date
-): Array<{
-  dayNumber: number | string;
-  isHoliday?: boolean;
-  isCurrentDay?: boolean;
-  isWeekend?: boolean;
-  isHaveTodos?: boolean;
-  rangeStart?: boolean;
-  rangeEnd?: boolean;
-  isIncludeInRange?: boolean;
-}> =>
+): Array<IDay> =>
   daysArray.map((dayIndex) => {
     const localeStorageObject = getLocaleStorageItem('allDaysToDoObject') as object;
     const localeStorageProperty = `${dayIndex} ${month - 1} ${year}`;
@@ -119,8 +97,10 @@ const getPropppertiesForDaysArray = (
       dayObject = { ...dayObject, isWeekend: true };
     }
 
-    if (localeStorageObject[localeStorageProperty as keyof typeof localeStorageObject]) {
-      dayObject = { ...dayObject, isHaveTodos: true };
+    if (!(rangeStartDate && rangeEndDate)) {
+      if (localeStorageObject[localeStorageProperty as keyof typeof localeStorageObject]) {
+        dayObject = { ...dayObject, isHaveTodos: true };
+      }
     }
 
     if (rangeStartDate && rangeEndDate) {
@@ -148,7 +128,7 @@ export const getArrayOfDaysForMonthCalendar = (
   isWeekendsOn: boolean,
   rangeStartDate: Date,
   rangeEndDate: Date
-): Array<IdayObject> => {
+): Array<IDayObject> => {
   let numberOfDaysFromPrevMonth: number;
   const currentMonthDaysArray = getArrayOfDaysInMonth(beginningOfTheMonth, endOfTheMonth);
 
@@ -188,7 +168,7 @@ export const getArrayOfDaysForMonthCalendar = (
     .map((item) => String(item));
 
   const calendarDaysArray = [
-    ...getPropppertiesForDaysArray(
+    ...getProppertiesForDaysArray(
       prevMonthVisibleDays,
       selectedMonth - oneMonth,
       selectedYear,
@@ -196,7 +176,7 @@ export const getArrayOfDaysForMonthCalendar = (
       rangeStartDate,
       rangeEndDate
     ),
-    ...getPropppertiesForDaysArray(
+    ...getProppertiesForDaysArray(
       currentMonthDaysArray,
       selectedMonth,
       selectedYear,
@@ -204,7 +184,7 @@ export const getArrayOfDaysForMonthCalendar = (
       rangeStartDate,
       rangeEndDate
     ),
-    ...getPropppertiesForDaysArray(
+    ...getProppertiesForDaysArray(
       nextMonthVisibleDays,
       selectedMonth + oneMonth,
       selectedYear,
@@ -216,7 +196,7 @@ export const getArrayOfDaysForMonthCalendar = (
   return calendarDaysArray.map((dayObject, index) => ({ id: index, day: dayObject }));
 };
 
-export const convertToWeekFormat = (monthFormatArray: Array<IdayObject>): Array<IdayObject[]> => {
+export const convertToWeekFormat = (monthFormatArray: Array<IDayObject>): Array<IDayObject[]> => {
   const convertedArray = [];
   let oneWeekArray = [];
 
@@ -245,9 +225,9 @@ export const getWeekNumberForDay = (
   year: number,
   isWeekStartsOnMonday: boolean
 ): number => {
+  let numberOfDaysFromPrevMonth: number;
   const numberOfDaysInCurrentMonth = getNumberOfDaysInMonth(year, month) + oneDay;
   const currentMonthDaysArray = getArrayOfDaysInMonth(oneDay, numberOfDaysInCurrentMonth);
-  let numberOfDaysFromPrevMonth: number;
 
   const monthFirstDay = getMonthFirstDayIndex(month, year);
 

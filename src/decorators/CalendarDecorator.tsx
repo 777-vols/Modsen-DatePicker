@@ -30,7 +30,9 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
       closeOpenToDoHandler,
       ...otherProps
     } = props;
+
     const weeksCountRef = useRef(0);
+
     const daysNamesArray = useMemo(() => {
       if (isWeekStartsOnMonday) {
         return daysNamesStartsWithMonday.map((dayName) => (

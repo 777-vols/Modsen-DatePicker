@@ -20,8 +20,8 @@ const RangePicker: FC<IProps> = ({
   maxDate,
   form
 }) => {
-  const [rangeStartDate, setRangeStartDate] = useState(defaultRangeStartDate);
-  const [rangeEndDate, setRangeEndDate] = useState(defaultRangeEndDate);
+  const [rangeStartDate, setRangeStartDate] = useState<Date>(defaultRangeStartDate);
+  const [rangeEndDate, setRangeEndDate] = useState<Date>(defaultRangeEndDate);
   const onChangeRangeStartDate = useCallback((newDate: Date) => setRangeStartDate(newDate), []);
   const onChangeRangeEndDate = useCallback((newDate: Date) => setRangeEndDate(newDate), []);
 

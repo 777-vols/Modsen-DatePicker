@@ -31,13 +31,13 @@ const DayPicker: FC<IProps> = ({
   defaultRangeDate,
   onChangeRangeDate
 }) => {
-  const [calenderIsOpen, setCalendarIsOpen] = useState(false);
+  const [calenderIsOpen, setCalendarIsOpen] = useState<boolean>(false);
   const [headerDateInputValue, setHeaderDateInputValue] = useState<string>('');
-  const [currentSelectedMonth, setCurrentSelectedMonth] = useState(new Date().getMonth());
-  const [currentSelectedYear, setCurrentSelectedYear] = useState(new Date().getFullYear());
-  const [toDoWindowIsOpen, setToDoWindowIsOpen] = useState(false);
-  const [activeDay, setActiveDay] = useState(0);
-  const [activeWeekNumber, setActiveWeekNumber] = useState(0);
+  const [currentSelectedMonth, setCurrentSelectedMonth] = useState<number>(new Date().getMonth());
+  const [currentSelectedYear, setCurrentSelectedYear] = useState<number>(new Date().getFullYear());
+  const [toDoWindowIsOpen, setToDoWindowIsOpen] = useState<boolean>(false);
+  const [activeDay, setActiveDay] = useState<number>(0);
+  const [activeWeekNumber, setActiveWeekNumber] = useState<number>(0);
 
   useEffect(() => {
     if (form === 'week') {
@@ -87,19 +87,17 @@ const DayPicker: FC<IProps> = ({
 
   const changeCurrentActiveDay = useCallback(
     (newActiveDay: number) => {
-      if (rangeStartDate && rangeEndDate) {
-        onChangeRangeDate(new Date(currentSelectedYear, currentSelectedMonth, newActiveDay));
-      } else {
-        setActiveDay(newActiveDay);
-      }
+      onChangeRangeDate(new Date(currentSelectedYear, currentSelectedMonth, newActiveDay));
+      setActiveDay(newActiveDay);
     },
-    [currentSelectedMonth, currentSelectedYear, onChangeRangeDate, rangeEndDate, rangeStartDate]
+    [currentSelectedMonth, currentSelectedYear, onChangeRangeDate]
   );
 
-  const closeOpenToDoHandler = useCallback(
-    () => setToDoWindowIsOpen((prevState) => !prevState),
-    []
-  );
+  const closeOpenToDoHandler = useCallback(() => {
+    if (!(rangeStartDate && rangeEndDate)) {
+      setToDoWindowIsOpen((prevState) => !prevState);
+    }
+  }, [rangeEndDate, rangeStartDate]);
 
   const changeActiveWeekNumber = useCallback((newActiveWeek: number) => {
     setActiveWeekNumber(newActiveWeek);
@@ -107,6 +105,7 @@ const DayPicker: FC<IProps> = ({
 
   const clearCalendarHandler = useCallback(() => {
     onChangeRangeDate(defaultRangeDate);
+    setActiveDay(0);
   }, [defaultRangeDate, onChangeRangeDate]);
 
   return (
