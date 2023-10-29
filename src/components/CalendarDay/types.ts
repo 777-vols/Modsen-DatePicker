@@ -3,8 +3,8 @@ interface IProps {
   rangeEnd?: boolean;
   isIncludeInRange?: boolean;
   dayNumber: number | string;
-  isCurrentDay: boolean | undefined;
-  isWeekend: boolean | undefined;
+  isCurrentDay?: boolean | undefined;
+  isWeekend?: boolean | undefined;
   isHaveTodos?: boolean;
   holidaysColor?: string;
   isBold?: boolean;

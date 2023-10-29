@@ -78,6 +78,7 @@ export const DayNumber = styled.button<IDayNumber>`
   ${({ $isIncludeInRange }) =>
     $isIncludeInRange &&
     css`
+      border-radius: 0px;
       background: ${({ theme }) => theme.colors.grey};
     `}
   ${({ $isStartRangeDay }) =>
