@@ -40,6 +40,11 @@ const meta: Meta<typeof DayPicker> = {
       table: {
         disable: true
       }
+    },
+    isRangeCalendarOpen: {
+      table: {
+        disable: true
+      }
     }
   }
 };

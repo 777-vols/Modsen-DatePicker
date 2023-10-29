@@ -8,6 +8,8 @@ interface IProps {
   activeWeekNumber: number;
   minDate: Date;
   maxDate: Date;
+  isWeekStartsOnMonday: boolean;
+  isWeekendsOn: boolean;
 }
 
 export default IProps;

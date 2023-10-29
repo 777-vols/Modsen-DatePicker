@@ -61,6 +61,9 @@ const DayPicker: FC<IProps> = ({
 
   const changeCurrentSelectedMonth = useCallback(
     (newMonth: number) => {
+      if (rangeStartDate && rangeEndDate) {
+        setActiveDay(0);
+      }
       if (
         new Date(currentSelectedYear, newMonth, 1) >= minDate &&
         new Date(currentSelectedYear, newMonth, 1) < maxDate
@@ -78,7 +81,7 @@ const DayPicker: FC<IProps> = ({
       }
       return false;
     },
-    [currentSelectedYear, maxDate, minDate]
+    [currentSelectedYear, maxDate, minDate, rangeEndDate, rangeStartDate]
   );
 
   const changeCurrentSelectedYear = useCallback((newYear: number) => {

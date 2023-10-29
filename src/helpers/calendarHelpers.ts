@@ -67,8 +67,8 @@ const getProppertiesForDaysArray = (
   month: number,
   year: number,
   isWeekendsOn: boolean,
-  rangeStartDate: Date,
-  rangeEndDate: Date
+  rangeStartDate?: Date,
+  rangeEndDate?: Date
 ): Array<IDay> =>
   daysArray.map((dayIndex) => {
     const localeStorageObject = getLocaleStorageItem('allDaysToDoObject') as object;
@@ -119,18 +119,14 @@ const getProppertiesForDaysArray = (
     return dayObject;
   });
 
-export const getArrayOfDaysForMonthCalendar = (
-  beginningOfTheMonth: number,
-  endOfTheMonth: number,
+export const getCurrentPrevAndNextMonthDays = (
   selectedMonth: number,
   selectedYear: number,
-  isWeekStartsOnMonday: boolean,
-  isWeekendsOn: boolean,
-  rangeStartDate: Date,
-  rangeEndDate: Date
-): Array<IDayObject> => {
+  isWeekStartsOnMonday: boolean
+) => {
   let numberOfDaysFromPrevMonth: number;
-  const currentMonthDaysArray = getArrayOfDaysInMonth(beginningOfTheMonth, endOfTheMonth);
+  const endOfTheMonth = getNumberOfDaysInMonth(selectedYear, selectedMonth) + oneDay;
+  const currentMonthDaysArray = getArrayOfDaysInMonth(oneDay, endOfTheMonth);
 
   const monthFirstDay = getMonthFirstDayIndex(selectedMonth, selectedYear);
 
@@ -167,6 +163,20 @@ export const getArrayOfDaysForMonthCalendar = (
     .slice(firstDayIndexOfTheWeek, numberOfDaysFromNextMonth)
     .map((item) => String(item));
 
+  return [prevMonthVisibleDays, currentMonthDaysArray, nextMonthVisibleDays];
+};
+
+export const getArrayOfDaysForMonthCalendar = (
+  selectedMonth: number,
+  selectedYear: number,
+  isWeekStartsOnMonday: boolean,
+  isWeekendsOn: boolean,
+  rangeStartDate?: Date,
+  rangeEndDate?: Date
+): Array<IDayObject> => {
+  const [prevMonthVisibleDays, currentMonthDaysArray, nextMonthVisibleDays] =
+    getCurrentPrevAndNextMonthDays(selectedMonth, selectedYear, isWeekStartsOnMonday);
+
   const calendarDaysArray = [
     ...getProppertiesForDaysArray(
       prevMonthVisibleDays,
@@ -202,14 +212,14 @@ export const convertToWeekFormat = (monthFormatArray: Array<IDayObject>): Array<
 
   for (let dayIndex = 0; dayIndex <= monthFormatArray.length; dayIndex += oneDay) {
     if (oneWeekArray.length === numOfDaysInOneWeek) {
-      const filledDaysInWeek = oneWeekArray.filter((dayObj) => {
+      const weekIncludesCurrentMonthDays = oneWeekArray.filter((dayObj) => {
         if (typeof dayObj.day.dayNumber === 'number') {
           return dayObj;
         }
         return null;
       });
 
-      if (filledDaysInWeek.length > 0) {
+      if (weekIncludesCurrentMonthDays.length > 0) {
         convertedArray.push(oneWeekArray);
         oneWeekArray = [];
       }
@@ -225,42 +235,8 @@ export const getWeekNumberForDay = (
   year: number,
   isWeekStartsOnMonday: boolean
 ): number => {
-  let numberOfDaysFromPrevMonth: number;
-  const numberOfDaysInCurrentMonth = getNumberOfDaysInMonth(year, month) + oneDay;
-  const currentMonthDaysArray = getArrayOfDaysInMonth(oneDay, numberOfDaysInCurrentMonth);
-
-  const monthFirstDay = getMonthFirstDayIndex(month, year);
-
-  const prevMonthDaysNumber = getNumberOfDaysInMonth(year, month - oneMonth) + oneDay;
-  const prevMonthDaysArray = getArrayOfDaysInMonth(oneDay, prevMonthDaysNumber);
-
-  const nextMonthDaysNumber = getNumberOfDaysInMonth(year, month + oneMonth) - oneDay;
-  const nextMonthDaysArray = getArrayOfDaysInMonth(oneDay, nextMonthDaysNumber);
-
-  if (isWeekStartsOnMonday) {
-    numberOfDaysFromPrevMonth = monthFirstDay - twoDays;
-    if (numberOfDaysFromPrevMonth === -oneDay) {
-      if (monthFirstDay === oneDay) {
-        numberOfDaysFromPrevMonth = lastDayIndexOfTheWeek;
-      } else {
-        numberOfDaysFromPrevMonth = oneDay;
-      }
-    }
-  } else {
-    numberOfDaysFromPrevMonth = monthFirstDay - oneDay;
-  }
-
-  const numberOfDaysFromNextMonth =
-    numOfWeeksInCalendar * numOfDaysInOneWeek -
-    (numberOfDaysFromPrevMonth + currentMonthDaysArray.length);
-
-  const prevMonthVisibleDays = prevMonthDaysArray
-    .slice(prevMonthDaysArray.length - numberOfDaysFromPrevMonth)
-    .map((item) => String(item));
-
-  const nextMonthVisibleDays = nextMonthDaysArray
-    .slice(firstDayIndexOfTheWeek, numberOfDaysFromNextMonth)
-    .map((item) => String(item));
+  const [prevMonthVisibleDays, currentMonthDaysArray, nextMonthVisibleDays] =
+    getCurrentPrevAndNextMonthDays(month, year, isWeekStartsOnMonday);
 
   const monthArray = [...prevMonthVisibleDays, ...currentMonthDaysArray, ...nextMonthVisibleDays];
 
@@ -300,4 +276,20 @@ export const getYearsOptionsArray = (
     yearsArray.push(yearNumber);
   }
   return yearsArray.map((year) => ({ value: year, label: year }));
+};
+
+export const getWeeksCount = (
+  month: number,
+  year: number,
+  isWeekStartsOnMonday: boolean,
+  isWeekendsOn: boolean
+) => {
+  const arrayOfDays = getArrayOfDaysForMonthCalendar(
+    month + oneMonth,
+    year,
+    isWeekStartsOnMonday,
+    isWeekendsOn
+  );
+  const arrayOfweeks = convertToWeekFormat(arrayOfDays);
+  return arrayOfweeks.length - 1;
 };
