@@ -15,7 +15,7 @@ export const ChangeMonthButton = styled.button`
   }
 `;
 export const MonthName = styled.span`
-  padding: 0 5px;
+  padding: ${({ theme }) => theme.padding.zero} ${({ theme }) => theme.padding.smallS};
   font-size: ${({ theme }) => theme.fontSize.mediumL};
   font-weight: ${({ theme }) => theme.fontWeight.l};
 `;

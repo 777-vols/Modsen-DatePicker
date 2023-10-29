@@ -1,21 +1,15 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import ReactSelect from 'react-select';
 
 import nextImg from '@/assets/next.svg';
 import prevImg from '@/assets/prev.svg';
 import { allMonthsNames } from '@/constants/calendarData';
-import {
-  convertToWeekFormat,
-  getArrayOfDaysForMonthCalendar,
-  getNumberOfDaysInMonth,
-  getYearsOptionsArray
-} from '@/helpers/calendarHelpers';
+import { getWeeksCount, getYearsOptionsArray } from '@/helpers/calendarHelpers';
 
 import { ChangeMonthButton, MonthName, Panel, Wrapper } from './styled';
 import IProps from './types';
 
 const oneMonth = 1;
-const oneDay = 1;
 
 const MonthSlider: FC<IProps> = ({
   form,
@@ -26,20 +20,15 @@ const MonthSlider: FC<IProps> = ({
   changeCurrentSelectedYear,
   changeActiveWeekNumber,
   currentSelectedMonth,
-  currentSelectedYear
+  currentSelectedYear,
+  isWeekStartsOnMonday,
+  isWeekendsOn
 }) => {
-  const getWeeksCount = () => {
-    const arrayOfDays = getArrayOfDaysForMonthCalendar(
-      oneDay,
-      getNumberOfDaysInMonth(currentSelectedYear, currentSelectedMonth + 1) + oneDay,
-      currentSelectedMonth + 1,
-      currentSelectedYear,
-      true,
-      true
-    );
-    const arrayOfweeks = convertToWeekFormat(arrayOfDays);
-    return arrayOfweeks.length - 1;
-  };
+  const weeksCount = useMemo(
+    () =>
+      getWeeksCount(currentSelectedMonth, currentSelectedYear, isWeekStartsOnMonday, isWeekendsOn),
+    [currentSelectedMonth, currentSelectedYear, isWeekStartsOnMonday, isWeekendsOn]
+  );
 
   const prevMonthHandler = (): void => {
     changeCurrentSelectedMonth(currentSelectedMonth - oneMonth);
@@ -49,7 +38,6 @@ const MonthSlider: FC<IProps> = ({
   };
 
   const prevWeekHandler = (): void => {
-    const weeksCount = getWeeksCount();
     if (activeWeekNumber - 1 < 0 && changeCurrentSelectedMonth(currentSelectedMonth - 1)) {
       changeActiveWeekNumber(weeksCount - 1);
     }
@@ -58,7 +46,6 @@ const MonthSlider: FC<IProps> = ({
     }
   };
   const nextWeekHandler = (): void => {
-    const weeksCount = getWeeksCount();
     if (activeWeekNumber + 1 > weeksCount && changeCurrentSelectedMonth(currentSelectedMonth + 1)) {
       changeActiveWeekNumber(0);
     }

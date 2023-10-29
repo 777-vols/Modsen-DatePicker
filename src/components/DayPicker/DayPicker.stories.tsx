@@ -20,6 +20,31 @@ const meta: Meta<typeof DayPicker> = {
     form: {
       options: ['year', 'month', 'week'],
       control: { type: 'radio' }
+    },
+    onChangeRangeDate: {
+      table: {
+        disable: true
+      }
+    },
+    rangeStartDate: {
+      table: {
+        disable: true
+      }
+    },
+    rangeEndDate: {
+      table: {
+        disable: true
+      }
+    },
+    defaultRangeDate: {
+      table: {
+        disable: true
+      }
+    },
+    isRangeCalendarOpen: {
+      table: {
+        disable: true
+      }
     }
   }
 };
@@ -33,9 +58,13 @@ export const Default: Story = {
     form: 'month',
     isWeekendsOn: true,
     isWeekStartsOnMonday: true,
-    minDate: new Date(2010, 0, 1),
-    maxDate: new Date(2030, 11, 31)
+    minDate: new Date(2020, 0, 1),
+    maxDate: new Date(2025, 11, 31)
   },
 
-  render: (args) => <DayPicker {...args} />
+  render: (args) => {
+    const minDate = new Date(args.minDate);
+    const maxDate = new Date(args.maxDate);
+    return <DayPicker {...args} minDate={minDate} maxDate={maxDate} />;
+  }
 };

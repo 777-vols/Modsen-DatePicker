@@ -49,8 +49,7 @@ const config = {
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
     'react/function-component-definition': 0,
-    'import/extensions': 'off',
-    'import/no-extraneous-dependencies': 'off',
+    'import/extensions': 0,
     '@typescript-eslint/no-unused-vars': [
       'warn',
       {

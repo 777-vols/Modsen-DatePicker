@@ -17,21 +17,27 @@ const januaryIndex = 0;
 const decemberIndex = 11;
 
 const DayPicker: FC<IProps> = ({
+  form,
   title,
   isWeekendsOn,
   isWeekStartsOnMonday,
+  isClearButtonVisible,
+  isRangeCalendarOpen,
   holidaysColor,
   minDate,
   maxDate,
-  form
+  rangeStartDate,
+  rangeEndDate,
+  defaultRangeDate,
+  onChangeRangeDate
 }) => {
-  const [calenderIsOpen, setCalendarIsOpen] = useState(true);
+  const [calenderIsOpen, setCalendarIsOpen] = useState<boolean>(false);
   const [headerDateInputValue, setHeaderDateInputValue] = useState<string>('');
-  const [currentSelectedMonth, setCurrentSelectedMonth] = useState(new Date().getMonth());
-  const [currentSelectedYear, setCurrentSelectedYear] = useState(new Date().getFullYear());
-  const [toDoWindowIsOpen, setToDoWindowIsOpen] = useState(false);
-  const [activeDay, setActiveDay] = useState(0);
-  const [activeWeekNumber, setActiveWeekNumber] = useState(0);
+  const [currentSelectedMonth, setCurrentSelectedMonth] = useState<number>(new Date().getMonth());
+  const [currentSelectedYear, setCurrentSelectedYear] = useState<number>(new Date().getFullYear());
+  const [toDoWindowIsOpen, setToDoWindowIsOpen] = useState<boolean>(false);
+  const [activeDay, setActiveDay] = useState<number>(0);
+  const [activeWeekNumber, setActiveWeekNumber] = useState<number>(0);
 
   useEffect(() => {
     if (form === 'week') {
@@ -55,6 +61,9 @@ const DayPicker: FC<IProps> = ({
 
   const changeCurrentSelectedMonth = useCallback(
     (newMonth: number) => {
+      if (rangeStartDate && rangeEndDate) {
+        setActiveDay(0);
+      }
       if (
         new Date(currentSelectedYear, newMonth, 1) >= minDate &&
         new Date(currentSelectedYear, newMonth, 1) < maxDate
@@ -72,25 +81,35 @@ const DayPicker: FC<IProps> = ({
       }
       return false;
     },
-    [currentSelectedYear, maxDate, minDate]
+    [currentSelectedYear, maxDate, minDate, rangeEndDate, rangeStartDate]
   );
 
   const changeCurrentSelectedYear = useCallback((newYear: number) => {
     setCurrentSelectedYear(newYear);
   }, []);
 
-  const changeCurrentActiveDay = useCallback((newActiveDay: number) => {
-    setActiveDay(newActiveDay);
-  }, []);
-
-  const closeOpenToDoHandler = useCallback(
-    () => setToDoWindowIsOpen((prevState) => !prevState),
-    []
+  const changeCurrentActiveDay = useCallback(
+    (newActiveDay: number) => {
+      onChangeRangeDate(new Date(currentSelectedYear, currentSelectedMonth, newActiveDay));
+      setActiveDay(newActiveDay);
+    },
+    [currentSelectedMonth, currentSelectedYear, onChangeRangeDate]
   );
+
+  const closeOpenToDoHandler = useCallback(() => {
+    if (!(rangeStartDate && rangeEndDate)) {
+      setToDoWindowIsOpen((prevState) => !prevState);
+    }
+  }, [rangeEndDate, rangeStartDate]);
 
   const changeActiveWeekNumber = useCallback((newActiveWeek: number) => {
     setActiveWeekNumber(newActiveWeek);
   }, []);
+
+  const clearCalendarHandler = useCallback(() => {
+    onChangeRangeDate(defaultRangeDate);
+    setActiveDay(0);
+  }, [defaultRangeDate, onChangeRangeDate]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -112,12 +131,15 @@ const DayPicker: FC<IProps> = ({
               changeCurrentSelectedYear={changeCurrentSelectedYear}
               changeActiveWeekNumber={changeActiveWeekNumber}
             />
-            {calenderIsOpen && (
+            {(calenderIsOpen || isRangeCalendarOpen) && (
               <Calendar
                 form={form}
                 minDate={minDate}
                 maxDate={maxDate}
+                rangeStartDate={rangeStartDate}
+                rangeEndDate={rangeEndDate}
                 isWeekendsOn={isWeekendsOn}
+                isClearButtonVisible={isClearButtonVisible}
                 isWeekStartsOnMonday={isWeekStartsOnMonday}
                 holidaysColor={holidaysColor}
                 activeWeekNumber={activeWeekNumber}
@@ -129,6 +151,7 @@ const DayPicker: FC<IProps> = ({
                 activeDay={activeDay}
                 changeCurrentActiveDay={changeCurrentActiveDay}
                 closeOpenToDoHandler={closeOpenToDoHandler}
+                clearCalendarHandler={clearCalendarHandler}
               />
             )}
             {toDoWindowIsOpen && (

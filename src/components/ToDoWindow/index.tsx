@@ -30,7 +30,7 @@ const ToDoWindow: FC<IProps> = ({
   currentSelectedYear
 }) => {
   const [leeresArray] = useState<IToDo[]>([]);
-  const [inputNewToDo, setInputNewToDo] = useState('');
+  const [inputNewToDo, setInputNewToDo] = useState<string>('');
   const [allDaysToDoStateObject, setAllDaysToDoStateObject] = useState<object>(
     getLocaleStorageItem('allDaysToDoObject') as object
   );
@@ -136,9 +136,7 @@ const ToDoWindow: FC<IProps> = ({
         <CloseButton onClick={closeOpenToDoHandler}>
           <CloseImg src={clearImg} alt="clearImg" />
         </CloseButton>
-        <SelectedDateHeader>{`${activeDay} ${
-          allMonthsNames[currentSelectedMonth - 1]
-        } ${currentSelectedYear}`}</SelectedDateHeader>
+        <SelectedDateHeader>{`${activeDay} ${allMonthsNames[currentSelectedMonth]} ${currentSelectedYear}`}</SelectedDateHeader>
 
         <AddToDoWrapper>
           <InputWrapper>
