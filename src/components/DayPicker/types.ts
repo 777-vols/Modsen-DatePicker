@@ -8,10 +8,10 @@ interface IProps {
   holidaysColor: string;
   minDate: Date;
   maxDate: Date;
-  rangeStartDate: Date;
-  rangeEndDate: Date;
-  defaultRangeDate: Date;
-  onChangeRangeDate: (newDate: Date) => void;
+  rangeStartDate?: Date;
+  rangeEndDate?: Date;
+  defaultRangeDate?: Date;
+  onChangeRangeDate?: (newDate: Date) => void;
 }
 
 export default IProps;

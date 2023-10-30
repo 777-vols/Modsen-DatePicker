@@ -7,8 +7,8 @@ interface IProps {
   activeWeekNumber: number;
   minDate: Date;
   maxDate: Date;
-  rangeStartDate: Date;
-  rangeEndDate: Date;
+  rangeStartDate?: Date;
+  rangeEndDate?: Date;
   isWeekStartsOnMonday: boolean;
   isWeekendsOn: boolean;
   isClearButtonVisible: boolean;
