@@ -41,8 +41,6 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
 
     const daysNumbersArray = useDaysNumbersArray(
       form,
-      rangeStartDate,
-      rangeEndDate,
       currentSelectedMonth,
       currentSelectedYear,
       isWeekendsOn,
@@ -51,7 +49,9 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
       holidaysColor,
       activeDay,
       changeCurrentActiveDay,
-      closeOpenToDoHandler
+      closeOpenToDoHandler,
+      rangeStartDate,
+      rangeEndDate
     );
 
     return (

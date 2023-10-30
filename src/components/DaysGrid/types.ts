@@ -1,7 +1,7 @@
 interface IProps {
   form: 'year' | 'month' | 'week';
-  rangeStartDate: Date;
-  rangeEndDate: Date;
+  rangeStartDate?: Date;
+  rangeEndDate?: Date;
   daysNumbersArray?: Array<number | string>;
   daysNamesArray?: Array<string>;
   isCurrentDay?: boolean;

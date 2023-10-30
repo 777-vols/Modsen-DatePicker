@@ -47,7 +47,7 @@ export default meta;
 type Story = StoryObj<typeof RangePicker>;
 
 const rangeStartDay = new Date();
-rangeStartDay.setDate(new Date().getDate() - 5);
+rangeStartDay.setDate(new Date().getDate() - 55);
 const rangeEndDay = new Date();
 rangeEndDay.setDate(new Date().getDate() + 5);
 

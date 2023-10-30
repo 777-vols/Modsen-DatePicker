@@ -236,7 +236,7 @@ export const getWeekNumberForDay = (
   isWeekStartsOnMonday: boolean
 ): number => {
   const [prevMonthVisibleDays, currentMonthDaysArray, nextMonthVisibleDays] =
-    getCurrentPrevAndNextMonthDays(month, year, isWeekStartsOnMonday);
+    getCurrentPrevAndNextMonthDays(month + oneMonth, year, isWeekStartsOnMonday);
 
   const monthArray = [...prevMonthVisibleDays, ...currentMonthDaysArray, ...nextMonthVisibleDays];
 

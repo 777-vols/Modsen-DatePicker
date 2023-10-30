@@ -11,7 +11,7 @@ interface IProps {
   changeCurrentSelectedMonth: (newActiveDay: number) => boolean;
   changeCurrentSelectedYear: (newYear: number) => void;
   changeActiveWeekNumber: (newActiveWeek: number) => void;
-  onChangeRangeDate: (newDate: Date) => void;
+  onChangeRangeDate?: (newDate: Date) => void;
 }
 
 export default IProps;

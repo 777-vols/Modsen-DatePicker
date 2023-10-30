@@ -41,14 +41,34 @@ const DayPicker: FC<IProps> = ({
 
   useEffect(() => {
     if (form === 'week') {
-      const day = new Date().getDate();
-      const month = new Date().getMonth();
-      const year = new Date().getFullYear();
+      const date = new Date();
       setActiveWeekNumber(
-        getWeekNumberForDay(Number(day), Number(month), Number(year), isWeekStartsOnMonday)
+        getWeekNumberForDay(
+          Number(date.getDate()),
+          Number(date.getMonth()),
+          Number(date.getFullYear()),
+          isWeekStartsOnMonday
+        )
       );
     }
   }, [form, isWeekStartsOnMonday]);
+
+  useEffect(() => {
+    if (defaultRangeDate) {
+      setCurrentSelectedMonth(defaultRangeDate.getMonth());
+      setCurrentSelectedYear(defaultRangeDate.getFullYear());
+      if (form === 'week') {
+        setActiveWeekNumber(
+          getWeekNumberForDay(
+            Number(defaultRangeDate.getDate()),
+            Number(defaultRangeDate.getMonth()),
+            Number(defaultRangeDate.getFullYear()),
+            isWeekStartsOnMonday
+          )
+        );
+      }
+    }
+  }, []);
 
   const openCalendarHandler = useCallback(
     () => setCalendarIsOpen((prevState: boolean) => !prevState),
@@ -91,7 +111,8 @@ const DayPicker: FC<IProps> = ({
   const changeCurrentActiveDay = useCallback(
     (newActiveDay: number) => {
       setActiveDay(newActiveDay);
-      onChangeRangeDate(new Date(currentSelectedYear, currentSelectedMonth, newActiveDay));
+      if (onChangeRangeDate)
+        onChangeRangeDate(new Date(currentSelectedYear, currentSelectedMonth, newActiveDay));
     },
     [currentSelectedMonth, currentSelectedYear, onChangeRangeDate]
   );
@@ -107,11 +128,23 @@ const DayPicker: FC<IProps> = ({
   }, []);
 
   const clearCalendarHandler = useCallback(() => {
-    onChangeRangeDate(defaultRangeDate);
-    setActiveDay(defaultRangeDate.getDate());
-    setCurrentSelectedMonth(defaultRangeDate.getMonth());
-    setCurrentSelectedYear(defaultRangeDate.getFullYear());
-  }, [defaultRangeDate, onChangeRangeDate]);
+    if (defaultRangeDate && onChangeRangeDate) {
+      onChangeRangeDate(defaultRangeDate);
+      setActiveDay(defaultRangeDate.getDate());
+      setCurrentSelectedMonth(defaultRangeDate.getMonth());
+      setCurrentSelectedYear(defaultRangeDate.getFullYear());
+      if (form === 'week') {
+        setActiveWeekNumber(
+          getWeekNumberForDay(
+            Number(defaultRangeDate.getDate()),
+            Number(defaultRangeDate.getMonth()),
+            Number(defaultRangeDate.getFullYear()),
+            isWeekStartsOnMonday
+          )
+        );
+      }
+    }
+  }, [defaultRangeDate, form, isWeekStartsOnMonday, onChangeRangeDate]);
 
   return (
     <ThemeProvider theme={theme}>

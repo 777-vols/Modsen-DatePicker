@@ -5,8 +5,6 @@ import { convertToWeekFormat, getArrayOfDaysForMonthCalendar } from '@/helpers/c
 
 const useDaysNumbersArray = (
   form: 'year' | 'month' | 'week',
-  rangeStartDate: Date,
-  rangeEndDate: Date,
   currentSelectedMonth: number,
   currentSelectedYear: number,
   isWeekendsOn: boolean,
@@ -15,7 +13,9 @@ const useDaysNumbersArray = (
   holidaysColor: string,
   activeDay: number,
   changeCurrentActiveDay: (newActiveDay: number) => void,
-  closeOpenToDoHandler: () => void
+  closeOpenToDoHandler: () => void,
+  rangeStartDate?: Date,
+  rangeEndDate?: Date
 ) =>
   useMemo(() => {
     let arrayOfDaysForCalendar;

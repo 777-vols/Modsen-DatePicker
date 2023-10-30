@@ -43,7 +43,8 @@ const HeaderDateInput: FC<IProps> = ({
       changeCurrentSelectedYear(Number(year));
       changeCurrentSelectedMonth(Number(month) - 1);
       changeCurrentActiveDay(Number(day));
-      onChangeRangeDate(new Date(Number(year), Number(month) - 1, Number(day)));
+      if (onChangeRangeDate)
+        onChangeRangeDate(new Date(Number(year), Number(month) - 1, Number(day)));
 
       if (form === 'week') {
         changeActiveWeekNumber(
