@@ -1,6 +1,6 @@
 {
-  "name": "modsen_date_picker",
-  "version": "1.0.0",
+  "name": "@vladislav_sss/modsen_date_picker",
+  "version": "1.0.2",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "files": [
@@ -14,7 +14,6 @@
     "test": "jest",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
-    "build-storybook": "storybook build",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "license": "MIT",

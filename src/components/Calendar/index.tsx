@@ -59,7 +59,11 @@ const Calendar: FC<IProps> = ({
       changeCurrentActiveDay={changeCurrentActiveDay}
       closeOpenToDoHandler={closeOpenToDoHandler}
     />
-    {isClearButtonVisible && <ClearButton onClick={clearCalendarHandler}>{buttonText}</ClearButton>}
+    {isClearButtonVisible && (
+      <ClearButton data-testid="clearButton" onClick={clearCalendarHandler}>
+        {buttonText}
+      </ClearButton>
+    )}
   </Wrapper>
 );
 

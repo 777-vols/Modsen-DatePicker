@@ -6,7 +6,7 @@ import theme from '@/constants/theme';
 
 import DayPicker from '.';
 
-describe('Renders the Calendar', () => {
+describe('Renders the DayPicker', () => {
   const onChange = jest.fn();
 
   it('Show/hide calendar button', () => {
