@@ -108,7 +108,7 @@ describe('Renders the Calendar', () => {
     });
   });
 
-  it('Check month days count', () => {
+  it('Check month days count in month form', () => {
     const { getAllByTestId } = render(
       <ThemeProvider theme={theme}>
         <Calendar
@@ -137,5 +137,36 @@ describe('Renders the Calendar', () => {
 
     const weekDays = getAllByTestId('monthDay');
     expect(weekDays).toHaveLength(42);
+  });
+
+  it('Check month days count in week form', () => {
+    const { getAllByTestId } = render(
+      <ThemeProvider theme={theme}>
+        <Calendar
+          form="week"
+          currentSelectedMonth={9}
+          currentSelectedYear={2023}
+          activeDay={21}
+          holidaysColor={theme.colors.lightRed}
+          activeWeekNumber={3}
+          minDate={new Date(2020, 0, 1)}
+          maxDate={new Date(2025, 11, 31)}
+          rangeStartDate={new Date(2023, 9, 10)}
+          rangeEndDate={new Date(2023, 10, 8)}
+          isWeekStartsOnMonday
+          isWeekendsOn
+          isClearButtonVisible={false}
+          changeCurrentSelectedMonth={onChange}
+          changeCurrentSelectedYear={onChange}
+          changeCurrentActiveDay={onChange}
+          changeActiveWeekNumber={onChange}
+          closeOpenToDoHandler={onChange}
+          clearCalendarHandler={onChange}
+        />
+      </ThemeProvider>
+    );
+
+    const weekDays = getAllByTestId('monthDay');
+    expect(weekDays).toHaveLength(7);
   });
 });

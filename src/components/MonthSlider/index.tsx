@@ -66,14 +66,13 @@ const MonthSlider: FC<IProps> = ({
   if (form === 'year') {
     const selectOptions = getYearsOptionsArray(minDate, maxDate);
     return (
-      <Wrapper data-testid="prevMonthButton">
-        <ChangeMonthButton onClick={prevMonthHandler}>
+      <Wrapper>
+        <ChangeMonthButton data-testid="prevMonthButton" onClick={prevMonthHandler}>
           <img src={prevImg} alt="prevMonth" />
         </ChangeMonthButton>
         <Panel>
           <MonthName>{`${allMonthsNames[currentSelectedMonth]}`}</MonthName>
           <ReactSelect
-            id="year-select"
             onChange={selectHandler}
             maxMenuHeight={200}
             defaultValue={{ value: 2023, label: 2023 }}
@@ -89,8 +88,8 @@ const MonthSlider: FC<IProps> = ({
 
   if (form === 'month') {
     return (
-      <Wrapper data-testid="prevMonthButton">
-        <ChangeMonthButton onClick={prevMonthHandler}>
+      <Wrapper>
+        <ChangeMonthButton data-testid="prevMonthButton" onClick={prevMonthHandler}>
           <img src={prevImg} alt="prevMonth" />
         </ChangeMonthButton>
         <MonthName>{`${allMonthsNames[currentSelectedMonth]} ${currentSelectedYear}`}</MonthName>

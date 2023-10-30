@@ -22,7 +22,9 @@ const RangePicker: FC<IProps> = ({
 }) => {
   const [rangeStartDate, setRangeStartDate] = useState<Date>(defaultRangeStartDate);
   const [rangeEndDate, setRangeEndDate] = useState<Date>(defaultRangeEndDate);
-  const onChangeRangeStartDate = useCallback((newDate: Date) => setRangeStartDate(newDate), []);
+  const onChangeRangeStartDate = useCallback((newDate: Date) => {
+    setRangeStartDate(newDate);
+  }, []);
   const onChangeRangeEndDate = useCallback((newDate: Date) => setRangeEndDate(newDate), []);
 
   return (

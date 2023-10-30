@@ -23,24 +23,28 @@ const HeaderDateInput: FC<IProps> = ({
   changeCurrentActiveDay,
   changeCurrentSelectedMonth,
   changeCurrentSelectedYear,
-  changeActiveWeekNumber
+  changeActiveWeekNumber,
+  onChangeRangeDate
 }) => {
   const [isErrorMessage, setIsErrorMessage] = useState<boolean>(false);
 
   const dateInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
+    const isInputCorrect = dateInputCheckHelper(target.value, minDate, maxDate);
     dateInputChangeHandler(target.value);
     setIsErrorMessage(false);
 
-    if (!dateInputCheckHelper(target.value, minDate, maxDate)) {
+    if (!isInputCorrect) {
       setIsErrorMessage(true);
     }
-    if (dateInputCheckHelper(target.value, minDate, maxDate)) {
+    if (isInputCorrect) {
       const [day, month, year] = target.value.split('/');
 
-      changeCurrentActiveDay(Number(day));
-      changeCurrentSelectedMonth(Number(month) - 1);
       changeCurrentSelectedYear(Number(year));
+      changeCurrentSelectedMonth(Number(month) - 1);
+      changeCurrentActiveDay(Number(day));
+      onChangeRangeDate(new Date(Number(year), Number(month) - 1, Number(day)));
+
       if (form === 'week') {
         changeActiveWeekNumber(
           getWeekNumberForDay(Number(day), Number(month), Number(year), isWeekStartsOnMonday)
@@ -64,11 +68,16 @@ const HeaderDateInput: FC<IProps> = ({
       </TitleWrapper>
       <Panel>
         {isErrorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-        <StyledButtton onClick={openCalendarHandler}>
+        <StyledButtton data-testid="show-hideButton" onClick={openCalendarHandler}>
           <img src={calendarImg} alt="calendarImg" />
         </StyledButtton>
-        <Input placeholder={placeholder} value={dateInputValue} onChange={dateInputHandler} />
-        <StyledButtton onClick={clearButtonHandler}>
+        <Input
+          data-testid="headerInput"
+          placeholder={placeholder}
+          value={dateInputValue}
+          onChange={dateInputHandler}
+        />
+        <StyledButtton data-testid="clearInput" onClick={clearButtonHandler}>
           <img src={clearImg} alt="clearImg" />
         </StyledButtton>
       </Panel>

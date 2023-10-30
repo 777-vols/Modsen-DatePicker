@@ -30,7 +30,7 @@ const Calendar: FC<IProps> = ({
   isWeekendsOn,
   holidaysColor
 }) => (
-  <Wrapper>
+  <Wrapper data-testid="calendar">
     <MonthSlider
       form={form}
       minDate={minDate}
