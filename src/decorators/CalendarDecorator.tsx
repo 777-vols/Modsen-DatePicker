@@ -27,7 +27,9 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
     const daysNamesArray = useMemo(() => {
       if (isWeekStartsOnMonday) {
         return daysNamesStartsWithMonday.map((dayName) => (
-          <DayName key={dayName}>{dayName}</DayName>
+          <DayName data-testid="weekDayName" key={dayName}>
+            {dayName}
+          </DayName>
         ));
       }
       return daysNamesStartsWithSunday.map((dayName) => <DayName key={dayName}>{dayName}</DayName>);

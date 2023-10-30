@@ -33,7 +33,7 @@ const CalendarDay: FC<IProps> = ({
   return (
     <Wrapper>
       <DayNumber
-        data-testid="day"
+        data-testid="monthDay"
         onClick={handleClick}
         $isHoliday={isHoliday}
         $isWeekend={isWeekend}

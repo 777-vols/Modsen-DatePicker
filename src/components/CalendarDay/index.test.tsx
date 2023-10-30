@@ -14,7 +14,7 @@ describe('Default Calendar day', () => {
       </ThemeProvider>
     );
 
-    const day = getByTestId('day');
+    const day = getByTestId('monthDay');
     expect(day).toBeInTheDocument();
     expect(getByText(21)).toBeInTheDocument();
     expect(day).toHaveStyleRule('border-radius', '5px');
@@ -33,7 +33,7 @@ describe('Prev/Next month Calendar day', () => {
       </ThemeProvider>
     );
 
-    const day = getByTestId('day');
+    const day = getByTestId('monthDay');
     expect(day).toBeInTheDocument();
     expect(getByText(21)).toBeInTheDocument();
     expect(day).toHaveStyleRule('border-radius', '5px');
@@ -51,7 +51,7 @@ describe('Holiday Calendar day', () => {
       </ThemeProvider>
     );
 
-    const day = getByTestId('day');
+    const day = getByTestId('monthDay');
     expect(day).toBeInTheDocument();
     expect(getByText(21)).toBeInTheDocument();
     expect(day).toHaveStyleRule('border-radius', '5px');
@@ -68,7 +68,7 @@ describe('Active Calendar day', () => {
       </ThemeProvider>
     );
 
-    const day = getByTestId('day');
+    const day = getByTestId('monthDay');
     expect(day).toBeInTheDocument();
     expect(getByText(21)).toBeInTheDocument();
     expect(day).toHaveStyleRule('border-radius', '5px');
@@ -87,7 +87,7 @@ describe('Active Calendar day', () => {
       </ThemeProvider>
     );
 
-    const day = getByTestId('day');
+    const day = getByTestId('monthDay');
     expect(day).toBeInTheDocument();
     expect(getByText(21)).toBeInTheDocument();
     expect(day).toHaveStyleRule('border-radius', '5px');
@@ -106,7 +106,7 @@ describe('Active Calendar day', () => {
       </ThemeProvider>
     );
 
-    const day = getByTestId('day');
+    const day = getByTestId('monthDay');
     expect(day).toBeInTheDocument();
     expect(getByText(21)).toBeInTheDocument();
     expect(day).toHaveStyleRule('border-radius', '5px');
@@ -125,7 +125,7 @@ describe('Current Calendar day', () => {
       </ThemeProvider>
     );
 
-    const day = getByTestId('day');
+    const day = getByTestId('monthDay');
     expect(day).toBeInTheDocument();
     expect(getByText(21)).toBeInTheDocument();
     expect(day).toHaveStyleRule('border-radius', '5px');
@@ -142,7 +142,7 @@ describe('Included in range Calendar day', () => {
       </ThemeProvider>
     );
 
-    const day = getByTestId('day');
+    const day = getByTestId('monthDay');
     expect(day).toBeInTheDocument();
     expect(getByText(21)).toBeInTheDocument();
     expect(day).toHaveStyleRule('border-radius', '0px');
@@ -158,7 +158,7 @@ describe('Active range start Calendar day', () => {
       </ThemeProvider>
     );
 
-    const day = getByTestId('day');
+    const day = getByTestId('monthDay');
     expect(day).toBeInTheDocument();
     expect(getByText(21)).toBeInTheDocument();
     expect(day).toHaveStyleRule('border-radius', '0px');
@@ -177,7 +177,7 @@ describe('Active range end Calendar day', () => {
       </ThemeProvider>
     );
 
-    const day = getByTestId('day');
+    const day = getByTestId('monthDay');
     expect(day).toBeInTheDocument();
     expect(getByText(21)).toBeInTheDocument();
     expect(day).toHaveStyleRule('border-radius', '0px');

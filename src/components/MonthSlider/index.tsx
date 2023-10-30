@@ -66,7 +66,7 @@ const MonthSlider: FC<IProps> = ({
   if (form === 'year') {
     const selectOptions = getYearsOptionsArray(minDate, maxDate);
     return (
-      <Wrapper>
+      <Wrapper data-testid="prevMonthButton">
         <ChangeMonthButton onClick={prevMonthHandler}>
           <img src={prevImg} alt="prevMonth" />
         </ChangeMonthButton>
@@ -80,7 +80,7 @@ const MonthSlider: FC<IProps> = ({
             options={selectOptions}
           />
         </Panel>
-        <ChangeMonthButton onClick={nextMonthHandler}>
+        <ChangeMonthButton data-testid="nextMonthButton" onClick={nextMonthHandler}>
           <img src={nextImg} alt="nextMonth" />
         </ChangeMonthButton>
       </Wrapper>
@@ -89,12 +89,12 @@ const MonthSlider: FC<IProps> = ({
 
   if (form === 'month') {
     return (
-      <Wrapper>
+      <Wrapper data-testid="prevMonthButton">
         <ChangeMonthButton onClick={prevMonthHandler}>
           <img src={prevImg} alt="prevMonth" />
         </ChangeMonthButton>
         <MonthName>{`${allMonthsNames[currentSelectedMonth]} ${currentSelectedYear}`}</MonthName>
-        <ChangeMonthButton onClick={nextMonthHandler}>
+        <ChangeMonthButton data-testid="nextMonthButton" onClick={nextMonthHandler}>
           <img src={nextImg} alt="nextMonth" />
         </ChangeMonthButton>
       </Wrapper>
@@ -102,11 +102,11 @@ const MonthSlider: FC<IProps> = ({
   }
   return (
     <Wrapper>
-      <ChangeMonthButton onClick={prevWeekHandler}>
+      <ChangeMonthButton data-testid="prevWeekButton" onClick={prevWeekHandler}>
         <img src={prevImg} alt="prevMonth" />
       </ChangeMonthButton>
       <MonthName>{`${allMonthsNames[currentSelectedMonth]} ${currentSelectedYear}`}</MonthName>
-      <ChangeMonthButton onClick={nextWeekHandler}>
+      <ChangeMonthButton data-testid="nextWeekButton" onClick={nextWeekHandler}>
         <img src={nextImg} alt="nextMonth" />
       </ChangeMonthButton>
     </Wrapper>
