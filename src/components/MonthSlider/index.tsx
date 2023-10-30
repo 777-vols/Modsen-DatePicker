@@ -67,20 +67,19 @@ const MonthSlider: FC<IProps> = ({
     const selectOptions = getYearsOptionsArray(minDate, maxDate);
     return (
       <Wrapper>
-        <ChangeMonthButton onClick={prevMonthHandler}>
+        <ChangeMonthButton data-testid="prevMonthButton" onClick={prevMonthHandler}>
           <img src={prevImg} alt="prevMonth" />
         </ChangeMonthButton>
         <Panel>
           <MonthName>{`${allMonthsNames[currentSelectedMonth]}`}</MonthName>
           <ReactSelect
-            id="year-select"
             onChange={selectHandler}
             maxMenuHeight={200}
             defaultValue={{ value: 2023, label: 2023 }}
             options={selectOptions}
           />
         </Panel>
-        <ChangeMonthButton onClick={nextMonthHandler}>
+        <ChangeMonthButton data-testid="nextMonthButton" onClick={nextMonthHandler}>
           <img src={nextImg} alt="nextMonth" />
         </ChangeMonthButton>
       </Wrapper>
@@ -90,11 +89,11 @@ const MonthSlider: FC<IProps> = ({
   if (form === 'month') {
     return (
       <Wrapper>
-        <ChangeMonthButton onClick={prevMonthHandler}>
+        <ChangeMonthButton data-testid="prevMonthButton" onClick={prevMonthHandler}>
           <img src={prevImg} alt="prevMonth" />
         </ChangeMonthButton>
         <MonthName>{`${allMonthsNames[currentSelectedMonth]} ${currentSelectedYear}`}</MonthName>
-        <ChangeMonthButton onClick={nextMonthHandler}>
+        <ChangeMonthButton data-testid="nextMonthButton" onClick={nextMonthHandler}>
           <img src={nextImg} alt="nextMonth" />
         </ChangeMonthButton>
       </Wrapper>
@@ -102,11 +101,11 @@ const MonthSlider: FC<IProps> = ({
   }
   return (
     <Wrapper>
-      <ChangeMonthButton onClick={prevWeekHandler}>
+      <ChangeMonthButton data-testid="prevWeekButton" onClick={prevWeekHandler}>
         <img src={prevImg} alt="prevMonth" />
       </ChangeMonthButton>
       <MonthName>{`${allMonthsNames[currentSelectedMonth]} ${currentSelectedYear}`}</MonthName>
-      <ChangeMonthButton onClick={nextWeekHandler}>
+      <ChangeMonthButton data-testid="nextWeekButton" onClick={nextWeekHandler}>
         <img src={nextImg} alt="nextMonth" />
       </ChangeMonthButton>
     </Wrapper>

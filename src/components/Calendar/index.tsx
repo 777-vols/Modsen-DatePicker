@@ -30,7 +30,7 @@ const Calendar: FC<IProps> = ({
   isWeekendsOn,
   holidaysColor
 }) => (
-  <Wrapper>
+  <Wrapper data-testid="calendar">
     <MonthSlider
       form={form}
       minDate={minDate}
@@ -59,7 +59,11 @@ const Calendar: FC<IProps> = ({
       changeCurrentActiveDay={changeCurrentActiveDay}
       closeOpenToDoHandler={closeOpenToDoHandler}
     />
-    {isClearButtonVisible && <ClearButton onClick={clearCalendarHandler}>{buttonText}</ClearButton>}
+    {isClearButtonVisible && (
+      <ClearButton data-testid="clearButton" onClick={clearCalendarHandler}>
+        {buttonText}
+      </ClearButton>
+    )}
   </Wrapper>
 );
 

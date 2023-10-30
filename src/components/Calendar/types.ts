@@ -9,15 +9,15 @@ interface IProps {
   maxDate: Date;
   rangeStartDate: Date;
   rangeEndDate: Date;
+  isWeekStartsOnMonday: boolean;
+  isWeekendsOn: boolean;
+  isClearButtonVisible: boolean;
   changeCurrentSelectedMonth: (newMonth: number) => boolean;
   changeCurrentSelectedYear: (newYear: number) => void;
   changeCurrentActiveDay: (newActiveDay: number) => void;
   changeActiveWeekNumber: (newActiveWeek: number) => void;
   closeOpenToDoHandler: () => void;
   clearCalendarHandler: () => void;
-  isWeekStartsOnMonday: boolean;
-  isWeekendsOn: boolean;
-  isClearButtonVisible: boolean;
 }
 
 export default IProps;

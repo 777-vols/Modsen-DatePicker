@@ -90,8 +90,8 @@ const DayPicker: FC<IProps> = ({
 
   const changeCurrentActiveDay = useCallback(
     (newActiveDay: number) => {
-      onChangeRangeDate(new Date(currentSelectedYear, currentSelectedMonth, newActiveDay));
       setActiveDay(newActiveDay);
+      onChangeRangeDate(new Date(currentSelectedYear, currentSelectedMonth, newActiveDay));
     },
     [currentSelectedMonth, currentSelectedYear, onChangeRangeDate]
   );
@@ -108,7 +108,9 @@ const DayPicker: FC<IProps> = ({
 
   const clearCalendarHandler = useCallback(() => {
     onChangeRangeDate(defaultRangeDate);
-    setActiveDay(0);
+    setActiveDay(defaultRangeDate.getDate());
+    setCurrentSelectedMonth(defaultRangeDate.getMonth());
+    setCurrentSelectedYear(defaultRangeDate.getFullYear());
   }, [defaultRangeDate, onChangeRangeDate]);
 
   return (
@@ -126,6 +128,7 @@ const DayPicker: FC<IProps> = ({
               dateInputValue={headerDateInputValue}
               dateInputChangeHandler={dateInputChangeHandler}
               openCalendarHandler={openCalendarHandler}
+              onChangeRangeDate={onChangeRangeDate}
               changeCurrentActiveDay={changeCurrentActiveDay}
               changeCurrentSelectedMonth={changeCurrentSelectedMonth}
               changeCurrentSelectedYear={changeCurrentSelectedYear}

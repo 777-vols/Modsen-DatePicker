@@ -133,7 +133,7 @@ const ToDoWindow: FC<IProps> = ({
   return (
     <Wrapper>
       <WrapperInner>
-        <CloseButton onClick={closeOpenToDoHandler}>
+        <CloseButton data-testid="closeToDoWindow" onClick={closeOpenToDoHandler}>
           <CloseImg src={clearImg} alt="clearImg" />
         </CloseButton>
         <SelectedDateHeader>{`${activeDay} ${allMonthsNames[currentSelectedMonth]} ${currentSelectedYear}`}</SelectedDateHeader>
@@ -145,11 +145,13 @@ const ToDoWindow: FC<IProps> = ({
               onChange={inputNewToDoHandler}
               value={inputNewToDo}
             />
-            <ClearButton onClick={clearInputHandler}>
+            <ClearButton data-testid="clearToDoInput" onClick={clearInputHandler}>
               <CloseImg src={clearImg} alt="clearImg" />
             </ClearButton>
           </InputWrapper>
-          <AddToDoButton onClick={addToDoHandler}>{addTodoButtonText}</AddToDoButton>
+          <AddToDoButton data-testid="addToDo" onClick={addToDoHandler}>
+            {addTodoButtonText}
+          </AddToDoButton>
         </AddToDoWrapper>
 
         {toDoArray && <ToDoListWrapper>{toDoItemsComponentsArray}</ToDoListWrapper>}
