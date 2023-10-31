@@ -7,7 +7,7 @@ import { allMonthsNames } from '@/constants/calendarData';
 import { getWeeksCount, getYearsOptionsArray } from '@/helpers/calendarHelpers';
 
 import { ChangeMonthButton, MonthName, Panel, Wrapper } from './styled';
-import IProps from './types';
+import { IProps, OptionType } from './types';
 
 const oneMonth = 1;
 
@@ -38,13 +38,21 @@ const MonthSlider: FC<IProps> = ({
   };
 
   const prevWeekHandler = (): void => {
+    const prevWeeksCount = getWeeksCount(
+      currentSelectedMonth - 1,
+      currentSelectedYear,
+      isWeekStartsOnMonday,
+      isWeekendsOn
+    );
+
     if (activeWeekNumber - 1 < 0 && changeCurrentSelectedMonth(currentSelectedMonth - 1)) {
-      changeActiveWeekNumber(weeksCount - 1);
+      changeActiveWeekNumber(prevWeeksCount);
     }
     if (activeWeekNumber - 1 >= 0) {
       changeActiveWeekNumber(activeWeekNumber - 1);
     }
   };
+
   const nextWeekHandler = (): void => {
     if (activeWeekNumber + 1 > weeksCount && changeCurrentSelectedMonth(currentSelectedMonth + 1)) {
       changeActiveWeekNumber(0);
@@ -54,13 +62,10 @@ const MonthSlider: FC<IProps> = ({
     }
   };
 
-  type OptionType = {
-    value: number;
-    label: number;
-  };
-
   const selectHandler = (option: OptionType | null) => {
-    if (option) changeCurrentSelectedYear(option.value);
+    if (option) {
+      changeCurrentSelectedYear(option.value);
+    }
   };
 
   if (form === 'year') {

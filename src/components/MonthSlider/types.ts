@@ -1,4 +1,4 @@
-interface IProps {
+export interface IProps {
   form: 'year' | 'month' | 'week';
   changeCurrentSelectedMonth: (newMonth: number) => boolean;
   changeCurrentSelectedYear: (newYear: number) => void;
@@ -12,4 +12,7 @@ interface IProps {
   isWeekendsOn: boolean;
 }
 
-export default IProps;
+export type OptionType = {
+  value: number;
+  label: number;
+};

@@ -7,12 +7,13 @@ import HeaderDateInput from '@/components/HeaderDateInput';
 import ToDoWindow from '@/components/ToDoWindow';
 import GlobalStyle from '@/constants/styles/globalStyle';
 import theme from '@/constants/theme';
-import { getWeekNumberForDay } from '@/helpers/calendarHelpers';
+import { getWeekNumberForDay, getWeeksCount } from '@/helpers/calendarHelpers';
 
 import { Wrapper, WrapperInner } from './styled';
 import IProps from './types';
 
 const oneYear = 1;
+const firstWeekIndex = 0;
 const januaryIndex = 0;
 const decemberIndex = 11;
 
@@ -31,7 +32,7 @@ const DayPicker: FC<IProps> = ({
   defaultRangeDate,
   onChangeRangeDate
 }) => {
-  const [calenderIsOpen, setCalendarIsOpen] = useState<boolean>(false);
+  const [calenderIsOpen, setCalendarIsOpen] = useState<boolean>(true);
   const [headerDateInputValue, setHeaderDateInputValue] = useState<string>('');
   const [currentSelectedMonth, setCurrentSelectedMonth] = useState<number>(new Date().getMonth());
   const [currentSelectedYear, setCurrentSelectedYear] = useState<number>(new Date().getFullYear());
@@ -41,14 +42,13 @@ const DayPicker: FC<IProps> = ({
 
   useEffect(() => {
     if (form === 'week') {
-      const date = new Date();
       setActiveWeekNumber(
         getWeekNumberForDay(
-          Number(date.getDate()),
-          Number(date.getMonth()),
-          Number(date.getFullYear()),
+          new Date().getDate(),
+          currentSelectedMonth,
+          currentSelectedYear,
           isWeekStartsOnMonday
-        )
+        ) || firstWeekIndex
       );
     }
   }, [form, isWeekStartsOnMonday]);
@@ -91,9 +91,18 @@ const DayPicker: FC<IProps> = ({
         if (newMonth < januaryIndex) {
           setCurrentSelectedMonth(decemberIndex);
           setCurrentSelectedYear((prevState) => prevState - oneYear);
+          setActiveWeekNumber(
+            getWeeksCount(
+              decemberIndex,
+              currentSelectedYear - oneYear,
+              isWeekStartsOnMonday,
+              isWeekendsOn
+            )
+          );
         } else if (newMonth > decemberIndex) {
           setCurrentSelectedMonth(januaryIndex);
           setCurrentSelectedYear((prevState) => prevState + oneYear);
+          setActiveWeekNumber(firstWeekIndex);
         } else {
           setCurrentSelectedMonth(newMonth);
           return true;
@@ -101,7 +110,15 @@ const DayPicker: FC<IProps> = ({
       }
       return false;
     },
-    [currentSelectedYear, maxDate, minDate, rangeEndDate, rangeStartDate]
+    [
+      currentSelectedYear,
+      isWeekStartsOnMonday,
+      isWeekendsOn,
+      maxDate,
+      minDate,
+      rangeEndDate,
+      rangeStartDate
+    ]
   );
 
   const changeCurrentSelectedYear = useCallback((newYear: number) => {
