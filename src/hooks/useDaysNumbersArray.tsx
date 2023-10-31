@@ -30,7 +30,7 @@ const useDaysNumbersArray = (
 
     if (form === 'week') {
       const arrayOfweeks = convertToWeekFormat(arrayOfDays);
-      arrayOfDaysForCalendar = arrayOfweeks[activeWeekNumber];
+      arrayOfDaysForCalendar = arrayOfweeks[activeWeekNumber] || arrayOfweeks[0];
     } else {
       arrayOfDaysForCalendar = arrayOfDays;
     }
