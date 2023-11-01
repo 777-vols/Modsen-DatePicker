@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   width: fit-content;
-  padding: ${({ theme }) => theme.spaces.mediumS};
+  padding: ${({ theme }) => theme.spaces.mediumS}px;
   ::-webkit-scrollbar {
     width: 8px;
   }

@@ -4,10 +4,10 @@ import DaysGrid from '@/components/DaysGrid';
 import MonthSlider from '@/components/MonthSlider';
 
 import config from './config';
-import { ClearButton, Wrapper } from './styles';
-import { IProps } from './types';
+import { ClearButton, Clue, Wrapper } from './styles';
+import IProps from './types';
 
-const { buttonText } = config;
+const { buttonText, clueText } = config;
 
 const Calendar: FC<IProps> = ({
   form,
@@ -59,6 +59,7 @@ const Calendar: FC<IProps> = ({
       changeCurrentActiveDay={changeCurrentActiveDay}
       closeOpenToDoHandler={closeOpenToDoHandler}
     />
+    {!(rangeStartDate && rangeEndDate) && <Clue>{clueText}</Clue>}
     {isClearButtonVisible && (
       <ClearButton data-testid="clearButton" onClick={clearCalendarHandler}>
         {buttonText}

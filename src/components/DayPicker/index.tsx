@@ -165,7 +165,7 @@ const DayPicker: FC<IProps> = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
+      <GlobalStyle theme={theme} />
       <ErrorBoundary>
         <Wrapper>
           <WrapperInner>

@@ -41,7 +41,7 @@ const RangePicker: FC<IProps> = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
+      <GlobalStyle theme={theme} />
       <Wrapper>
         <DayPicker
           title="From"

@@ -15,14 +15,14 @@ export const ChangeMonthButton = styled.button`
   }
 `;
 export const MonthName = styled.span`
-  padding: ${({ theme }) => theme.spaces.zero} ${({ theme }) => theme.spaces.smallS};
-  font-size: ${({ theme }) => theme.fontSize.mediumL};
+  padding: ${({ theme }) => theme.spaces.zero}px ${({ theme }) => theme.spaces.smallS}px;
+  font-size: ${({ theme }) => theme.fontSize.mediumL}px;
   font-weight: ${({ theme }) => theme.fontWeight.l};
 `;
 export const Panel = styled.div`
   display: flex;
   align-items: center;
   display: flex;
-  font-size: ${({ theme }) => theme.fontSize.mediumM};
+  font-size: ${({ theme }) => theme.fontSize.mediumM}px;
   font-weight: ${({ theme }) => theme.fontWeight.l};
 `;

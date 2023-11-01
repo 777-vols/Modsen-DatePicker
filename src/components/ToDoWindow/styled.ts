@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
   background: blue;
   width: 100%;
   height: 100%;
-  padding: ${({ theme }) => theme.spaces.mediumS};
+  padding: ${({ theme }) => theme.spaces.mediumS}px;
   background: ${({ theme }) => theme.colors.white};
   border: 2px solid ${({ theme }) => theme.colors.gray};
   border-radius: 8px;
@@ -27,7 +27,7 @@ export const WrapperInner = styled.div`
 export const SelectedDateHeader = styled.h1`
   display: flex;
   justify-content: center;
-  font-size: ${({ theme }) => theme.fontSize.mediumM};
+  font-size: ${({ theme }) => theme.fontSize.mediumM}px;
 `;
 export const CloseButton = styled.button`
   cursor: pointer;
@@ -53,7 +53,7 @@ export const CloseImg = styled.img`
 export const AddToDoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: ${({ theme }) => theme.spaces.mediumS};
+  margin-top: ${({ theme }) => theme.spaces.mediumS}px;
   width: 100%;
   border-radius: ${borderRadiusS}px;
 `;
@@ -62,9 +62,9 @@ export const InputWrapper = styled.div`
   justify-content: space-between;
   border: 2px solid ${({ theme }) => theme.colors.gray};
   width: 100%;
-  margin-right: ${({ theme }) => theme.spaces.mediumS};
+  margin-right: ${({ theme }) => theme.spaces.mediumS}px;
   border-radius: ${borderRadiusS}px;
-  padding: ${({ theme }) => theme.spaces.smallS};
+  padding: ${({ theme }) => theme.spaces.smallS}px;
 `;
 export const AddToDoInput = styled.input`
   border: none;
@@ -76,11 +76,11 @@ export const ClearButton = styled.button`
   background: transparent;
   border: none;
   transition: 0.2s;
-  padding-right: ${({ theme }) => theme.spaces.smallS};
+  padding-right: ${({ theme }) => theme.spaces.smallS}px;
 `;
 export const AddToDoButton = styled.button`
   cursor: pointer;
-  font-size: ${({ theme }) => theme.fontSize.largeL};
+  font-size: ${({ theme }) => theme.fontSize.largeL}px;
   background: transparent;
   border: 2px solid ${({ theme }) => theme.colors.gray};
   width: 30px;
@@ -92,7 +92,7 @@ export const AddToDoButton = styled.button`
   }
 `;
 export const ToDoListWrapper = styled.div`
-  margin-top: ${({ theme }) => theme.spaces.mediumL};
+  margin-top: ${({ theme }) => theme.spaces.mediumL}px;
   max-height: 60%;
   overflow-x: auto;
 `;

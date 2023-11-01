@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  padding-bottom: ${({ theme }) => theme.spaces.mediumS};
+  padding-bottom: ${({ theme }) => theme.spaces.mediumS}px;
 `;
 export const WeekDaysNames = styled.div`
   cursor: default;
@@ -18,7 +18,7 @@ export const DayName = styled.span`
   width: 100%;
   height: 100%;
   font-weight: ${({ theme }) => theme.fontWeight.l};
-  font-size: ${({ theme }) => theme.fontSize.mediumL};
+  font-size: ${({ theme }) => theme.fontSize.mediumL}px;
 `;
 export const MonthDaysNumbers = styled.div`
   display: grid;

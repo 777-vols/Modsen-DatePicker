@@ -9,8 +9,8 @@ const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme }>`
   text-decoration: none;
   list-style: none;
   outline: none;
-  padding: ${theme.spaces.zero};
-  margin: ${theme.spaces.zero};
+  padding: ${theme.spaces.zero}px;
+  margin: ${theme.spaces.zero}px;
 }`;
 
 export default GlobalStyle;

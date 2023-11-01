@@ -18,18 +18,18 @@ export const DayNumber = styled.button<IDayNumber>`
   background: transparent;
   width: 100%;
   height: 100%;
-  font-size: ${({ theme }) => theme.fontSize.mediumM};
+  font-size: ${({ theme }) => theme.fontSize.mediumM}px;
   border-radius: ${borderRadius}px;
   ${({ $bold }) =>
     $bold &&
     css`
       cursor: pointer;
       font-weight: ${({ theme }) => theme.fontWeight.l};
-      font-size: ${({ theme }) => theme.fontSize.mediumL};
+      font-size: ${({ theme }) => theme.fontSize.mediumL}px;
       transition: 0.2s;
       &:hover {
         background: ${({ theme }) => theme.colors.blue};
-        font-size: ${({ theme }) => theme.fontSize.mediumXL};
+        font-size: ${({ theme }) => theme.fontSize.mediumXL}px;
       }
     `};
   ${({ $isHoliday, $holidaysColor }) =>
@@ -56,7 +56,7 @@ export const DayNumber = styled.button<IDayNumber>`
   ${({ $isActiveDay }) =>
     $isActiveDay &&
     css`
-      font-size: ${({ theme }) => theme.fontSize.mediumXL};
+      font-size: ${({ theme }) => theme.fontSize.mediumXL}px;
       background: ${({ theme }) => theme.colors.blue};
       color: ${({ theme }) => theme.colors.white};
     `}
@@ -74,7 +74,7 @@ export const DayNumber = styled.button<IDayNumber>`
   ${({ $isStartRangeDay }) =>
     $isStartRangeDay &&
     css`
-      font-size: ${({ theme }) => theme.fontSize.mediumXL};
+      font-size: ${({ theme }) => theme.fontSize.mediumXL}px;
       background: ${({ theme }) => theme.colors.blue};
       color: ${({ theme }) => theme.colors.white};
       border-radius: 0px;
@@ -91,7 +91,7 @@ export const DayNumber = styled.button<IDayNumber>`
   ${({ $isEndRangeDay }) =>
     $isEndRangeDay &&
     css`
-      font-size: ${({ theme }) => theme.fontSize.mediumXL};
+      font-size: ${({ theme }) => theme.fontSize.mediumXL}px;
       background: ${({ theme }) => theme.colors.blue};
       color: ${({ theme }) => theme.colors.white};
       border-radius: 0px;
@@ -112,7 +112,7 @@ export const TodosIdentifier = styled.span<ITodosIdentifier>`
   display: none;
   top: 0px;
   right: 2px;
-  font-size: ${({ theme }) => theme.fontSize.mediumXL};
+  font-size: ${({ theme }) => theme.fontSize.mediumXL}px;
   ${({ $isHaveTodos }) =>
     $isHaveTodos &&
     css`

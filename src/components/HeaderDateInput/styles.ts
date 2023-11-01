@@ -9,22 +9,22 @@ export const TitleWrapper = styled.div`
   align-items: center;
 `;
 export const Title = styled.h1`
-  margin: ${({ theme }) => theme.spaces.zero} ${({ theme }) => theme.spaces.mediumS};
-  font-size: ${({ theme }) => theme.fontSize.mediumXL};
+  margin: ${({ theme }) => theme.spaces.zero}px ${({ theme }) => theme.spaces.mediumS}px;
+  font-size: ${({ theme }) => theme.fontSize.mediumXL}px;
   min-height: 20px;
-  margin-bottom: ${({ theme }) => theme.spaces.mediumS};
+  margin-bottom: ${({ theme }) => theme.spaces.mediumS}px;
   word-wrap: break-word;
 `;
 export const ErrorMessage = styled.span`
   position: absolute;
   top: -15px;
   right: 15px;
-  font-size: ${({ theme }) => theme.fontSize.mediumS};
+  font-size: ${({ theme }) => theme.fontSize.mediumS}px;
   color: ${({ theme }) => theme.colors.red};
 `;
 export const Panel = styled.div`
   position: relative;
-  padding: ${({ theme }) => theme.spaces.zero} ${({ theme }) => theme.spaces.mediumM};
+  padding: ${({ theme }) => theme.spaces.zero}px ${({ theme }) => theme.spaces.mediumM}px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,8 +33,8 @@ export const Panel = styled.div`
   height: 42px;
 `;
 export const Input = styled.input`
-  margin: ${({ theme }) => theme.spaces.zero} ${({ theme }) => theme.spaces.smallL};
-  font-size: ${({ theme }) => theme.fontSize.mediumXL};
+  margin: ${({ theme }) => theme.spaces.zero}px ${({ theme }) => theme.spaces.smallL}px;
+  font-size: ${({ theme }) => theme.fontSize.mediumXL}px;
   height: 20px;
   width: 100%;
   border: none;

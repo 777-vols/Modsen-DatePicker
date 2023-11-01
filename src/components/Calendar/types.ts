@@ -1,4 +1,4 @@
-export interface IProps {
+interface IProps {
   form: 'year' | 'month' | 'week';
   currentSelectedMonth: number;
   currentSelectedYear: number;
@@ -20,6 +20,4 @@ export interface IProps {
   clearCalendarHandler: () => void;
 }
 
-export interface IWrapperProps {
-  theme: object;
-}
+export default IProps;
