@@ -9,7 +9,7 @@ import { IProps, IState } from './types';
 class ErrorBoundary extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: true };
   }
 
   static getDerivedStateFromError() {

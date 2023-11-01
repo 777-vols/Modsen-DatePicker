@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
 
-import clearImg from '@/assets/clear.svg';
 import { ClearButton, CloseImg } from '@/components/ToDoWindow/styled';
+import Images from '@/constants/images';
 
 import { CheckBox, Text, Wrapper } from './styled';
 import IProps from './types';
+
+const { clearImg } = Images;
 
 const ToDoItem: FC<IProps> = ({ id, isDone, toDoText, deleteToDoHandler, completeToDoHandler }) => {
   const deleteToDo = () => {

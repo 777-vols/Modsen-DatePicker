@@ -1,4 +1,4 @@
-const enum Margin {
+const enum Spaces {
   LARGE_XL = '22px',
   LARGE_L = '20px',
   LARGE_M = '18px',
@@ -14,4 +14,4 @@ const enum Margin {
   ZERO = '0px'
 }
 
-export default Margin;
+export default Spaces;

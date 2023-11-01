@@ -1,15 +1,15 @@
 import React, { FC, memo, useMemo } from 'react';
 import ReactSelect from 'react-select';
 
-import nextImg from '@/assets/next.svg';
-import prevImg from '@/assets/prev.svg';
 import { allMonthsNames } from '@/constants/calendarData';
+import Images from '@/constants/images';
 import { getWeeksCount, getYearsOptionsArray } from '@/helpers/calendarHelpers';
 
 import { ChangeMonthButton, MonthName, Panel, Wrapper } from './styled';
 import { IProps, OptionType } from './types';
 
 const oneMonth = 1;
+const { prevImg, nextImg } = Images;
 
 const MonthSlider: FC<IProps> = ({
   form,

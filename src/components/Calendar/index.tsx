@@ -5,7 +5,7 @@ import MonthSlider from '@/components/MonthSlider';
 
 import config from './config';
 import { ClearButton, Wrapper } from './styles';
-import IProps from './types';
+import { IProps } from './types';
 
 const { buttonText } = config;
 

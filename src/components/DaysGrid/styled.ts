@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  padding-bottom: ${({ theme }) => theme.padding.mediumS};
+  padding-bottom: ${({ theme }) => theme.spaces.mediumS};
 `;
 export const WeekDaysNames = styled.div`
   cursor: default;
@@ -13,8 +13,6 @@ export const DayName = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
   border: none;
   background: transparent;
   width: 100%;

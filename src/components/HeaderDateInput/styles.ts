@@ -9,10 +9,10 @@ export const TitleWrapper = styled.div`
   align-items: center;
 `;
 export const Title = styled.h1`
-  margin: ${({ theme }) => theme.margin.zero} ${({ theme }) => theme.margin.mediumS};
+  margin: ${({ theme }) => theme.spaces.zero} ${({ theme }) => theme.spaces.mediumS};
   font-size: ${({ theme }) => theme.fontSize.mediumXL};
   min-height: 20px;
-  margin-bottom: ${({ theme }) => theme.padding.mediumS};
+  margin-bottom: ${({ theme }) => theme.spaces.mediumS};
   word-wrap: break-word;
 `;
 export const ErrorMessage = styled.span`
@@ -24,16 +24,16 @@ export const ErrorMessage = styled.span`
 `;
 export const Panel = styled.div`
   position: relative;
-  padding: ${({ theme }) => theme.padding.zero} ${({ theme }) => theme.padding.mediumM};
+  padding: ${({ theme }) => theme.spaces.zero} ${({ theme }) => theme.spaces.mediumM};
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-radius: 8px;
-  border: 2px solid ${({ theme }) => theme.colors.grey};
+  border: 2px solid ${({ theme }) => theme.colors.gray};
   height: 42px;
 `;
 export const Input = styled.input`
-  margin: ${({ theme }) => theme.margin.zero} ${({ theme }) => theme.margin.smallL};
+  margin: ${({ theme }) => theme.spaces.zero} ${({ theme }) => theme.spaces.smallL};
   font-size: ${({ theme }) => theme.fontSize.mediumXL};
   height: 20px;
   width: 100%;

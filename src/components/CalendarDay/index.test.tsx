@@ -146,7 +146,7 @@ describe('Included in range Calendar day', () => {
     expect(day).toBeInTheDocument();
     expect(getByText(21)).toBeInTheDocument();
     expect(day).toHaveStyleRule('border-radius', '0px');
-    expect(day).toHaveStyleRule('background', `${theme.colors.grey}`);
+    expect(day).toHaveStyleRule('background', `${theme.colors.gray}`);
   });
 });
 

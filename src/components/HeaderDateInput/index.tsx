@@ -1,7 +1,6 @@
 import React, { FC, memo, useState } from 'react';
 
-import calendarImg from '@/assets/calendar.svg';
-import clearImg from '@/assets/clear.svg';
+import Images from '@/constants/images';
 import { getWeekNumberForDay } from '@/helpers/calendarHelpers';
 import dateInputCheckHelper from '@/helpers/dateInputCheckHelpers';
 
@@ -10,6 +9,7 @@ import { ErrorMessage, Input, Panel, StyledButtton, Title, TitleWrapper, Wrapper
 import IProps from './types';
 
 const { defaultTitle, placeholder, errorMessage } = config;
+const { calendarImg, clearImg } = Images;
 
 const HeaderDateInput: FC<IProps> = ({
   title,

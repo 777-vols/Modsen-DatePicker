@@ -1,26 +1,16 @@
 import styled, { css } from 'styled-components';
 
-interface IDayNumber {
-  $isWeekend: boolean | undefined;
-  $bold?: boolean;
-  $isHoliday?: boolean | undefined;
-  $isCurrentDay?: boolean;
-  $holidaysColor?: string;
-  $isActive?: boolean;
-  $isIncludeInRange?: boolean;
-  $isStartRangeDay?: boolean;
-  $isEndRangeDay?: boolean;
-}
-interface ITodosIdentifier {
-  $isHaveTodos?: boolean;
-}
+import { IDayNumber, ITodosIdentifier } from './types';
+
+const sizeS = 32;
+const borderRadius = 5;
 
 export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 32px;
-  width: 32px;
+  height: ${sizeS}px;
+  width: ${sizeS}px;
 `;
 export const DayNumber = styled.button<IDayNumber>`
   position: relative;
@@ -29,7 +19,7 @@ export const DayNumber = styled.button<IDayNumber>`
   width: 100%;
   height: 100%;
   font-size: ${({ theme }) => theme.fontSize.mediumM};
-  border-radius: 5px;
+  border-radius: ${borderRadius}px;
   ${({ $bold }) =>
     $bold &&
     css`
@@ -63,8 +53,8 @@ export const DayNumber = styled.button<IDayNumber>`
     css`
       border: 2px solid ${({ theme }) => theme.colors.blue};
     `}
-  ${({ $isActive }) =>
-    $isActive &&
+  ${({ $isActiveDay }) =>
+    $isActiveDay &&
     css`
       font-size: ${({ theme }) => theme.fontSize.mediumXL};
       background: ${({ theme }) => theme.colors.blue};
@@ -79,7 +69,7 @@ export const DayNumber = styled.button<IDayNumber>`
     $isIncludeInRange &&
     css`
       border-radius: 0px;
-      background: ${({ theme }) => theme.colors.grey};
+      background: ${({ theme }) => theme.colors.gray};
     `}
   ${({ $isStartRangeDay }) =>
     $isStartRangeDay &&
@@ -88,13 +78,13 @@ export const DayNumber = styled.button<IDayNumber>`
       background: ${({ theme }) => theme.colors.blue};
       color: ${({ theme }) => theme.colors.white};
       border-radius: 0px;
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
+      border-top-left-radius: ${borderRadius}px;
+      border-bottom-left-radius: ${borderRadius}px;
       opacity: 0.7;
     `}
-    ${({ $isStartRangeDay, $isActive }) =>
+    ${({ $isStartRangeDay, $isActiveDay }) =>
     $isStartRangeDay &&
-    $isActive &&
+    $isActiveDay &&
     css`
       opacity: 1;
     `}
@@ -105,13 +95,13 @@ export const DayNumber = styled.button<IDayNumber>`
       background: ${({ theme }) => theme.colors.blue};
       color: ${({ theme }) => theme.colors.white};
       border-radius: 0px;
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
+      border-top-right-radius: ${borderRadius}px;
+      border-bottom-right-radius: ${borderRadius}px;
       opacity: 0.7;
     `}
-  ${({ $isEndRangeDay, $isActive }) =>
+  ${({ $isEndRangeDay, $isActiveDay }) =>
     $isEndRangeDay &&
-    $isActive &&
+    $isActiveDay &&
     css`
       opacity: 1;
     `}

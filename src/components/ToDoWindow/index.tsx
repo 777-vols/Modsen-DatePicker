@@ -1,8 +1,8 @@
 import React, { FC, memo, useCallback, useMemo, useState } from 'react';
 
-import clearImg from '@/assets/clear.svg';
 import ToDoItem from '@/components/ToDoItem';
 import { allMonthsNames } from '@/constants/calendarData';
+import Images from '@/constants/images';
 import { getLocaleStorageItem, setStateAndLocaleStorage } from '@/helpers/localeStorageHelpers';
 
 import config from './config';
@@ -22,6 +22,7 @@ import {
 import { IProps, IToDo } from './types';
 
 const { placeholder, addTodoButtonText } = config;
+const { clearImg } = Images;
 
 const ToDoWindow: FC<IProps> = ({
   closeOpenToDoHandler,
