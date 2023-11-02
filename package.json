@@ -52,9 +52,16 @@
     "@types/react": "^18.2.27",
     "@types/react-dom": "^18.2.14",
     "@types/react-select": "^5.0.1",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
     "@typescript-eslint/parser": "^6.7.5",
     "eslint": "^8.51.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "next",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "husky": "^8.0.3",
@@ -73,6 +80,12 @@
     "storybook": "latest",
     "tslib": "^2.6.2",
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.23.1",
+    "@types/styled-components": "^5.1.28",
+    "react-select": "^5.7.7",
+    "styled-components": "^6.0.8"
   },
   "jest": {
     "transform": {

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { DayName } from '@/components/DaysGrid/styled';
-import IProps from '@/components/DaysGrid/types';
+import { IProps } from '@/components/DaysGrid/types';
 import { daysNamesStartsWithMonday, daysNamesStartsWithSunday } from '@/constants/calendarData';
 import useDaysNumbersArray from '@/hooks/useDaysNumbersArray';
 
