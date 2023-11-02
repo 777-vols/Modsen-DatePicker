@@ -1,4 +1,4 @@
-interface IProps {
+export interface IProps {
   title: string;
   form: 'year' | 'month' | 'week';
   dateInputValue: string;
@@ -13,5 +13,3 @@ interface IProps {
   changeActiveWeekNumber: (newActiveWeek: number) => void;
   onChangeRangeDate?: (newDate: Date) => void;
 }
-
-export default IProps;

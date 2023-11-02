@@ -1,11 +1,10 @@
-interface IProps {
+export interface IProps {
   form: 'year' | 'month' | 'week';
   rangeStartDate?: Date;
   rangeEndDate?: Date;
   daysNumbersArray?: Array<number | string>;
   daysNamesArray?: Array<string>;
   isCurrentDay?: boolean;
-  isStartCalendar?: boolean;
   currentSelectedMonth: number;
   currentSelectedYear: number;
   isWeekStartsOnMonday: boolean;
@@ -17,5 +16,3 @@ interface IProps {
   changeActiveWeekNumber: (newActiveWeek: number) => void;
   closeOpenToDoHandler: () => void;
 }
-
-export default IProps;

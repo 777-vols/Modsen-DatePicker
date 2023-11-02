@@ -4,7 +4,7 @@ import { ClearButton, CloseImg } from '@/components/ToDoWindow/styled';
 import Images from '@/constants/images';
 
 import { CheckBox, Text, Wrapper } from './styled';
-import IProps from './types';
+import { IProps } from './types';
 
 const { clearImg } = Images;
 

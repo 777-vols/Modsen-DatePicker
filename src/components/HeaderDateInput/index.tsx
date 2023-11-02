@@ -4,9 +4,9 @@ import Images from '@/constants/images';
 import { getWeekNumberForDay } from '@/helpers/calendarHelpers';
 import dateInputCheckHelper from '@/helpers/dateInputCheckHelpers';
 
-import config from './config';
+import { config } from './config';
 import { ErrorMessage, Input, Panel, StyledButtton, Title, TitleWrapper, Wrapper } from './styles';
-import IProps from './types';
+import { IProps } from './types';
 
 const { defaultTitle, placeholder, errorMessage } = config;
 const { calendarImg, clearImg } = Images;

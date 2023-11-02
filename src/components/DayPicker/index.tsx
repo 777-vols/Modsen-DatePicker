@@ -10,7 +10,7 @@ import theme from '@/constants/theme';
 import { getWeekNumberForDay, getWeeksCount } from '@/helpers/calendarHelpers';
 
 import { Wrapper, WrapperInner } from './styled';
-import IProps from './types';
+import { IProps } from './types';
 
 const oneYear = 1;
 const firstWeekIndex = 0;
@@ -20,7 +20,6 @@ const decemberIndex = 11;
 const DayPicker: FC<IProps> = ({
   form,
   title,
-  isStartCalendar,
   isWeekendsOn,
   isWeekStartsOnMonday,
   isClearButtonVisible,
@@ -201,7 +200,6 @@ const DayPicker: FC<IProps> = ({
                 form={form}
                 minDate={minDate}
                 maxDate={maxDate}
-                isStartCalendar={isStartCalendar}
                 rangeStartDate={rangeStartDate}
                 rangeEndDate={rangeEndDate}
                 isWeekendsOn={isWeekendsOn}

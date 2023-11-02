@@ -3,9 +3,9 @@ import React, { FC, memo } from 'react';
 import DaysGrid from '@/components/DaysGrid';
 import MonthSlider from '@/components/MonthSlider';
 
-import config from './config';
+import { config } from './config';
 import { ClearButton, Clue, Wrapper } from './styles';
-import IProps from './types';
+import { IProps } from './types';
 
 const { buttonText, clueText } = config;
 
@@ -27,7 +27,6 @@ const Calendar: FC<IProps> = ({
   clearCalendarHandler,
   isWeekStartsOnMonday,
   isClearButtonVisible,
-  isStartCalendar,
   isWeekendsOn,
   holidaysColor
 }) => (
@@ -53,7 +52,6 @@ const Calendar: FC<IProps> = ({
       currentSelectedMonth={currentSelectedMonth}
       currentSelectedYear={currentSelectedYear}
       isWeekStartsOnMonday={isWeekStartsOnMonday}
-      isStartCalendar={isStartCalendar}
       isWeekendsOn={isWeekendsOn}
       holidaysColor={holidaysColor}
       activeDay={activeDay}

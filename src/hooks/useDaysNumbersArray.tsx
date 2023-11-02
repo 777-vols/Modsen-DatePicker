@@ -15,8 +15,7 @@ const useDaysNumbersArray = (
   changeCurrentActiveDay: (newActiveDay: number) => void,
   closeOpenToDoHandler: () => void,
   rangeStartDate?: Date,
-  rangeEndDate?: Date,
-  isStartCalendar?: boolean
+  rangeEndDate?: Date
 ) =>
   useMemo(() => {
     let arrayOfDaysForCalendar;
@@ -26,8 +25,7 @@ const useDaysNumbersArray = (
       isWeekStartsOnMonday,
       isWeekendsOn,
       rangeStartDate,
-      rangeEndDate,
-      isStartCalendar
+      rangeEndDate
     );
 
     if (form === 'week') {
@@ -90,7 +88,6 @@ const useDaysNumbersArray = (
     isWeekendsOn,
     rangeStartDate,
     rangeEndDate,
-    isStartCalendar,
     form,
     activeWeekNumber,
     holidaysColor,

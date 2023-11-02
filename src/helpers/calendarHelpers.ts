@@ -1,7 +1,8 @@
+import { IToDoObject } from '@/components/ToDoWindow/types';
 import { holidaysArray } from '@/constants/calendarData';
 
 import { getLocaleStorageItem } from './localeStorageHelpers';
-import { IDay, IDayObject } from './types';
+import { IDay, IDayObject, ReduceType } from './types';
 
 const firstDayIndex = 0;
 
@@ -19,11 +20,11 @@ const numOfDaysInOneWeek = 7;
 export const getNumberOfDaysInMonth = (year: number, month: number): number =>
   new Date(year, month, firstDayIndex).getDate();
 
-export const padWithZeros = (value: number, length: number = 2): string =>
+export const paddingWithZeros = (value: number, length: number = 2): string =>
   `${value}`.padStart(length, '0');
 
 export const getMonthFirstDayIndex = (month: number, year: number): number =>
-  new Date(`${year}-${padWithZeros(month)}-01`).getDay() + oneDay;
+  new Date(`${year}-${paddingWithZeros(month)}-01`).getDay() + oneDay;
 
 export const compareDates = (date1: Date, date2: Date) => {
   if (
@@ -40,7 +41,6 @@ export const getArrayOfDaysInMonth = (
   beginningOfTheMonth: number,
   endOfTheMonth: number
 ): Array<number> => {
-  type ReduceType = { daysArray: number[]; dayNumber: number };
   const length = Math.abs(endOfTheMonth - beginningOfTheMonth);
 
   const { daysArray } = Array.from({ length }).reduce(
@@ -68,11 +68,10 @@ const getProppertiesForDaysArray = (
   year: number,
   isWeekendsOn: boolean,
   rangeStartDate?: Date,
-  rangeEndDate?: Date,
-  isStartCalendar?: boolean
+  rangeEndDate?: Date
 ): Array<IDay> =>
   daysArray.map((dayIndex) => {
-    const localeStorageObject = getLocaleStorageItem('allDaysToDoObject') as object;
+    const localeStorageObject = getLocaleStorageItem('allDaysToDoObject') as IToDoObject;
     const localeStorageProperty = `${dayIndex} ${month - 1} ${year}`;
 
     const monthIndex = month - oneMonth;
@@ -106,19 +105,8 @@ const getProppertiesForDaysArray = (
 
     if (rangeStartDate && rangeEndDate) {
       const currentDayDate = new Date(year, monthIndex, Number(dayObject.dayNumber));
-      if (
-        compareDates(rangeStartDate, rangeEndDate) &&
-        rangeStartDate.getDate() === dayIndex &&
-        isStartCalendar === true
-      ) {
-        dayObject = { ...dayObject, rangeStart: true };
-      } else if (
-        compareDates(rangeStartDate, rangeEndDate) &&
-        rangeEndDate.getDate() === dayIndex &&
-        isStartCalendar === false
-      ) {
-        dayObject = { ...dayObject, rangeEnd: true };
-      } else if (compareDates(rangeStartDate, currentDayDate)) {
+
+      if (compareDates(rangeStartDate, currentDayDate)) {
         dayObject = { ...dayObject, rangeStart: true };
       } else if (compareDates(rangeEndDate, currentDayDate)) {
         dayObject = { ...dayObject, rangeEnd: true };
@@ -183,8 +171,7 @@ export const getArrayOfDaysForMonthCalendar = (
   isWeekStartsOnMonday: boolean,
   isWeekendsOn: boolean,
   rangeStartDate?: Date,
-  rangeEndDate?: Date,
-  isStartCalendar?: boolean
+  rangeEndDate?: Date
 ): Array<IDayObject> => {
   const [prevMonthVisibleDays, currentMonthDaysArray, nextMonthVisibleDays] =
     getCurrentPrevAndNextMonthDays(selectedMonth, selectedYear, isWeekStartsOnMonday);
@@ -204,8 +191,7 @@ export const getArrayOfDaysForMonthCalendar = (
       selectedYear,
       isWeekendsOn,
       rangeStartDate,
-      rangeEndDate,
-      isStartCalendar
+      rangeEndDate
     ),
     ...getProppertiesForDaysArray(
       nextMonthVisibleDays,

@@ -1,4 +1,4 @@
-interface IProps {
+export interface IProps {
   form: 'year' | 'month' | 'week';
   currentSelectedMonth: number;
   currentSelectedYear: number;
@@ -9,7 +9,6 @@ interface IProps {
   maxDate: Date;
   rangeStartDate?: Date;
   rangeEndDate?: Date;
-  isStartCalendar?: boolean;
   isWeekStartsOnMonday: boolean;
   isWeekendsOn: boolean;
   isClearButtonVisible: boolean;
@@ -20,5 +19,3 @@ interface IProps {
   closeOpenToDoHandler: () => void;
   clearCalendarHandler: () => void;
 }
-
-export default IProps;

@@ -4,9 +4,10 @@ import { ThemeProvider } from 'styled-components';
 import DayPicker from '@/components/DayPicker';
 import GlobalStyle from '@/constants/styles/globalStyle';
 import theme from '@/constants/theme';
+import { compareDates } from '@/helpers/calendarHelpers';
 
 import Wrapper from './styled';
-import IProps from './types';
+import { IProps } from './types';
 
 const RangePicker: FC<IProps> = ({
   defaultRangeStartDate,
@@ -26,12 +27,14 @@ const RangePicker: FC<IProps> = ({
     (newDate: Date) => {
       if (newDate < rangeEndDate) {
         setRangeStartDate(newDate);
-      } else {
+      }
+      if (newDate > rangeEndDate) {
+        setRangeStartDate(newDate);
+      }
+      if (compareDates(newDate, rangeEndDate)) {
         setRangeStartDate(newDate);
         setRangeEndDate(newDate);
-        return false;
       }
-      return true;
     },
     [rangeEndDate]
   );
@@ -39,12 +42,14 @@ const RangePicker: FC<IProps> = ({
     (newDate: Date) => {
       if (newDate > rangeStartDate) {
         setRangeEndDate(newDate);
-      } else {
+      }
+      if (newDate < rangeStartDate) {
+        setRangeEndDate(newDate);
+      }
+      if (compareDates(newDate, rangeStartDate)) {
         setRangeStartDate(newDate);
         setRangeEndDate(newDate);
-        return false;
       }
-      return true;
     },
     [rangeStartDate]
   );
@@ -56,7 +61,6 @@ const RangePicker: FC<IProps> = ({
         <DayPicker
           title="From"
           form={form}
-          isStartCalendar
           isWeekendsOn={isWeekendsOn}
           holidaysColor={holidaysColor}
           isWeekStartsOnMonday={isWeekStartsOnMonday}
@@ -72,7 +76,6 @@ const RangePicker: FC<IProps> = ({
         <DayPicker
           title="To"
           form={form}
-          isStartCalendar={false}
           isWeekendsOn={isWeekendsOn}
           holidaysColor={holidaysColor}
           isWeekStartsOnMonday={isWeekStartsOnMonday}

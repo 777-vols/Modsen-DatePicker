@@ -13,3 +13,5 @@ export interface IDayObject {
   id: number;
   day: IDay;
 }
+
+export type ReduceType = { daysArray: number[]; dayNumber: number };

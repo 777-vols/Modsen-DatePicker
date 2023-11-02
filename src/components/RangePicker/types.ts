@@ -1,4 +1,4 @@
-interface IProps {
+export interface IProps {
   isWeekendsOn: boolean;
   isWeekStartsOnMonday: boolean;
   isRangeCalendarOpen: boolean;
@@ -10,5 +10,3 @@ interface IProps {
   defaultRangeStartDate: Date;
   defaultRangeEndDate: Date;
 }
-
-export default IProps;

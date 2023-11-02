@@ -1,11 +1,11 @@
-import React, { FC, memo, useCallback, useMemo, useState } from 'react';
+import React, { FC, memo, useCallback, useMemo, useRef, useState } from 'react';
 
 import ToDoItem from '@/components/ToDoItem';
 import { allMonthsNames } from '@/constants/calendarData';
 import Images from '@/constants/images';
 import { getLocaleStorageItem, setStateAndLocaleStorage } from '@/helpers/localeStorageHelpers';
 
-import config from './config';
+import { config } from './config';
 import {
   AddToDoButton,
   AddToDoInput,
@@ -19,7 +19,7 @@ import {
   Wrapper,
   WrapperInner
 } from './styled';
-import { IProps, IToDo } from './types';
+import { IProps, IToDo, IToDoObject } from './types';
 
 const { placeholder, addTodoButtonText } = config;
 const { clearImg } = Images;
@@ -30,15 +30,16 @@ const ToDoWindow: FC<IProps> = ({
   currentSelectedMonth,
   currentSelectedYear
 }) => {
-  const [leeresArray] = useState<IToDo[]>([]);
+  const leeresArray = useRef([]);
   const [inputNewToDo, setInputNewToDo] = useState<string>('');
-  const [allDaysToDoStateObject, setAllDaysToDoStateObject] = useState<object>(
-    getLocaleStorageItem('allDaysToDoObject') as object
+  const [allDaysToDoStateObject, setAllDaysToDoStateObject] = useState<IToDoObject>(
+    getLocaleStorageItem('allDaysToDoObject') as IToDoObject
   );
 
   const selectedDayDate = `${activeDay} ${currentSelectedMonth} ${currentSelectedYear}`;
   const toDoArray: IToDo[] =
-    allDaysToDoStateObject[selectedDayDate as keyof typeof allDaysToDoStateObject] ?? leeresArray;
+    allDaysToDoStateObject[selectedDayDate as keyof typeof allDaysToDoStateObject] ??
+    leeresArray.current;
 
   const addToDoHandler = useCallback(() => {
     if (inputNewToDo.length !== 0) {
@@ -61,8 +62,8 @@ const ToDoWindow: FC<IProps> = ({
   }, [inputNewToDo, selectedDayDate, allDaysToDoStateObject, toDoArray]);
 
   const deleteToDoHandler = useCallback(
-    (toDoItemId: number) => {
-      const toDoObjectLocaleStorage = getLocaleStorageItem('allDaysToDoObject') as object;
+    (toDoItemId: string) => {
+      const toDoObjectLocaleStorage = getLocaleStorageItem('allDaysToDoObject') as IToDoObject;
       const filtredToDo = [...toDoArray.filter(({ id }) => id !== toDoItemId)];
 
       setStateAndLocaleStorage(
@@ -87,8 +88,8 @@ const ToDoWindow: FC<IProps> = ({
   );
 
   const completeToDoHandler = useCallback(
-    (toDoItemId: number) => {
-      const toDoObjectLocaleStorage = getLocaleStorageItem('allDaysToDoObject') as object;
+    (toDoItemId: string) => {
+      const toDoObjectLocaleStorage = getLocaleStorageItem('allDaysToDoObject') as IToDoObject;
       const withCompletedToDo = [
         ...toDoArray.map((item) => {
           const { id, isDone } = item;
