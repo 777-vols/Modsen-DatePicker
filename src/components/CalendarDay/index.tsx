@@ -5,21 +5,23 @@ import { IProps } from './types';
 
 const doubleClick = 2;
 
-const CalendarDay: FC<IProps> = ({
-  rangeStart,
-  rangeEnd,
-  isIncludeInRange,
-  dayNumber,
-  isBold,
-  isHoliday,
-  holidaysColor,
-  isCurrentDay,
-  activeDay,
-  isWeekend,
-  isHaveTodos,
-  changeCurrentActiveDay,
-  closeOpenToDoHandler
-}) => {
+const CalendarDay: FC<IProps> = (props) => {
+  const {
+    rangeStart,
+    rangeEnd,
+    isIncludeInRange,
+    dayNumber,
+    isBold,
+    isHoliday,
+    holidaysColor,
+    isCurrentDay,
+    activeDay,
+    isWeekend,
+    isHaveTodos,
+    changeCurrentActiveDay,
+    closeOpenToDoHandler
+  } = props;
+
   const handleClick = (event: React.MouseEvent) => {
     if (typeof dayNumber === 'number' && changeCurrentActiveDay) {
       changeCurrentActiveDay(dayNumber);
@@ -29,7 +31,9 @@ const CalendarDay: FC<IProps> = ({
       closeOpenToDoHandler();
     }
   };
+
   const isActiveDay = activeDay === dayNumber;
+
   return (
     <Wrapper>
       <DayNumber

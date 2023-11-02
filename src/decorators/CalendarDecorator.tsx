@@ -31,6 +31,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
           </DayName>
         ));
       }
+
       return daysNamesStartsWithSunday.map((dayName) => (
         <DayName data-testid="weekDayName" key={dayName}>
           {dayName}

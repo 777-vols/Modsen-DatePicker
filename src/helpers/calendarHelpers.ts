@@ -1,4 +1,3 @@
-import { IToDoObject } from '@/components/ToDoWindow/types';
 import { holidaysArray } from '@/constants/calendarData';
 
 import { getLocaleStorageItem } from './localeStorageHelpers';
@@ -256,9 +255,11 @@ export const getWeekNumberForDay = (
         oneWeekArray = [];
       }
     }
+
     if (monthArray[dayIndex] === day) {
       return convertedArray.length;
     }
+
     oneWeekArray.push(monthArray[dayIndex]);
   }
   return 0;
@@ -271,9 +272,11 @@ export const getYearsOptionsArray = (
   const minYear = minDate.getFullYear();
   const maxYear = maxDate.getFullYear();
   const yearsArray: number[] = [];
+
   for (let yearNumber = minYear; yearNumber <= maxYear; yearNumber += 1) {
     yearsArray.push(yearNumber);
   }
+
   return yearsArray.map((year) => ({ value: year, label: year }));
 };
 
@@ -289,6 +292,7 @@ export const getWeeksCount = (
     isWeekStartsOnMonday,
     isWeekendsOn
   );
+
   const arrayOfweeks = convertToWeekFormat(arrayOfDays);
   return arrayOfweeks.length - 1;
 };

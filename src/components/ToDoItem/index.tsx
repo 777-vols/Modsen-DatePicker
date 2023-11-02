@@ -8,13 +8,17 @@ import { IProps } from './types';
 
 const { clearImg } = Images;
 
-const ToDoItem: FC<IProps> = ({ id, isDone, toDoText, deleteToDoHandler, completeToDoHandler }) => {
+const ToDoItem: FC<IProps> = (props) => {
+  const { id, isDone, toDoText, deleteToDoHandler, completeToDoHandler } = props;
+
   const deleteToDo = () => {
     deleteToDoHandler(id);
   };
+
   const isCompleteTodo = () => {
     completeToDoHandler(id);
   };
+
   return (
     <Wrapper>
       <CheckBox id={`${id}`} onChange={isCompleteTodo} type="checkbox" />

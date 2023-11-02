@@ -25,12 +25,9 @@ import { IProps, IToDo, IToDoObject } from './types';
 const { placeholder, addTodoButtonText } = config;
 const { clearImg } = Images;
 
-const ToDoWindow: FC<IProps> = ({
-  closeOpenToDoHandler,
-  activeDay,
-  currentSelectedMonth,
-  currentSelectedYear
-}) => {
+const ToDoWindow: FC<IProps> = (props) => {
+  const { closeOpenToDoHandler, activeDay, currentSelectedMonth, currentSelectedYear } = props;
+
   const leeresArray = useRef([]);
   const [inputNewToDo, setInputNewToDo] = useState<string>('');
   const [allDaysToDoStateObject, setAllDaysToDoStateObject] = useState<IToDoObject>(
@@ -95,6 +92,7 @@ const ToDoWindow: FC<IProps> = ({
           return id === toDoItemId ? { ...item, isDone: !isDone } : item;
         })
       ];
+
       setStateAndLocaleStorage(
         'allDaysToDoObject',
         {

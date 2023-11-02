@@ -17,21 +17,23 @@ const firstWeekIndex = 0;
 const januaryIndex = 0;
 const decemberIndex = 11;
 
-const DayPicker: FC<IProps> = ({
-  form,
-  title,
-  isWeekendsOn,
-  isWeekStartsOnMonday,
-  isClearButtonVisible,
-  isRangeCalendarOpen,
-  holidaysColor,
-  minDate,
-  maxDate,
-  rangeStartDate,
-  rangeEndDate,
-  defaultRangeDate,
-  onChangeRangeDate
-}) => {
+const DayPicker: FC<IProps> = (props) => {
+  const {
+    form,
+    title,
+    isWeekendsOn,
+    isWeekStartsOnMonday,
+    isClearButtonVisible,
+    isRangeCalendarOpen,
+    holidaysColor,
+    minDate,
+    maxDate,
+    rangeStartDate,
+    rangeEndDate,
+    defaultRangeDate,
+    onChangeRangeDate
+  } = props;
+
   const [calenderIsOpen, setCalendarIsOpen] = useState<boolean>(true);
   const [headerDateInputValue, setHeaderDateInputValue] = useState<string>('');
   const [currentSelectedMonth, setCurrentSelectedMonth] = useState<number>(new Date().getMonth());
