@@ -1,9 +1,9 @@
 import { IToDoObject } from '@/components/ToDoWindow/types';
 
-export const getLocaleStorageItem = (itemName: string): unknown => {
+export const getLocaleStorageItem = (itemName: string): IToDoObject => {
   const data = localStorage.getItem(itemName);
   if (data) {
-    return JSON.parse(data);
+    return JSON.parse(data) as IToDoObject;
   }
   return {};
 };

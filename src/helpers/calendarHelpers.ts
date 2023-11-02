@@ -71,7 +71,7 @@ const getProppertiesForDaysArray = (
   rangeEndDate?: Date
 ): Array<IDay> =>
   daysArray.map((dayIndex) => {
-    const localeStorageObject = getLocaleStorageItem('allDaysToDoObject') as IToDoObject;
+    const localeStorageObject = getLocaleStorageItem('allDaysToDoObject');
     const localeStorageProperty = `${dayIndex} ${month - 1} ${year}`;
 
     const monthIndex = month - oneMonth;
@@ -98,7 +98,7 @@ const getProppertiesForDaysArray = (
     }
 
     if (!(rangeStartDate && rangeEndDate)) {
-      if (localeStorageObject[localeStorageProperty as keyof typeof localeStorageObject]) {
+      if (localeStorageObject[localeStorageProperty]) {
         dayObject = { ...dayObject, isHaveTodos: true };
       }
     }
