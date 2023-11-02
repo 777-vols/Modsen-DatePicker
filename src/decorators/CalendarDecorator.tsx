@@ -15,6 +15,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
       currentSelectedYear,
       isWeekendsOn,
       isWeekStartsOnMonday,
+      isStartCalendar,
       holidaysColor,
       activeDay,
       activeWeekNumber,
@@ -50,7 +51,8 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
       changeCurrentActiveDay,
       closeOpenToDoHandler,
       rangeStartDate,
-      rangeEndDate
+      rangeEndDate,
+      isStartCalendar
     );
 
     return (

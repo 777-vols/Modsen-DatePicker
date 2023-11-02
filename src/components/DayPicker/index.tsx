@@ -20,6 +20,7 @@ const decemberIndex = 11;
 const DayPicker: FC<IProps> = ({
   form,
   title,
+  isStartCalendar,
   isWeekendsOn,
   isWeekStartsOnMonday,
   isClearButtonVisible,
@@ -69,6 +70,14 @@ const DayPicker: FC<IProps> = ({
       }
     }
   }, []);
+
+  useEffect(() => {
+    if (rangeStartDate && rangeEndDate && rangeStartDate === rangeEndDate) {
+      setActiveDay(rangeStartDate.getDate());
+      setCurrentSelectedMonth(rangeStartDate.getMonth());
+      setCurrentSelectedYear(rangeStartDate.getFullYear());
+    }
+  }, [rangeEndDate, rangeStartDate]);
 
   const openCalendarHandler = useCallback(
     () => setCalendarIsOpen((prevState: boolean) => !prevState),
@@ -126,8 +135,11 @@ const DayPicker: FC<IProps> = ({
   }, []);
 
   const changeCurrentActiveDay = useCallback(
-    (newActiveDay: number) => {
+    (newActiveDay: number, isHeaderInputValue?: boolean) => {
       setActiveDay(newActiveDay);
+      if (!isHeaderInputValue) {
+        setHeaderDateInputValue('');
+      }
       if (onChangeRangeDate)
         onChangeRangeDate(new Date(currentSelectedYear, currentSelectedMonth, newActiveDay));
     },
@@ -153,9 +165,9 @@ const DayPicker: FC<IProps> = ({
       if (form === 'week') {
         setActiveWeekNumber(
           getWeekNumberForDay(
-            Number(defaultRangeDate.getDate()),
-            Number(defaultRangeDate.getMonth()),
-            Number(defaultRangeDate.getFullYear()),
+            defaultRangeDate.getDate(),
+            defaultRangeDate.getMonth(),
+            defaultRangeDate.getFullYear(),
             isWeekStartsOnMonday
           )
         );
@@ -189,6 +201,7 @@ const DayPicker: FC<IProps> = ({
                 form={form}
                 minDate={minDate}
                 maxDate={maxDate}
+                isStartCalendar={isStartCalendar}
                 rangeStartDate={rangeStartDate}
                 rangeEndDate={rangeEndDate}
                 isWeekendsOn={isWeekendsOn}

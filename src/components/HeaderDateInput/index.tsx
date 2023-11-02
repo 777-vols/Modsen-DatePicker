@@ -42,7 +42,7 @@ const HeaderDateInput: FC<IProps> = ({
 
       changeCurrentSelectedYear(Number(year));
       changeCurrentSelectedMonth(Number(month) - 1);
-      changeCurrentActiveDay(Number(day));
+      changeCurrentActiveDay(Number(day), true);
       if (onChangeRangeDate)
         onChangeRangeDate(new Date(Number(year), Number(month) - 1, Number(day)));
 

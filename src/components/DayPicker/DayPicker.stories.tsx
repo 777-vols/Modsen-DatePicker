@@ -44,6 +44,11 @@ const meta: Meta<typeof DayPicker> = {
       table: {
         disable: true
       }
+    },
+    isStartCalendar: {
+      table: {
+        disable: true
+      }
     }
   }
 };

@@ -7,7 +7,7 @@ interface IProps {
   maxDate: Date;
   dateInputChangeHandler: (value: string) => void;
   openCalendarHandler: () => void;
-  changeCurrentActiveDay: (newMonth: number) => void;
+  changeCurrentActiveDay: (newMonth: number, isHeaderInputValue?: boolean) => void;
   changeCurrentSelectedMonth: (newActiveDay: number) => boolean;
   changeCurrentSelectedYear: (newYear: number) => void;
   changeActiveWeekNumber: (newActiveWeek: number) => void;

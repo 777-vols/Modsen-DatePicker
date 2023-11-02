@@ -9,12 +9,13 @@ interface IProps {
   maxDate: Date;
   rangeStartDate?: Date;
   rangeEndDate?: Date;
+  isStartCalendar?: boolean;
   isWeekStartsOnMonday: boolean;
   isWeekendsOn: boolean;
   isClearButtonVisible: boolean;
   changeCurrentSelectedMonth: (newMonth: number) => boolean;
   changeCurrentSelectedYear: (newYear: number) => void;
-  changeCurrentActiveDay: (newActiveDay: number) => void;
+  changeCurrentActiveDay: (newMonth: number, isHeaderInputValue?: boolean) => void;
   changeActiveWeekNumber: (newActiveWeek: number) => void;
   closeOpenToDoHandler: () => void;
   clearCalendarHandler: () => void;

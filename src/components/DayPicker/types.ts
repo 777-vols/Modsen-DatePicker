@@ -8,6 +8,7 @@ interface IProps {
   holidaysColor: string;
   minDate: Date;
   maxDate: Date;
+  isStartCalendar?: boolean;
   rangeStartDate?: Date;
   rangeEndDate?: Date;
   defaultRangeDate?: Date;

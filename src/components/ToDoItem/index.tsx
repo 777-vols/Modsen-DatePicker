@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 import { ClearButton, CloseImg } from '@/components/ToDoWindow/styled';
 import Images from '@/constants/images';
@@ -28,4 +28,4 @@ const ToDoItem: FC<IProps> = ({ id, isDone, toDoText, deleteToDoHandler, complet
   );
 };
 
-export default ToDoItem;
+export default memo(ToDoItem);

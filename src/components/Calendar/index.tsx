@@ -27,6 +27,7 @@ const Calendar: FC<IProps> = ({
   clearCalendarHandler,
   isWeekStartsOnMonday,
   isClearButtonVisible,
+  isStartCalendar,
   isWeekendsOn,
   holidaysColor
 }) => (
@@ -52,6 +53,7 @@ const Calendar: FC<IProps> = ({
       currentSelectedMonth={currentSelectedMonth}
       currentSelectedYear={currentSelectedYear}
       isWeekStartsOnMonday={isWeekStartsOnMonday}
+      isStartCalendar={isStartCalendar}
       isWeekendsOn={isWeekendsOn}
       holidaysColor={holidaysColor}
       activeDay={activeDay}

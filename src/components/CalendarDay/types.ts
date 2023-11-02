@@ -11,7 +11,7 @@ export interface IProps {
   isHoliday?: boolean | undefined;
   activeDay?: number;
   closeOpenToDoHandler?: () => void;
-  changeCurrentActiveDay?: (newActiveDay: number) => void;
+  changeCurrentActiveDay?: (newMonth: number, isHeaderInputValue?: boolean) => void;
 }
 
 export interface IDayNumber {

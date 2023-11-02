@@ -26,7 +26,12 @@ const RangePicker: FC<IProps> = ({
     (newDate: Date) => {
       if (newDate < rangeEndDate) {
         setRangeStartDate(newDate);
+      } else {
+        setRangeStartDate(newDate);
+        setRangeEndDate(newDate);
+        return false;
       }
+      return true;
     },
     [rangeEndDate]
   );
@@ -34,7 +39,12 @@ const RangePicker: FC<IProps> = ({
     (newDate: Date) => {
       if (newDate > rangeStartDate) {
         setRangeEndDate(newDate);
+      } else {
+        setRangeStartDate(newDate);
+        setRangeEndDate(newDate);
+        return false;
       }
+      return true;
     },
     [rangeStartDate]
   );
@@ -46,6 +56,7 @@ const RangePicker: FC<IProps> = ({
         <DayPicker
           title="From"
           form={form}
+          isStartCalendar
           isWeekendsOn={isWeekendsOn}
           holidaysColor={holidaysColor}
           isWeekStartsOnMonday={isWeekStartsOnMonday}
@@ -61,6 +72,7 @@ const RangePicker: FC<IProps> = ({
         <DayPicker
           title="To"
           form={form}
+          isStartCalendar={false}
           isWeekendsOn={isWeekendsOn}
           holidaysColor={holidaysColor}
           isWeekStartsOnMonday={isWeekStartsOnMonday}

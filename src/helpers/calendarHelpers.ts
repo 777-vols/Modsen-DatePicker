@@ -68,7 +68,8 @@ const getProppertiesForDaysArray = (
   year: number,
   isWeekendsOn: boolean,
   rangeStartDate?: Date,
-  rangeEndDate?: Date
+  rangeEndDate?: Date,
+  isStartCalendar?: boolean
 ): Array<IDay> =>
   daysArray.map((dayIndex) => {
     const localeStorageObject = getLocaleStorageItem('allDaysToDoObject') as object;
@@ -105,13 +106,23 @@ const getProppertiesForDaysArray = (
 
     if (rangeStartDate && rangeEndDate) {
       const currentDayDate = new Date(year, monthIndex, Number(dayObject.dayNumber));
-      if (compareDates(rangeStartDate, currentDayDate)) {
+      if (
+        compareDates(rangeStartDate, rangeEndDate) &&
+        rangeStartDate.getDate() === dayIndex &&
+        isStartCalendar === true
+      ) {
         dayObject = { ...dayObject, rangeStart: true };
-      }
-      if (compareDates(rangeEndDate, currentDayDate)) {
+      } else if (
+        compareDates(rangeStartDate, rangeEndDate) &&
+        rangeEndDate.getDate() === dayIndex &&
+        isStartCalendar === false
+      ) {
         dayObject = { ...dayObject, rangeEnd: true };
-      }
-      if (currentDayDate > rangeStartDate && currentDayDate < rangeEndDate) {
+      } else if (compareDates(rangeStartDate, currentDayDate)) {
+        dayObject = { ...dayObject, rangeStart: true };
+      } else if (compareDates(rangeEndDate, currentDayDate)) {
+        dayObject = { ...dayObject, rangeEnd: true };
+      } else if (currentDayDate > rangeStartDate && currentDayDate < rangeEndDate) {
         dayObject = { ...dayObject, isIncludeInRange: true };
       }
     }
@@ -172,7 +183,8 @@ export const getArrayOfDaysForMonthCalendar = (
   isWeekStartsOnMonday: boolean,
   isWeekendsOn: boolean,
   rangeStartDate?: Date,
-  rangeEndDate?: Date
+  rangeEndDate?: Date,
+  isStartCalendar?: boolean
 ): Array<IDayObject> => {
   const [prevMonthVisibleDays, currentMonthDaysArray, nextMonthVisibleDays] =
     getCurrentPrevAndNextMonthDays(selectedMonth, selectedYear, isWeekStartsOnMonday);
@@ -192,7 +204,8 @@ export const getArrayOfDaysForMonthCalendar = (
       selectedYear,
       isWeekendsOn,
       rangeStartDate,
-      rangeEndDate
+      rangeEndDate,
+      isStartCalendar
     ),
     ...getProppertiesForDaysArray(
       nextMonthVisibleDays,
