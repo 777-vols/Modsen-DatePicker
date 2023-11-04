@@ -1,5 +1,7 @@
+import { Form } from '@/components/RangePicker/types';
+
 export interface IProps {
-  form: 'year' | 'month' | 'week';
+  form: Form;
   changeCurrentSelectedMonth: (newMonth: number) => boolean;
   changeCurrentSelectedYear: (newYear: number) => void;
   changeActiveWeekNumber: (newActiveWeek: number) => void;

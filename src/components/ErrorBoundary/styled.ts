@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 
-import error from '@/assets/error.svg';
+import Images from '@/constants/images';
+
+const { errorImg } = Images;
+
+const sizeS = 250;
+const sizeM = 300;
+const sizeL = 500;
+const sizeXL = 700;
 
 export const Wrapper = styled.div`
-  max-width: 100vw;
   width: 100%;
-  min-height: 100vh;
   height: 100%;
   background-color: ${({ theme }) => theme.colors.lightRed};
   display: flex;
@@ -14,19 +19,23 @@ export const Wrapper = styled.div`
 `;
 
 export const Content = styled.div`
-  min-height: 250px;
-  min-width: 250px;
-  width: 700px;
-  height: 700px;
+  min-height: ${sizeS}px;
+  min-width: ${sizeS}px;
+  width: ${sizeXL}px;
+  height: ${sizeXL}px;
   display: flex;
   justify-content: center;
-  background-image: url(${error});
+  background-image: url(${errorImg});
   @media (${({ theme }) => theme.breakPoints.mediumS}) {
-    width: 500px;
-    height: 500px;
+    width: ${sizeL}px;
+    height: ${sizeXL}px;
+  }
+  @media (${({ theme }) => theme.breakPoints.smallL}) {
+    width: ${sizeM}px;
+    height: ${sizeM}px;
   }
   @media (${({ theme }) => theme.breakPoints.smallS}) {
-    width: 300px;
-    height: 300px;
+    width: ${sizeS}px;
+    height: ${sizeS}px;
   }
 `;

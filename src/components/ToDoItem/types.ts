@@ -1,9 +1,11 @@
-interface IProps {
-  id: number;
+export interface IProps {
+  id: string;
   toDoText: string;
   isDone: boolean;
-  deleteToDoHandler: (toDoItemId: number) => void;
-  completeToDoHandler: (toDoItemId: number) => void;
+  deleteToDoHandler: (toDoItemId: string) => void;
+  completeToDoHandler: (toDoItemId: string) => void;
 }
 
-export default IProps;
+export interface InterfaceTextSpan {
+  $isDone: boolean;
+}

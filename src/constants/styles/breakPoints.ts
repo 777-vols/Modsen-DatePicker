@@ -5,9 +5,9 @@ const enum BreakPoints {
   MEDIUM_L = '(max-width: 900px)',
   MEDIUM_M = '(max-width: 750px)',
   MEDIUM_S = '(max-width: 700px)',
-  SMALL_L = '(max-width: 650px)',
-  SMALL_M = '(max-width: 600px)',
-  SMALL_S = '(max-width: 500px)'
+  SMALL_L = '(max-width: 500px)',
+  SMALL_M = '(max-width: 400px)',
+  SMALL_S = '(max-width: 300px)'
 }
 
 export default BreakPoints;

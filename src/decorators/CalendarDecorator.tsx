@@ -1,10 +1,9 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useMemo } from 'react';
 
 import { DayName } from '@/components/DaysGrid/styled';
-import IProps from '@/components/DaysGrid/types';
+import { IProps } from '@/components/DaysGrid/types';
 import { daysNamesStartsWithMonday, daysNamesStartsWithSunday } from '@/constants/calendarData';
-import useDaysNumbersArray from '@/hooks/useDaysNumbersArray';
+import useDaysNumbers from '@/hooks/useDaysNumbers';
 
 const CalendarDecorator = (WrappedComponent: React.ElementType) => {
   const DecoratedComponent = (props: IProps) => {
@@ -32,6 +31,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
           </DayName>
         ));
       }
+
       return daysNamesStartsWithSunday.map((dayName) => (
         <DayName data-testid="weekDayName" key={dayName}>
           {dayName}
@@ -39,7 +39,7 @@ const CalendarDecorator = (WrappedComponent: React.ElementType) => {
       ));
     }, [isWeekStartsOnMonday]);
 
-    const daysNumbersArray = useDaysNumbersArray(
+    const daysNumbersArray = useDaysNumbers(
       form,
       currentSelectedMonth,
       currentSelectedYear,

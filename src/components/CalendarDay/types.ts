@@ -1,4 +1,4 @@
-interface IProps {
+export interface IProps {
   rangeStart?: boolean;
   rangeEnd?: boolean;
   isIncludeInRange?: boolean;
@@ -11,7 +11,21 @@ interface IProps {
   isHoliday?: boolean | undefined;
   activeDay?: number;
   closeOpenToDoHandler?: () => void;
-  changeCurrentActiveDay?: (newActiveDay: number) => void;
+  changeCurrentActiveDay?: (newMonth: number, isHeaderInputValue?: boolean) => void;
 }
 
-export default IProps;
+export interface IDayNumber {
+  $isWeekend: boolean | undefined;
+  $bold?: boolean;
+  $isHoliday?: boolean | undefined;
+  $isCurrentDay?: boolean;
+  $holidaysColor?: string;
+  $isActiveDay?: boolean;
+  $isIncludeInRange?: boolean;
+  $isStartRangeDay?: boolean;
+  $isEndRangeDay?: boolean;
+}
+
+export interface ITodosIdentifier {
+  $isHaveTodos?: boolean;
+}

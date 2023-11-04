@@ -1,7 +1,7 @@
 import { holidaysArray } from '@/constants/calendarData';
 
 import { getLocaleStorageItem } from './localeStorageHelpers';
-import { IDay, IDayObject } from './types';
+import { IDay, IDayObject, ReduceType } from './types';
 
 const firstDayIndex = 0;
 
@@ -10,7 +10,6 @@ const firstMonthIndex = 0;
 const lastDayIndexOfTheWeek = 6;
 const lastMonthIndex = 11;
 const oneDay = 1;
-const twoDays = 2;
 const oneMonth = 1;
 
 const numOfWeeksInCalendar = 6;
@@ -19,11 +18,11 @@ const numOfDaysInOneWeek = 7;
 export const getNumberOfDaysInMonth = (year: number, month: number): number =>
   new Date(year, month, firstDayIndex).getDate();
 
-export const padWithZeros = (value: number, length: number = 2): string =>
+export const paddingWithZeros = (value: number, length: number = 2): string =>
   `${value}`.padStart(length, '0');
 
 export const getMonthFirstDayIndex = (month: number, year: number): number =>
-  new Date(`${year}-${padWithZeros(month)}-01`).getDay() + oneDay;
+  new Date(`${year}-${paddingWithZeros(month)}-01`).getDay();
 
 export const compareDates = (date1: Date, date2: Date) => {
   if (
@@ -40,7 +39,6 @@ export const getArrayOfDaysInMonth = (
   beginningOfTheMonth: number,
   endOfTheMonth: number
 ): Array<number> => {
-  type ReduceType = { daysArray: number[]; dayNumber: number };
   const length = Math.abs(endOfTheMonth - beginningOfTheMonth);
 
   const { daysArray } = Array.from({ length }).reduce(
@@ -71,7 +69,7 @@ const getProppertiesForDaysArray = (
   rangeEndDate?: Date
 ): Array<IDay> =>
   daysArray.map((dayIndex) => {
-    const localeStorageObject = getLocaleStorageItem('allDaysToDoObject') as object;
+    const localeStorageObject = getLocaleStorageItem('allDaysToDoObject');
     const localeStorageProperty = `${dayIndex} ${month - 1} ${year}`;
 
     const monthIndex = month - oneMonth;
@@ -98,20 +96,19 @@ const getProppertiesForDaysArray = (
     }
 
     if (!(rangeStartDate && rangeEndDate)) {
-      if (localeStorageObject[localeStorageProperty as keyof typeof localeStorageObject]) {
+      if (localeStorageObject[localeStorageProperty]) {
         dayObject = { ...dayObject, isHaveTodos: true };
       }
     }
 
     if (rangeStartDate && rangeEndDate) {
       const currentDayDate = new Date(year, monthIndex, Number(dayObject.dayNumber));
+
       if (compareDates(rangeStartDate, currentDayDate)) {
         dayObject = { ...dayObject, rangeStart: true };
-      }
-      if (compareDates(rangeEndDate, currentDayDate)) {
+      } else if (compareDates(rangeEndDate, currentDayDate)) {
         dayObject = { ...dayObject, rangeEnd: true };
-      }
-      if (currentDayDate > rangeStartDate && currentDayDate < rangeEndDate) {
+      } else if (currentDayDate > rangeStartDate && currentDayDate < rangeEndDate) {
         dayObject = { ...dayObject, isIncludeInRange: true };
       }
     }
@@ -139,16 +136,12 @@ export const getCurrentPrevAndNextMonthDays = (
   const nextMonthDaysArray = getArrayOfDaysInMonth(oneDay, nextMonthDaysNumber);
 
   if (isWeekStartsOnMonday) {
-    numberOfDaysFromPrevMonth = monthFirstDay - twoDays;
+    numberOfDaysFromPrevMonth = monthFirstDay - oneDay;
     if (numberOfDaysFromPrevMonth === -oneDay) {
-      if (monthFirstDay === oneDay) {
-        numberOfDaysFromPrevMonth = lastDayIndexOfTheWeek;
-      } else {
-        numberOfDaysFromPrevMonth = oneDay;
-      }
+      numberOfDaysFromPrevMonth = lastDayIndexOfTheWeek;
     }
   } else {
-    numberOfDaysFromPrevMonth = monthFirstDay - oneDay;
+    numberOfDaysFromPrevMonth = monthFirstDay;
   }
 
   const numberOfDaysFromNextMonth =
@@ -210,14 +203,11 @@ export const convertToWeekFormat = (monthFormatArray: Array<IDayObject>): Array<
   const convertedArray = [];
   let oneWeekArray = [];
 
-  for (let dayIndex = 0; dayIndex <= monthFormatArray.length; dayIndex += oneDay) {
+  for (let dayIndex = 0; dayIndex < monthFormatArray.length; dayIndex += 1) {
     if (oneWeekArray.length === numOfDaysInOneWeek) {
-      const weekIncludesCurrentMonthDays = oneWeekArray.filter((dayObj) => {
-        if (typeof dayObj.day.dayNumber === 'number') {
-          return dayObj;
-        }
-        return null;
-      });
+      const weekIncludesCurrentMonthDays = oneWeekArray.filter(
+        (dayObj) => typeof dayObj.day.dayNumber === 'number'
+      );
 
       if (weekIncludesCurrentMonthDays.length > 0) {
         convertedArray.push(oneWeekArray);
@@ -240,29 +230,19 @@ export const getWeekNumberForDay = (
 
   const monthArray = [...prevMonthVisibleDays, ...currentMonthDaysArray, ...nextMonthVisibleDays];
 
-  const convertedArray = [];
-  let oneWeekArray = [];
+  const filledWeeks = monthArray.reduce(
+    (weeks: Array<Array<number | string>>, dayNumber, index) => {
+      const weeksCopy = [...weeks];
+      const weekIndex = Math.floor(index / numOfDaysInOneWeek);
+      weeksCopy[weekIndex] = weeks[weekIndex] || [];
+      weeksCopy[weekIndex].push(dayNumber);
+      return weeksCopy;
+    },
+    []
+  );
 
-  for (let dayIndex = 0; dayIndex <= monthArray.length; dayIndex += oneDay) {
-    if (oneWeekArray.length === numOfDaysInOneWeek) {
-      const filledDaysInWeek = oneWeekArray.filter((dayNumber) => {
-        if (typeof dayNumber === 'number') {
-          return dayNumber;
-        }
-        return null;
-      });
-
-      if (filledDaysInWeek.length > 0) {
-        convertedArray.push(oneWeekArray);
-        oneWeekArray = [];
-      }
-    }
-    if (monthArray[dayIndex] === day) {
-      return convertedArray.length;
-    }
-    oneWeekArray.push(monthArray[dayIndex]);
-  }
-  return 0;
+  const weekIndex = filledWeeks.findIndex((week) => week.includes(day));
+  return weekIndex >= 0 ? weekIndex : 0;
 };
 
 export const getYearsOptionsArray = (
@@ -272,6 +252,7 @@ export const getYearsOptionsArray = (
   const minYear = minDate.getFullYear();
   const maxYear = maxDate.getFullYear();
   const yearsArray: number[] = [];
+
   for (let yearNumber = minYear; yearNumber <= maxYear; yearNumber += 1) {
     yearsArray.push(yearNumber);
   }
@@ -290,6 +271,7 @@ export const getWeeksCount = (
     isWeekStartsOnMonday,
     isWeekendsOn
   );
+
   const arrayOfweeks = convertToWeekFormat(arrayOfDays);
   return arrayOfweeks.length - 1;
 };

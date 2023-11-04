@@ -7,31 +7,33 @@ import HeaderDateInput from '@/components/HeaderDateInput';
 import ToDoWindow from '@/components/ToDoWindow';
 import GlobalStyle from '@/constants/styles/globalStyle';
 import theme from '@/constants/theme';
-import { getWeekNumberForDay, getWeeksCount } from '@/helpers/calendarHelpers';
+import { getWeekNumberForDay, getWeeksCount, paddingWithZeros } from '@/helpers/calendarHelpers';
 
 import { Wrapper, WrapperInner } from './styled';
-import IProps from './types';
+import { IProps } from './types';
 
 const oneYear = 1;
 const firstWeekIndex = 0;
 const januaryIndex = 0;
 const decemberIndex = 11;
 
-const DayPicker: FC<IProps> = ({
-  form,
-  title,
-  isWeekendsOn,
-  isWeekStartsOnMonday,
-  isClearButtonVisible,
-  isRangeCalendarOpen,
-  holidaysColor,
-  minDate,
-  maxDate,
-  rangeStartDate,
-  rangeEndDate,
-  defaultRangeDate,
-  onChangeRangeDate
-}) => {
+const DayPicker: FC<IProps> = (props) => {
+  const {
+    form,
+    title,
+    isWeekendsOn,
+    isWeekStartsOnMonday,
+    isClearButtonVisible,
+    isRangeCalendarOpen,
+    holidaysColor,
+    minDate,
+    maxDate,
+    rangeStartDate,
+    rangeEndDate,
+    defaultRangeDate,
+    onChangeRangeDate
+  } = props;
+
   const [calenderIsOpen, setCalendarIsOpen] = useState<boolean>(true);
   const [headerDateInputValue, setHeaderDateInputValue] = useState<string>('');
   const [currentSelectedMonth, setCurrentSelectedMonth] = useState<number>(new Date().getMonth());
@@ -69,6 +71,14 @@ const DayPicker: FC<IProps> = ({
       }
     }
   }, []);
+
+  useEffect(() => {
+    if (rangeStartDate && rangeEndDate && rangeStartDate === rangeEndDate) {
+      setActiveDay(rangeStartDate.getDate());
+      setCurrentSelectedMonth(rangeStartDate.getMonth());
+      setCurrentSelectedYear(rangeStartDate.getFullYear());
+    }
+  }, [rangeEndDate, rangeStartDate]);
 
   const openCalendarHandler = useCallback(
     () => setCalendarIsOpen((prevState: boolean) => !prevState),
@@ -126,8 +136,15 @@ const DayPicker: FC<IProps> = ({
   }, []);
 
   const changeCurrentActiveDay = useCallback(
-    (newActiveDay: number) => {
+    (newActiveDay: number, isHeaderInputValue?: boolean) => {
       setActiveDay(newActiveDay);
+      if (!isHeaderInputValue) {
+        setHeaderDateInputValue(
+          `${paddingWithZeros(newActiveDay)}/${paddingWithZeros(
+            currentSelectedMonth
+          )}/${currentSelectedYear}`
+        );
+      }
       if (onChangeRangeDate)
         onChangeRangeDate(new Date(currentSelectedYear, currentSelectedMonth, newActiveDay));
     },
@@ -153,9 +170,9 @@ const DayPicker: FC<IProps> = ({
       if (form === 'week') {
         setActiveWeekNumber(
           getWeekNumberForDay(
-            Number(defaultRangeDate.getDate()),
-            Number(defaultRangeDate.getMonth()),
-            Number(defaultRangeDate.getFullYear()),
+            defaultRangeDate.getDate(),
+            defaultRangeDate.getMonth(),
+            defaultRangeDate.getFullYear(),
             isWeekStartsOnMonday
           )
         );

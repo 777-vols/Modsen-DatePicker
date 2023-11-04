@@ -19,7 +19,7 @@ describe('Default Calendar day', () => {
     expect(getByText(21)).toBeInTheDocument();
     expect(day).toHaveStyleRule('border-radius', '5px');
     expect(day).toHaveStyleRule('background', 'transparent');
-    expect(day).toHaveStyleRule('font-size', `${theme.fontSize.mediumL}`);
+    expect(day).toHaveStyleRule('font-size', `${theme.fontSize.mediumL}px`);
     expect(day).toHaveStyleRule('border', 'none');
     expect(day).toHaveStyleRule('font-weight', `${theme.fontWeight.l}`);
   });
@@ -38,7 +38,7 @@ describe('Prev/Next month Calendar day', () => {
     expect(getByText(21)).toBeInTheDocument();
     expect(day).toHaveStyleRule('border-radius', '5px');
     expect(day).toHaveStyleRule('background', 'transparent');
-    expect(day).toHaveStyleRule('font-size', `${theme.fontSize.mediumM}`);
+    expect(day).toHaveStyleRule('font-size', `${theme.fontSize.mediumM}px`);
     expect(day).toHaveStyleRule('border', 'none');
   });
 });
@@ -75,7 +75,7 @@ describe('Active Calendar day', () => {
     expect(day).toHaveStyleRule('background', `${theme.colors.blue}`);
     expect(day).toHaveStyleRule('border', 'none');
     expect(day).toHaveStyleRule('color', `${theme.colors.white}`);
-    expect(day).toHaveStyleRule('font-size', `${theme.fontSize.mediumXL}`);
+    expect(day).toHaveStyleRule('font-size', `${theme.fontSize.mediumXL}px`);
   });
 });
 
@@ -94,7 +94,7 @@ describe('Active Calendar day', () => {
     expect(day).toHaveStyleRule('background', `${theme.colors.blue}`);
     expect(day).toHaveStyleRule('border', 'none');
     expect(day).toHaveStyleRule('color', `${theme.colors.white}`);
-    expect(day).toHaveStyleRule('font-size', `${theme.fontSize.mediumXL}`);
+    expect(day).toHaveStyleRule('font-size', `${theme.fontSize.mediumXL}px`);
   });
 });
 
@@ -113,7 +113,7 @@ describe('Active Calendar day', () => {
     expect(day).toHaveStyleRule('background', `${theme.colors.blue}`);
     expect(day).toHaveStyleRule('border', 'none');
     expect(day).toHaveStyleRule('color', `${theme.colors.white}`);
-    expect(day).toHaveStyleRule('font-size', `${theme.fontSize.mediumXL}`);
+    expect(day).toHaveStyleRule('font-size', `${theme.fontSize.mediumXL}px`);
   });
 });
 
@@ -146,7 +146,7 @@ describe('Included in range Calendar day', () => {
     expect(day).toBeInTheDocument();
     expect(getByText(21)).toBeInTheDocument();
     expect(day).toHaveStyleRule('border-radius', '0px');
-    expect(day).toHaveStyleRule('background', `${theme.colors.grey}`);
+    expect(day).toHaveStyleRule('background', `${theme.colors.gray}`);
   });
 });
 

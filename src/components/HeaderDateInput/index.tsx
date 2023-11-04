@@ -1,31 +1,33 @@
 import React, { FC, memo, useState } from 'react';
 
-import calendarImg from '@/assets/calendar.svg';
-import clearImg from '@/assets/clear.svg';
+import Images from '@/constants/images';
 import { getWeekNumberForDay } from '@/helpers/calendarHelpers';
 import dateInputCheckHelper from '@/helpers/dateInputCheckHelpers';
 
-import config from './config';
+import { config } from './config';
 import { ErrorMessage, Input, Panel, StyledButtton, Title, TitleWrapper, Wrapper } from './styles';
-import IProps from './types';
+import { IProps } from './types';
 
 const { defaultTitle, placeholder, errorMessage } = config;
+const { calendarImg, clearImg } = Images;
 
-const HeaderDateInput: FC<IProps> = ({
-  title,
-  form,
-  minDate,
-  maxDate,
-  dateInputValue,
-  isWeekStartsOnMonday,
-  dateInputChangeHandler,
-  openCalendarHandler,
-  changeCurrentActiveDay,
-  changeCurrentSelectedMonth,
-  changeCurrentSelectedYear,
-  changeActiveWeekNumber,
-  onChangeRangeDate
-}) => {
+const HeaderDateInput: FC<IProps> = (props) => {
+  const {
+    title,
+    form,
+    minDate,
+    maxDate,
+    dateInputValue,
+    isWeekStartsOnMonday,
+    dateInputChangeHandler,
+    openCalendarHandler,
+    changeCurrentActiveDay,
+    changeCurrentSelectedMonth,
+    changeCurrentSelectedYear,
+    changeActiveWeekNumber,
+    onChangeRangeDate
+  } = props;
+
   const [isErrorMessage, setIsErrorMessage] = useState<boolean>(false);
 
   const dateInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,12 +39,14 @@ const HeaderDateInput: FC<IProps> = ({
     if (!isInputCorrect) {
       setIsErrorMessage(true);
     }
+
     if (isInputCorrect) {
       const [day, month, year] = target.value.split('/');
 
       changeCurrentSelectedYear(Number(year));
       changeCurrentSelectedMonth(Number(month) - 1);
-      changeCurrentActiveDay(Number(day));
+      changeCurrentActiveDay(Number(day), true);
+
       if (onChangeRangeDate)
         onChangeRangeDate(new Date(Number(year), Number(month) - 1, Number(day)));
 
@@ -52,6 +56,7 @@ const HeaderDateInput: FC<IProps> = ({
         );
       }
     }
+
     if (target.value === '') {
       setIsErrorMessage(false);
     }

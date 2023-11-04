@@ -9,21 +9,8 @@ const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme }>`
   text-decoration: none;
   list-style: none;
   outline: none;
-  padding: ${theme.padding.zero};
-  margin: ${theme.padding.zero};
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background:  ${theme.colors.lightGray};
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: ${theme.colors.grey};
-    border-radius: 10px;
-    border: 1px solid ${theme.colors.black};
-  }
+  padding: ${theme.spaces.zero}px;
+  margin: ${theme.spaces.zero}px;
 }`;
 
 export default GlobalStyle;

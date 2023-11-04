@@ -1,20 +1,20 @@
-interface IProps {
-  form: 'year' | 'month' | 'week';
+import { Form } from '@/components/RangePicker/types';
+
+export interface IProps {
+  form: Form;
+  isWeekStartsOnMonday: boolean;
+  isWeekendsOn: boolean;
+  holidaysColor: string;
+  currentSelectedMonth: number;
+  currentSelectedYear: number;
+  activeDay: number;
+  activeWeekNumber: number;
   rangeStartDate?: Date;
   rangeEndDate?: Date;
   daysNumbersArray?: Array<number | string>;
   daysNamesArray?: Array<string>;
   isCurrentDay?: boolean;
-  currentSelectedMonth: number;
-  currentSelectedYear: number;
-  isWeekStartsOnMonday: boolean;
-  isWeekendsOn: boolean;
-  holidaysColor: string;
-  activeDay: number;
-  activeWeekNumber: number;
-  changeCurrentActiveDay: (newActiveDay: number) => void;
+  changeCurrentActiveDay: (newMonth: number, isHeaderInputValue?: boolean) => void;
   changeActiveWeekNumber: (newActiveWeek: number) => void;
   closeOpenToDoHandler: () => void;
 }
-
-export default IProps;

@@ -6,7 +6,11 @@ export interface IProps {
 }
 
 export interface IToDo {
-  id: number;
+  id: string;
   toDoText: string;
   isDone: boolean;
+}
+
+export interface IToDoObject {
+  [key: string]: IToDo[];
 }

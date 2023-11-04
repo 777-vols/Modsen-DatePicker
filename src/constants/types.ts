@@ -1,6 +1,6 @@
 interface ITheme {
   colors: {
-    grey: string;
+    gray: string;
     lightGray: string;
     blue: string;
     white: string;
@@ -28,22 +28,7 @@ interface ITheme {
     smallM: string;
     smallS: string;
   };
-  padding: {
-    largeXL: string;
-    largeL: string;
-    largeM: string;
-    largeS: string;
-    mediumXL: string;
-    mediumL: string;
-    mediumM: string;
-    mediumS: string;
-    smallXL: string;
-    smallL: string;
-    smallM: string;
-    smallS: string;
-    zero: string;
-  };
-  margin: {
+  spaces: {
     largeXL: string;
     largeL: string;
     largeM: string;

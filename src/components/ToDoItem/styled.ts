@@ -1,16 +1,16 @@
 import styled, { css } from 'styled-components';
 
-interface InterfaceTextSpan {
-  $isDone: boolean;
-}
+import { InterfaceTextSpan } from './types';
 
 export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
 export const CheckBox = styled.input.attrs({ type: 'checkbox' })`
   cursor: pointer;
 `;
+
 export const Text = styled.span<InterfaceTextSpan>`
   cursor: pointer;
   max-width: 180px;

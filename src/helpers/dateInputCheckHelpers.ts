@@ -10,8 +10,8 @@ const dateInputCheckHelper = (dateValue: string, minDate: Date, maxDate: Date): 
   const [dayNumber, monthNumber, yearNumber] = dateValue
     .split('/')
     .map((dateItem) => Number(dateItem));
-
   let date;
+
   if (dayNumber && monthNumber && String(yearNumber).length === yearNumberLength) {
     date = new Date(yearNumber, monthNumber - 1, dayNumber);
   }

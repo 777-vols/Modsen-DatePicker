@@ -1,18 +1,24 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
-import clearImg from '@/assets/clear.svg';
 import { ClearButton, CloseImg } from '@/components/ToDoWindow/styled';
+import Images from '@/constants/images';
 
 import { CheckBox, Text, Wrapper } from './styled';
-import IProps from './types';
+import { IProps } from './types';
 
-const ToDoItem: FC<IProps> = ({ id, isDone, toDoText, deleteToDoHandler, completeToDoHandler }) => {
+const { clearImg } = Images;
+
+const ToDoItem: FC<IProps> = (props) => {
+  const { id, isDone, toDoText, deleteToDoHandler, completeToDoHandler } = props;
+
   const deleteToDo = () => {
     deleteToDoHandler(id);
   };
+
   const isCompleteTodo = () => {
     completeToDoHandler(id);
   };
+
   return (
     <Wrapper>
       <CheckBox id={`${id}`} onChange={isCompleteTodo} type="checkbox" />
@@ -26,4 +32,4 @@ const ToDoItem: FC<IProps> = ({ id, isDone, toDoText, deleteToDoHandler, complet
   );
 };
 
-export default ToDoItem;
+export default memo(ToDoItem);

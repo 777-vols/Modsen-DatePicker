@@ -1,29 +1,31 @@
 import React, { FC, memo, useMemo } from 'react';
 import ReactSelect from 'react-select';
 
-import nextImg from '@/assets/next.svg';
-import prevImg from '@/assets/prev.svg';
 import { allMonthsNames } from '@/constants/calendarData';
+import Images from '@/constants/images';
 import { getWeeksCount, getYearsOptionsArray } from '@/helpers/calendarHelpers';
 
 import { ChangeMonthButton, MonthName, Panel, Wrapper } from './styled';
 import { IProps, OptionType } from './types';
 
 const oneMonth = 1;
+const { prevImg, nextImg } = Images;
 
-const MonthSlider: FC<IProps> = ({
-  form,
-  activeWeekNumber,
-  minDate,
-  maxDate,
-  changeCurrentSelectedMonth,
-  changeCurrentSelectedYear,
-  changeActiveWeekNumber,
-  currentSelectedMonth,
-  currentSelectedYear,
-  isWeekStartsOnMonday,
-  isWeekendsOn
-}) => {
+const MonthSlider: FC<IProps> = (props) => {
+  const {
+    form,
+    activeWeekNumber,
+    minDate,
+    maxDate,
+    changeCurrentSelectedMonth,
+    changeCurrentSelectedYear,
+    changeActiveWeekNumber,
+    currentSelectedMonth,
+    currentSelectedYear,
+    isWeekStartsOnMonday,
+    isWeekendsOn
+  } = props;
+
   const weeksCount = useMemo(
     () =>
       getWeeksCount(currentSelectedMonth, currentSelectedYear, isWeekStartsOnMonday, isWeekendsOn),
@@ -33,6 +35,7 @@ const MonthSlider: FC<IProps> = ({
   const prevMonthHandler = (): void => {
     changeCurrentSelectedMonth(currentSelectedMonth - oneMonth);
   };
+
   const nextMonthHandler = (): void => {
     changeCurrentSelectedMonth(currentSelectedMonth + oneMonth);
   };
@@ -48,6 +51,7 @@ const MonthSlider: FC<IProps> = ({
     if (activeWeekNumber - 1 < 0 && changeCurrentSelectedMonth(currentSelectedMonth - 1)) {
       changeActiveWeekNumber(prevWeeksCount);
     }
+
     if (activeWeekNumber - 1 >= 0) {
       changeActiveWeekNumber(activeWeekNumber - 1);
     }
@@ -57,6 +61,7 @@ const MonthSlider: FC<IProps> = ({
     if (activeWeekNumber + 1 > weeksCount && changeCurrentSelectedMonth(currentSelectedMonth + 1)) {
       changeActiveWeekNumber(0);
     }
+
     if (activeWeekNumber + 1 <= weeksCount) {
       changeActiveWeekNumber(activeWeekNumber + 1);
     }
@@ -104,6 +109,7 @@ const MonthSlider: FC<IProps> = ({
       </Wrapper>
     );
   }
+
   return (
     <Wrapper>
       <ChangeMonthButton data-testid="prevWeekButton" onClick={prevWeekHandler}>
