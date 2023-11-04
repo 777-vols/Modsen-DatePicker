@@ -10,7 +10,6 @@ const firstMonthIndex = 0;
 const lastDayIndexOfTheWeek = 6;
 const lastMonthIndex = 11;
 const oneDay = 1;
-const twoDays = 2;
 const oneMonth = 1;
 
 const numOfWeeksInCalendar = 6;
@@ -23,7 +22,7 @@ export const paddingWithZeros = (value: number, length: number = 2): string =>
   `${value}`.padStart(length, '0');
 
 export const getMonthFirstDayIndex = (month: number, year: number): number =>
-  new Date(`${year}-${paddingWithZeros(month)}-01`).getDay() + oneDay;
+  new Date(`${year}-${paddingWithZeros(month)}-01`).getDay();
 
 export const compareDates = (date1: Date, date2: Date) => {
   if (
@@ -137,16 +136,12 @@ export const getCurrentPrevAndNextMonthDays = (
   const nextMonthDaysArray = getArrayOfDaysInMonth(oneDay, nextMonthDaysNumber);
 
   if (isWeekStartsOnMonday) {
-    numberOfDaysFromPrevMonth = monthFirstDay - twoDays;
+    numberOfDaysFromPrevMonth = monthFirstDay - oneDay;
     if (numberOfDaysFromPrevMonth === -oneDay) {
-      if (monthFirstDay === oneDay) {
-        numberOfDaysFromPrevMonth = lastDayIndexOfTheWeek;
-      } else {
-        numberOfDaysFromPrevMonth = oneDay;
-      }
+      numberOfDaysFromPrevMonth = lastDayIndexOfTheWeek;
     }
   } else {
-    numberOfDaysFromPrevMonth = monthFirstDay - oneDay;
+    numberOfDaysFromPrevMonth = monthFirstDay;
   }
 
   const numberOfDaysFromNextMonth =
@@ -276,7 +271,6 @@ export const getYearsOptionsArray = (
   for (let yearNumber = minYear; yearNumber <= maxYear; yearNumber += 1) {
     yearsArray.push(yearNumber);
   }
-
   return yearsArray.map((year) => ({ value: year, label: year }));
 };
 

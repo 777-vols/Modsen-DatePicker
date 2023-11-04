@@ -31,7 +31,8 @@ const RangePicker: FC<IProps> = (props) => {
         setRangeStartDate(newDate);
       }
       if (newDate > rangeEndDate) {
-        setRangeStartDate(newDate);
+        setRangeStartDate(rangeEndDate);
+        setRangeEndDate(newDate);
       }
       if (compareDates(newDate, rangeEndDate)) {
         setRangeStartDate(newDate);
@@ -47,7 +48,8 @@ const RangePicker: FC<IProps> = (props) => {
         setRangeEndDate(newDate);
       }
       if (newDate < rangeStartDate) {
-        setRangeEndDate(newDate);
+        setRangeEndDate(rangeStartDate);
+        setRangeStartDate(newDate);
       }
       if (compareDates(newDate, rangeStartDate)) {
         setRangeStartDate(newDate);

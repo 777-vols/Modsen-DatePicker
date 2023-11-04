@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import CalendarDay from '@/components/CalendarDay';
 import { convertToWeekFormat, getArrayOfDaysForMonthCalendar } from '@/helpers/calendarHelpers';
 
-const useDaysNumbersArray = (
+const useDaysNumbers = (
   form: 'year' | 'month' | 'week',
   currentSelectedMonth: number,
   currentSelectedYear: number,
@@ -96,4 +96,4 @@ const useDaysNumbersArray = (
     closeOpenToDoHandler
   ]);
 
-export default useDaysNumbersArray;
+export default useDaysNumbers;

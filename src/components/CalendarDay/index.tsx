@@ -6,6 +6,7 @@ import { IProps } from './types';
 const doubleClick = 2;
 
 const CalendarDay: FC<IProps> = (props) => {
+  // console.log('day');
   const {
     rangeStart,
     rangeEnd,

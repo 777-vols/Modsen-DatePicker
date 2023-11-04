@@ -7,7 +7,7 @@ import HeaderDateInput from '@/components/HeaderDateInput';
 import ToDoWindow from '@/components/ToDoWindow';
 import GlobalStyle from '@/constants/styles/globalStyle';
 import theme from '@/constants/theme';
-import { getWeekNumberForDay, getWeeksCount } from '@/helpers/calendarHelpers';
+import { getWeekNumberForDay, getWeeksCount, paddingWithZeros } from '@/helpers/calendarHelpers';
 
 import { Wrapper, WrapperInner } from './styled';
 import { IProps } from './types';
@@ -139,7 +139,11 @@ const DayPicker: FC<IProps> = (props) => {
     (newActiveDay: number, isHeaderInputValue?: boolean) => {
       setActiveDay(newActiveDay);
       if (!isHeaderInputValue) {
-        setHeaderDateInputValue('');
+        setHeaderDateInputValue(
+          `${paddingWithZeros(newActiveDay)}/${paddingWithZeros(
+            currentSelectedMonth
+          )}/${currentSelectedYear}`
+        );
       }
       if (onChangeRangeDate)
         onChangeRangeDate(new Date(currentSelectedYear, currentSelectedMonth, newActiveDay));
