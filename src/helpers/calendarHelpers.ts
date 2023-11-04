@@ -203,14 +203,11 @@ export const convertToWeekFormat = (monthFormatArray: Array<IDayObject>): Array<
   const convertedArray = [];
   let oneWeekArray = [];
 
-  for (let dayIndex = 0; dayIndex <= monthFormatArray.length; dayIndex += oneDay) {
+  for (let dayIndex = 0; dayIndex < monthFormatArray.length; dayIndex += 1) {
     if (oneWeekArray.length === numOfDaysInOneWeek) {
-      const weekIncludesCurrentMonthDays = oneWeekArray.filter((dayObj) => {
-        if (typeof dayObj.day.dayNumber === 'number') {
-          return dayObj;
-        }
-        return null;
-      });
+      const weekIncludesCurrentMonthDays = oneWeekArray.filter(
+        (dayObj) => typeof dayObj.day.dayNumber === 'number'
+      );
 
       if (weekIncludesCurrentMonthDays.length > 0) {
         convertedArray.push(oneWeekArray);
@@ -233,31 +230,19 @@ export const getWeekNumberForDay = (
 
   const monthArray = [...prevMonthVisibleDays, ...currentMonthDaysArray, ...nextMonthVisibleDays];
 
-  const convertedArray = [];
-  let oneWeekArray = [];
+  const filledWeeks = monthArray.reduce(
+    (weeks: Array<Array<number | string>>, dayNumber, index) => {
+      const weeksCopy = [...weeks];
+      const weekIndex = Math.floor(index / numOfDaysInOneWeek);
+      weeksCopy[weekIndex] = weeks[weekIndex] || [];
+      weeksCopy[weekIndex].push(dayNumber);
+      return weeksCopy;
+    },
+    []
+  );
 
-  for (let dayIndex = 0; dayIndex <= monthArray.length; dayIndex += oneDay) {
-    if (oneWeekArray.length === numOfDaysInOneWeek) {
-      const filledDaysInWeek = oneWeekArray.filter((dayNumber) => {
-        if (typeof dayNumber === 'number') {
-          return dayNumber;
-        }
-        return null;
-      });
-
-      if (filledDaysInWeek.length > 0) {
-        convertedArray.push(oneWeekArray);
-        oneWeekArray = [];
-      }
-    }
-
-    if (monthArray[dayIndex] === day) {
-      return convertedArray.length;
-    }
-
-    oneWeekArray.push(monthArray[dayIndex]);
-  }
-  return 0;
+  const weekIndex = filledWeeks.findIndex((week) => week.includes(day));
+  return weekIndex >= 0 ? weekIndex : 0;
 };
 
 export const getYearsOptionsArray = (
