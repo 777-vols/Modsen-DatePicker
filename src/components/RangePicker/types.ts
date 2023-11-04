@@ -11,12 +11,6 @@ export interface IBaseProps {
 }
 
 export interface IProps extends IBaseProps {
-  form: Form;
-  isWeekStartsOnMonday: boolean;
-  isWeekendsOn: boolean;
-  holidaysColor: string;
-  minDate: Date;
-  maxDate: Date;
   isClearButtonVisible: boolean;
   isRangeCalendarOpen: boolean;
   defaultRangeStartDate: Date;

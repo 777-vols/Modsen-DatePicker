@@ -10,12 +10,16 @@ export const Wrapper = styled.div`
 `;
 
 export const Clue = styled.span`
-  color: ${({ theme }) => theme.colors.blue};
-  font-weight: ${({ theme }) => theme.fontWeight.l};
-  font-size: ${({ theme }) => theme.fontSize.mediumS}px;
-  position: absolute;
-  bottom: 1px;
-  right: 7px;
+  display: none;
+  ${Wrapper}:hover & {
+    display: block;
+    color: ${({ theme }) => theme.colors.blue};
+    font-weight: ${({ theme }) => theme.fontWeight.l};
+    font-size: ${({ theme }) => theme.fontSize.mediumS}px;
+    position: absolute;
+    bottom: 1px;
+    right: 7px;
+  }
 `;
 
 export const ClearButton = styled.button`
