@@ -5,3 +5,7 @@ export interface IProps {
   deleteToDoHandler: (toDoItemId: string) => void;
   completeToDoHandler: (toDoItemId: string) => void;
 }
+
+export interface InterfaceTextSpan {
+  $isDone: boolean;
+}

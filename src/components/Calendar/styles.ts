@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
   padding-bottom: ${({ theme }) => theme.spaces.smallS}px;
   position: relative;
 `;
+
 export const Clue = styled.span`
   color: ${({ theme }) => theme.colors.blue};
   font-weight: ${({ theme }) => theme.fontWeight.l};
@@ -16,6 +17,7 @@ export const Clue = styled.span`
   bottom: 1px;
   right: 7px;
 `;
+
 export const ClearButton = styled.button`
   cursor: pointer;
   width: 100%;

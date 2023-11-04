@@ -19,16 +19,19 @@ export const Wrapper = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.gray};
   border-radius: 8px;
 `;
+
 export const WrapperInner = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
 `;
+
 export const SelectedDateHeader = styled.h1`
   display: flex;
   justify-content: center;
   font-size: ${({ theme }) => theme.fontSize.mediumM}px;
 `;
+
 export const CloseButton = styled.button`
   cursor: pointer;
   position: absolute;
@@ -43,6 +46,7 @@ export const CloseButton = styled.button`
     transform: rotate(360deg) scale(1.2);
   }
 `;
+
 export const CloseImg = styled.img`
   width: 100%;
   height: 100%;
@@ -57,6 +61,7 @@ export const AddToDoWrapper = styled.div`
   width: 100%;
   border-radius: ${borderRadiusS}px;
 `;
+
 export const InputWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -66,9 +71,11 @@ export const InputWrapper = styled.div`
   border-radius: ${borderRadiusS}px;
   padding: ${({ theme }) => theme.spaces.smallS}px;
 `;
+
 export const AddToDoInput = styled.input`
   border: none;
 `;
+
 export const ClearButton = styled.button`
   cursor: pointer;
   display: flex;
@@ -78,6 +85,7 @@ export const ClearButton = styled.button`
   transition: 0.2s;
   padding-right: ${({ theme }) => theme.spaces.smallS}px;
 `;
+
 export const AddToDoButton = styled.button`
   cursor: pointer;
   font-size: ${({ theme }) => theme.fontSize.largeL}px;
@@ -91,6 +99,7 @@ export const AddToDoButton = styled.button`
     font-weight: ${({ theme }) => theme.fontWeight.l};
   }
 `;
+
 export const ToDoListWrapper = styled.div`
   margin-top: ${({ theme }) => theme.spaces.mediumL}px;
   max-height: 60%;

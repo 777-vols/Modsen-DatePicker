@@ -17,6 +17,7 @@ export const Wrapper = styled.div`
     border: 1px solid ${({ theme }) => theme.colors.black};
   }
 `;
+
 export const WrapperInner = styled.div`
   position: relative;
   background: ${({ theme }) => theme.colors.white};
