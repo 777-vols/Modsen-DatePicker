@@ -18,18 +18,18 @@ const Calendar: FC<IProps> = (props) => {
     rangeEndDate,
     currentSelectedMonth,
     currentSelectedYear,
-    changeCurrentSelectedMonth,
-    changeCurrentSelectedYear,
     activeDay,
     activeWeekNumber,
-    changeActiveWeekNumber,
-    changeCurrentActiveDay,
-    closeOpenToDoHandler,
-    clearCalendarHandler,
     isWeekStartsOnMonday,
     isClearButtonVisible,
     isWeekendsOn,
-    holidaysColor
+    holidaysColor,
+    changeCurrentSelectedMonth,
+    changeCurrentSelectedYear,
+    changeActiveWeekNumber,
+    changeCurrentActiveDay,
+    closeOpenToDoHandler,
+    clearCalendarHandler
   } = props;
 
   return (

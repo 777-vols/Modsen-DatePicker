@@ -1,13 +1,8 @@
-export interface IProps {
+import { IBaseProps } from '@/components/RangePicker/types';
+
+export interface IProps extends IBaseProps {
   title: string;
-  isWeekStartsOnMonday: boolean;
-  isClearButtonVisible: boolean;
-  isRangeCalendarOpen: boolean;
-  isWeekendsOn: boolean;
-  form: 'year' | 'month' | 'week';
-  holidaysColor: string;
-  minDate: Date;
-  maxDate: Date;
+  isRangeCalendarOpen?: boolean;
   rangeStartDate?: Date;
   rangeEndDate?: Date;
   defaultRangeDate?: Date;

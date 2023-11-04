@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
 
 import CalendarDay from '@/components/CalendarDay';
+import { Form } from '@/components/RangePicker/types';
 import { convertToWeekFormat, getArrayOfDaysForMonthCalendar } from '@/helpers/calendarHelpers';
 
 const useDaysNumbers = (
-  form: 'year' | 'month' | 'week',
+  form: Form,
   currentSelectedMonth: number,
   currentSelectedYear: number,
   isWeekendsOn: boolean,
