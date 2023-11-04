@@ -11,14 +11,17 @@ export const Wrapper = styled.div`
 
 export const Clue = styled.span`
   display: none;
+  color: ${({ theme }) => theme.colors.blue};
+  font-weight: ${({ theme }) => theme.fontWeight.l};
+  font-size: ${({ theme }) => theme.fontSize.mediumS}px;
+  position: absolute;
+  bottom: 1px;
+  right: 7px;
   ${Wrapper}:hover & {
     display: block;
-    color: ${({ theme }) => theme.colors.blue};
-    font-weight: ${({ theme }) => theme.fontWeight.l};
-    font-size: ${({ theme }) => theme.fontSize.mediumS}px;
-    position: absolute;
-    bottom: 1px;
-    right: 7px;
+  }
+  @media (${({ theme }) => theme.breakPoints.smallM}) {
+    display: block;
   }
 `;
 

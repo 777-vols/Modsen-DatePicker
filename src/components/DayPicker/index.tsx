@@ -164,7 +164,8 @@ const DayPicker: FC<IProps> = (props) => {
   const clearCalendarHandler = useCallback(() => {
     if (defaultRangeDate && onChangeRangeDate) {
       onChangeRangeDate(defaultRangeDate);
-      setActiveDay(defaultRangeDate.getDate());
+      setActiveDay(0);
+      setHeaderDateInputValue('');
       setCurrentSelectedMonth(defaultRangeDate.getMonth());
       setCurrentSelectedYear(defaultRangeDate.getFullYear());
       if (form === 'week') {
