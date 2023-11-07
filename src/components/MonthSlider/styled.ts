@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
+import { flexCenterVertical, flexSpaceBetween, resetButton } from '@/constants/styles/commonStyles';
+
 export const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
+  ${flexSpaceBetween};
   align-items: center;
 `;
 
 export const ChangeMonthButton = styled.button`
+  ${resetButton}
   cursor: pointer;
-  background: transparent;
-  border: none;
   transition: 0.2s;
   &:hover {
     transform: scale(1.3);
@@ -23,9 +23,7 @@ export const MonthName = styled.span`
 `;
 
 export const Panel = styled.div`
-  display: flex;
-  align-items: center;
-  display: flex;
+  ${flexCenterVertical}
   font-size: ${({ theme }) => theme.fontSize.mediumM}px;
   font-weight: ${({ theme }) => theme.fontWeight.l};
 `;

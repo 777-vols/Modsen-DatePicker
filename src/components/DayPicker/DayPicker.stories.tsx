@@ -44,6 +44,11 @@ const meta: Meta<typeof DayPicker> = {
       table: {
         disable: true
       }
+    },
+    isClearButtonVisible: {
+      table: {
+        disable: true
+      }
     }
   }
 };
