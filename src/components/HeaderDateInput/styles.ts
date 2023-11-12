@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
+import { flexCenterVertical, flexSpaceBetween, resetButton } from '@/constants/styles/commonStyles';
+
 export const Wrapper = styled.div`
   width: 250px;
 `;
 
 export const TitleWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
+  ${flexSpaceBetween};
   align-items: center;
 `;
 
@@ -27,11 +28,10 @@ export const ErrorMessage = styled.span`
 `;
 
 export const Panel = styled.div`
+  ${flexSpaceBetween};
+  align-items: center;
   position: relative;
   padding: ${({ theme }) => theme.spaces.zero}px ${({ theme }) => theme.spaces.mediumM}px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   border-radius: 8px;
   border: 2px solid ${({ theme }) => theme.colors.gray};
   height: 42px;
@@ -46,11 +46,9 @@ export const Input = styled.input`
 `;
 
 export const StyledButtton = styled.button`
+  ${flexCenterVertical}
+  ${resetButton}
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  background: transparent;
-  border: none;
   transition: 0.2s;
   &:hover {
     transform: rotate(360deg) scale(1.2);

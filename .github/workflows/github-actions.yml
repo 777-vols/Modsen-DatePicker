@@ -14,8 +14,8 @@ jobs:
         run: yarn install
       - name: build project
         run: yarn build
-      # - name: unit tests
-      #   run: yarn run test
+      - name: unit tests
+        run: yarn test
       - name: lint code
         run: yarn lint:fix
       - name: format code with prettier

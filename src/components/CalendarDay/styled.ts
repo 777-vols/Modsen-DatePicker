@@ -1,24 +1,23 @@
 import styled, { css } from 'styled-components';
 
+import { blueDay, flexCenterHorizontally, maxSize, resetButton } from '@/constants/styles/commonStyles';
+
 import { IDayNumber, ITodosIdentifier } from './types';
 
 const sizeS = 32;
 const borderRadius = 5;
 
 export const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
+  ${flexCenterHorizontally}
   align-items: center;
   height: ${sizeS}px;
   width: ${sizeS}px;
 `;
 
 export const DayNumber = styled.button<IDayNumber>`
+  ${maxSize}
+  ${resetButton}
   position: relative;
-  border: none;
-  background: transparent;
-  width: 100%;
-  height: 100%;
   font-size: ${({ theme }) => theme.fontSize.mediumM}px;
   border-radius: ${borderRadius}px;
 
@@ -48,12 +47,10 @@ export const DayNumber = styled.button<IDayNumber>`
       border: 2px solid ${theme.colors.blue};
     `}
 
-  ${({ $isActiveDay, theme }) =>
+  ${({ $isActiveDay }) =>
     $isActiveDay &&
     css`
-      font-size: ${theme.fontSize.mediumXL}px;
-      background: ${theme.colors.blue};
-      color: ${theme.colors.white};
+      ${blueDay}
     `}
 
   ${({ $isWeekend, theme }) =>
@@ -69,24 +66,20 @@ export const DayNumber = styled.button<IDayNumber>`
       background: ${theme.colors.gray};
     `}
 
-  ${({ $isStartRangeDay, $isActiveDay, theme }) =>
+  ${({ $isStartRangeDay, $isActiveDay }) =>
     $isStartRangeDay &&
     css`
-      font-size: ${theme.fontSize.mediumXL}px;
-      background: ${theme.colors.blue};
-      color: ${theme.colors.white};
+      ${blueDay}
       border-radius: 0px;
       border-top-left-radius: ${borderRadius}px;
       border-bottom-left-radius: ${borderRadius}px;
       opacity: ${$isActiveDay ? 1 : 0.7};
     `}
 
-  ${({ $isEndRangeDay, $isActiveDay, theme }) =>
+  ${({ $isEndRangeDay, $isActiveDay }) =>
     $isEndRangeDay &&
     css`
-      font-size: ${theme.fontSize.mediumXL}px;
-      background: ${theme.colors.blue};
-      color: ${theme.colors.white};
+      ${blueDay}
       border-radius: 0px;
       border-top-right-radius: ${borderRadius}px;
       border-bottom-right-radius: ${borderRadius}px;

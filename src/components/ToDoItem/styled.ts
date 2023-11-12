@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components';
 
+import { flexSpaceBetween } from '@/constants/styles/commonStyles';
+
 import { InterfaceTextSpan } from './types';
 
 export const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
+  ${flexSpaceBetween};
 `;
 
 export const CheckBox = styled.input.attrs({ type: 'checkbox' })`
