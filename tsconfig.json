@@ -1,27 +1,25 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": "src",
     "paths": {
       "@/*": ["./*"]
     },
+    "jsx": "react",
     "target": "es5",
     "outDir": "dist",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "declaration": true,
+    "module": "ESNext",
     "declarationDir": "types",
-    "allowJs": true,
+    "moduleResolution": "Node",
+    "strict": true,
+    "sourceMap": true,
+    "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "emitDeclarationOnly": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react"
+    "types": ["@testing-library/jest-dom", "jest-styled-components"]
   },
-  "include": ["src/**/*.ts", "tests/**/*.ts"],
-  "exclude": ["node_modules", ".vscode"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }
